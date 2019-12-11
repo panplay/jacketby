@@ -1,0 +1,2 @@
+module ArrivalItemsHelper
+end

@@ -1,0 +1,2 @@
+class ArrivalItem < ApplicationRecord
+end
