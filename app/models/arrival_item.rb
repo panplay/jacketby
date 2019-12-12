@@ -1,2 +1,5 @@
 class ArrivalItem < ApplicationRecord
-end
+
+	belongs_to :item
+
+	validates :arrival_count, numericality: { only_interger: true }
