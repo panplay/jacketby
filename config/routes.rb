@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'items#index'
+  root 'customer/items#index'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#new'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admin/sessions#destroy'
