@@ -1,68 +1,45 @@
 Rails.application.routes.draw do
+  root 'items#index'
+  get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#new'
+  get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#create'
+  get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admin/sessions#destroy'
+
   devise_for :admins
-  namespace :admin do
-    get 'categories/create'
-    get 'categories/update'
-    get 'categories/hide'
-  end
-  namespace :admin do
-    get 'labels/create'
-    get 'labels/update'
-    get 'labels/hide'
-  end
-  namespace :admin do
-    get 'artists/create'
-    get 'artists/update'
-    get 'artists/hide'
-  end
-  namespace :admin do
-    get 'homes/index'
-  end
-  namespace :admin do
-    get 'orders/index'
-    get 'orders/update'
-  end
-  namespace :admin do
-    get 'customers/show'
-    get 'customers/hide'
-    get 'customers/index'
-    get 'customers/update'
-  end
-  namespace :admin do
-    get 'arrival_items/index'
-    get 'arrival_items/new'
-    get 'arrival_items/create'
-  end
-  namespace :admin do
-    get 'items/new'
-    get 'items/create'
-    get 'items/edit'
-    get 'items/update'
-    get 'items/hide'
-  end
-  namespace :customer do
-    get 'homes/about'
-    get 'homes/thanks'
-    get 'homes/unsubscribe'
-  end
-  namespace :customer do
-    get 'carts/show'
-    get 'carts/create'
-    get 'carts/update'
-    get 'carts/destroy'
-  end
-  namespace :customer do
-    get 'favorites/create'
-    get 'favorites/destroy'
-  end
-  namespace :customer do
-    get 'orders/new'
-    get 'orders/create'
-  end
-  namespace :customer do
-    get 'items/index'
-    get 'items/show'
-  end
   devise_for :customers
+
+  namespace :admin do
+    resources :categories, only: [:create, :update]
+    put 'categories/hide'
+    resources :labels, only: [:create, :update]
+    put 'labels/hide'
+    resources :artists, only: [:create, :update]
+    put 'artists/hide'
+
+    get 'homes/index' => 'homes#index'
+
+   put "/items/:id" => "items#hide"
+   resources :items, only: [:new, :create, :edit, :update, :index]
+   resources :arrival_items, only: [:index, :new, :create]
+
+
+    put "/customers/:id" => "customers#hide"
+    resources :customers, only: [:index, :show, :update]
+    resources :orders, only: [:index, :update]
+
+  end
+
+  namespace :customer do
+    get 'homes/about' => "homes#about"
+    get 'homes/thanks' => "homes#thanks"
+    get 'homes/unsubscribe' => "homes#unsubscribe"
+
+    resource :orders, only: [:new, :create]
+    resources :cart, only: [:show, :create, :update, :destroy]
+
+    resources :items, only: [:show, :index] do
+      resource :favorites, only: [:create, :destroy]
+    end
+
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
