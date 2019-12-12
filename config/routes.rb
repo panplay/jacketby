@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   namespace :admin do
     get 'categories/create'
     get 'categories/update'
