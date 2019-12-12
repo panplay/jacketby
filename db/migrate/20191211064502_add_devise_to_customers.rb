@@ -32,15 +32,15 @@ class AddDeviseToCustomers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :last_name
-      t.string :first_name
-      t.string :last_name_kana
-      t.string :first_name_kana
-      t.string :postal_code
-      t.string :address
-      t.string :phone_number
-      t.string :password
-      t.boolean :is_deleted
+      t.string :last_name, :null => false
+      t.string :first_name, :null => false
+      t.string :last_name_kana, :null => false
+      t.string :first_name_kana, :null => false
+      t.string :postal_code, :null => false
+      t.string :address, :null => false
+      t.string :phone_number, :null => false
+      t.string :password, :null => false
+      t.boolean :is_deleted, :null => false, :default =>false
 
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
@@ -50,6 +50,7 @@ class AddDeviseToCustomers < ActiveRecord::Migration[5.2]
     add_index :customers, :reset_password_token, unique: true
     # add_index :customers, :confirmation_token,   unique: true
     # add_index :customers, :unlock_token,         unique: true
+    add_index :customers, :is_deleted
   end
 
   def self.down
