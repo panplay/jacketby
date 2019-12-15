@@ -1,0 +1,8 @@
+<select>
+    <button href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">カテゴリー</button>
+          <div class="dropdown-menu">
+            <option>カテゴリー</option>
+            <% @categories.each do |categories| %>
+            <option><%= categories.name %></option>>
+            <% end %>
+          </select>

@@ -14,6 +14,6 @@ class CreateItems < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :items, [:name, :artist_id, :is_deleted]
+    add_index :items, [:name, :artist_id, :is_deleted], unique: true
   end
 end
