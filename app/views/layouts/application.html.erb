@@ -35,7 +35,7 @@
 
             <% elsif admin_signed_in? %>
               <li>
-                <%= link_to 'ランキング', root_path(current_user.id) %>
+                <%= link_to 'ランキング', root_path %>
               </li>
               <li>
                 <%= link_to '商品一覧', admin_items_path %>
@@ -44,7 +44,7 @@
                 <%= link_to '顧客一覧', admin_customers_path %>
               </li>
               <li>
-                <%= link_to 'ログアウト', destroy_admin_session_path %>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
               </li>
               <br>
               <li>
