@@ -6,6 +6,6 @@ class CreateArtists < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :artists, [:name, :is_deleted]
+    add_index :artists, [:name, :is_deleted], unique: true
   end
 end

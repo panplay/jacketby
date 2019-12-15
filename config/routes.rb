@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :customer do
+    get 'customers/edit'
+    get 'customers/favorites'
+  end
   root 'customer/items#index'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#new'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admin/sessions#create'
