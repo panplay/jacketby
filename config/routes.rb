@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admin/sessions#destroy'
 
   devise_for :admins
-  devise_for :customers
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords',
+    registrations: 'customers/registrations'
+  }
 
   namespace :admin do
     resources :categories, only: [:create, :update]
