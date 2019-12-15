@@ -6,6 +6,7 @@ class Item < ApplicationRecord
 
 	has_many :arrival_items
 	has_many :disks, dependent: :destroy
+	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	has_many :favorites, dependent: :destroy
 	def favorited_by?(customer)
@@ -26,4 +27,15 @@ class Item < ApplicationRecord
 
 	validates :name, presence: true
 	validates :price, numericality: { only_interger: true }
+
+	enum status:{
+    受付: 0,
+    商品準備中: 1,
+    出荷済み: 2,
+  }
+
+   enum sale:{
+   	sale: 0
+   }
+
 end

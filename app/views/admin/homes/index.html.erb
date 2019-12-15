@@ -1,2 +1,11 @@
-<h1>Admin::Homes#index</h1>
-<p>Find me in app/views/admin/homes/index.html.erb</p>
+<section class="container clearfix" >
+	<div class="row">
+		<div class="col-md-6">
+			<%= render 'admin/artists/artist' %>
+		</div>
+		<div class="col-md-6">
+			<%= render 'admin/labels/label' %>
+			<%= render 'admin/categories/category' %>
+		</div>
+	</div>
+</section>

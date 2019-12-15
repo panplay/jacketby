@@ -39,7 +39,6 @@ class AddDeviseToCustomers < ActiveRecord::Migration[5.2]
       t.string :postal_code, :null => false
       t.string :address, :null => false
       t.string :phone_number, :null => false
-      t.string :password, :null => false
       t.boolean :is_deleted, :null => false, :default =>false
 
       # Uncomment below if timestamps were not included in your original model.
