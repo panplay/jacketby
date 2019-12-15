@@ -13,7 +13,7 @@
              #admin: true)
 
 Admin.create!(
-             email: "admin@example.jp",
+             email: "aa77okf@ppp.jp",
              password:  "11111111",
              password_confirmation: "11111111",
              )
