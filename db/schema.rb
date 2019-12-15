@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "is_deleted"], name: "index_artists_on_name_and_is_deleted", unique: true
+
   end
 
   create_table "carts", force: :cascade do |t|
@@ -115,6 +117,10 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sale"
+<<<<<<< HEAD
+    t.index ["name", "artist_id", "is_deleted"], name: "index_items_on_name_and_artist_id_and_is_deleted", unique: true
+=======
+>>>>>>> bb05515a0aeb3fc2312781c40b22597f33e8f99e
   end
 
   create_table "labels", force: :cascade do |t|
