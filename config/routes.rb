@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'customers/edit'
     get 'customers/favorites'
   end
-  root 'customer/items#index'
+  root 'customer/customers/items#index'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new'
   post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   end
 
-  namespace :customer do
+  namespace :customers do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
     get 'homes/unsubscribe' => "homes#unsubscribe"
