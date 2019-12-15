@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "is_deleted"], name: "index_artists_on_name_and_is_deleted", unique: true
-
   end
 
   create_table "carts", force: :cascade do |t|
