@@ -3,71 +3,67 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-			    <div class="col-md-6">
-				 <%= form_for(@item, url: admin_items_path) do |f| %>
-				 <%= image_tag "no_image.jpg" %>
-				</div>
-				<div class="col-md-6">
-					<%= f.label :シングルアルバム名 %><br>
-					<%= f.text_field :name, class:"form-control", placeholder: "シングル/アルバム名" %>
-					<p>アーティスト名</p>
-					<%= render 'admin/items/artist' %><br>
-					<%= f.label :価格 %><br>
-					<div class="row">
-					<div class="col-md-6">
-					<%= f.number_field :price, class:"form-control", placeholder: "￥1,000円" %>
-				    </div>
-				    <div class="col-md-6">
-					<%= select :status, :name, Item.statuses.keys.to_a, include_blank: false %>
-					<%= select :sale, :name, Item.sales.keys.to_a, include_blank: true %>
-				    </div>
-				    </div>
-					<%= f.label :発売日 %>
-					<%= f.date_field :release_date, class:"form-control", placeholder: "2020/12/27" %>
-					<p>レーベル名</p>
-					<%= render 'admin/items/label' %><br>
-					<p>カテゴリー名</p>
-					<%= render 'admin/items/category' %><br>
-					<%= form_for(@arrival_item, url: admin_arrival_items_path) do |f| %>
-					<%= f.label :在庫情報 %><br>
-					<%= f.number_field :arrival_count, class:"form-control", placeholder: "10" %>
-					<% end %>
-					<%= f.attachment_field :image %>
-				</div>
-				<% end %>
-		　　</div>
-	</div>
-
-		<div class="row">
-			<div class="col-md-12">
 				<%= form_for(@item, url: admin_items_path) do |f| %>
-				<%= f.label :管理者コメント %><br>
-					<%= f.text_field :comment, class:"form-control", placeholder: "管理者の熱いコメント" %>
-				<% end %>
-			<%= form_for(@song, url: admin_items_path) do |f| %>
-			<div class="field">
-				<%= f.label :シングルアルバム内の曲名 %><br>
 					<div class="col-md-6">
-					1<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					2<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					3<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					4<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-				    </div>
-				    <div class="col-md-6">
-					5<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					6<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					7<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-					8<%= f.text_field :name, class:"form-control", placeholder: "曲名" %>
-				</div>
-			</div>
+						<%= image_tag "no_image.jpg" %>
+					</div>
+					<div class="col-md-6">
+						<%= f.label :シングルアルバム名 %><br>
+						<%= f.text_field :name, class:"form-control", placeholder: "シングル/アルバム名" %>
+						<p>アーティスト名</p>
+						<%= render 'admin/items/artist' %><br>
+						<%= f.label :価格 %><br>
+						<div class="row">
+							<div class="col-md-6">
+								<%= f.number_field :price, class:"form-control", placeholder: "￥1,000円" %>
+							</div>
+							<div class="col-md-6">
+								<%= select :status, :name, Item.statuses.keys.to_a, include_blank: false %>
+								<%= select :sale, :name, Item.sales.keys.to_a, include_blank: true %>
+							</div>
+						</div>
+						<%= f.label :発売日 %>
+						<%= f.date_field :release_date, class:"form-control", placeholder: "2020/12/27" %>
+						<p>レーベル名</p>
+						<%= render 'admin/items/label' %><br>
+						<p>カテゴリー名</p>
+						<%= render 'admin/items/category' %><br>
+						<%= f.fields_for :arrival_items do |t| %>
+						<%= t.label :在庫情報 %><br>
+						<%= t.number_field :arrival_count, class:"form-control", placeholder: "10" %>
+						<% end %>
+						<%= f.attachment_field :image %>
+					</div>
+					<%= f.label :管理者コメント %><br>
+					<%= f.text_field :comment, class:"form-control", placeholder: "管理者の熱いコメント" %>
+					<%= f.fields_for :disks do |d| %>
+					<%= d.label :ディスク %><br>
+					<%= d.number_field :disk_order, class:"form-control", placeholder: "ディスク" %>
+					<%= d.fields_for :songs do |s| %>
+					<div class="field">
+						<%= s.label :シングルアルバム内の曲名 %><br>
+						<div class="col-md-6">
+							1<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							2<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							3<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							4<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+						</div>
+						<div class="col-md-6">
+							5<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							6<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							7<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+							8<%= s.text_field :name, class:"form-control", placeholder: "曲名" %>
+						</div>
+					</div>
+					<% end %>
+					<% end %>
 
-	<%= f.submit "保存", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
-	<%= link_to "削除", "#", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
-	<% end %>
+					<%= f.submit "保存", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
+					<%= link_to "削除", "#", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
+				<% end %>
+			</div>
+		</div>
 	</div>
-</div>
-</div>
-</div>
 </section>
 
 

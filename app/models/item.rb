@@ -6,6 +6,7 @@ class Item < ApplicationRecord
 
 	has_many :arrival_items
 	has_many :disks, dependent: :destroy
+	accepts_nested_attributes_for :arrival_items, allow_destroy: true
 	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	has_many :favorites, dependent: :destroy
