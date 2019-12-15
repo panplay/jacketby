@@ -25,7 +25,7 @@ class Admin::LabelsController < ApplicationController
 
   private
 	def label_params
-		params.require(:label).permit(:name)
+		params.require(:label).permit(:name, item_attributes:[:id, :name, disk_attributes: [:id, :disk_order, song_attributes: [:id, :name]])
 	end
 
 end
