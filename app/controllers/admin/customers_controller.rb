@@ -6,6 +6,7 @@ class Admin::CustomersController < ApplicationController
   end
 
   def index
+  	@customers = Customer.page(params[:page]).reverse_order
   end
 
   def update
