@@ -21,4 +21,5 @@ class Customer < ApplicationRecord
   # validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
   # validates :address, presence: true
   # validates :phone_number, { with: /^0\d{1,4}-\d{1,4}-\d{3,4}$/ }
+
 end
