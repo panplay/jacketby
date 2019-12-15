@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'customers/edit'
     get 'customers/favorites'
   end
-  root 'customer/customers/items#index'
+  root 'customers/items#index'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new'
   post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'

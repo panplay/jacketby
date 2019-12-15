@@ -25,7 +25,7 @@ class Admin::ArtistsController < ApplicationController
 
   private
 	def artist_params
-		params.require(:artist).permit(:name)
+		params.require(:artist).permit(:name, item_attributes:[:id, :name, disk_attributes: [:id, :disk_order, song_attributes: [:id, :name]])
 	end
 
 end
