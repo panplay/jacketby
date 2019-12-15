@@ -1,4 +1,4 @@
-class Customer::CartsController < ApplicationController
+class Customers::CartsController < ApplicationController
   
   def create
   	  @customer = current_customer

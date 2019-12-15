@@ -1,4 +1,4 @@
-class Customer::FavoritesController < ApplicationController
+class Customers::FavoritesController < ApplicationController
   def create
   end
 
