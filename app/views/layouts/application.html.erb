@@ -20,22 +20,22 @@
           <ul class="nav navbar-nav navbar-right">
             <% if customer_signed_in? %>
               <li>
-                <%= link_to 'いいね一覧', customers_customers_favorites_path(current_user.id) %>
+                <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
               </li>
               <li>
-                <%= link_to 'マイページ', customers_customers_edit_path(current_user.id) %>
+                <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id) %>
               </li>
               <li>
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
               </li>
               <br>
               <li>
-                <%= link_to 'ショッピングカート', customer_cart_path %>
+                <%= link_to 'ショッピングカート', customers_cart_path(current_customer.id) %>
               </li>
 
             <% elsif admin_signed_in? %>
               <li>
-                <%= link_to 'ランキング', root_path(current_user.id) %>
+                <%= link_to 'ランキング', root_path %>
               </li>
               <li>
                 <%= link_to '商品一覧', admin_items_path %>
@@ -44,7 +44,7 @@
                 <%= link_to '顧客一覧', admin_customers_path %>
               </li>
               <li>
-                <%= link_to 'ログアウト', destroy_admin_session_path %>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
               </li>
               <br>
               <li>

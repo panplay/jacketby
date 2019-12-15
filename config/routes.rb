@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  namespace :customer do
-    get 'customers/edit'
-    get 'customers/favorites'
-  end
-  root 'customer/customers/items#index'
+  root 'customers/items#index'
   get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new'
   post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
@@ -42,10 +38,10 @@ Rails.application.routes.draw do
     get 'homes/unsubscribe' => "homes#unsubscribe"
 
     resource :orders, only: [:new, :create]
-    resources :cart, only: [:show, :create, :update, :destroy]
+    resources :carts, only: [:show, :create, :update, :destroy]
     resources :customers, only: [:edit]
     put "/customers/:id" => "customers#hide"
-    get "/customers/:id" => "customers#favorite"
+    get "/customers/:id" => "customers#favorites", as: 'favorites'
 
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]

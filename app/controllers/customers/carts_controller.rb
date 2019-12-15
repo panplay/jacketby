@@ -13,7 +13,7 @@ class Customers::CartsController < ApplicationController
   def show
       newcart = Cart.new
       carts = Cart.all
-      @item = Item.find(params[:id])
+      # @item = Item.find(params[:id])
       @customer = current_customer
   end
 
