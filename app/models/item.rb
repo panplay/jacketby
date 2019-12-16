@@ -32,11 +32,12 @@ class Item < ApplicationRecord
 	enum status:{
     受付: 0,
     商品準備中: 1,
-    出荷済み: 2,
+    出荷済み: 2
   }
 
    enum sale:{
-   	sale: 0
+   	sale: 0,
+   	販売停止中: 1
    }
 
 end

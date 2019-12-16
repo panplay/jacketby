@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
    put "/items/:id" => "items#hide"
    resources :items, only: [:new, :create, :edit, :update, :index]
-   resources :arrival_items, only: [:index, :new, :create]
+   resources :arrival_items, only: [:index, :new, :create, :update]
 
 
     put "/customers/:id" => "customers#hide"
