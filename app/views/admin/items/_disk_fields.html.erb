@@ -1,0 +1,9 @@
+<%= f.label :ディスク %><br>
+<%= f.number_field :disk_order, class:"form-control", placeholder: "ディスク" %>
+		<p>シングルアルバム内の曲名</p>
+		<%= f.fields_for :songs do |song| %>
+		<%= render 'song_fields', f: song  %>
+		<% end %>
+		<div id="links">
+		  <%= link_to_add_association '曲追加',f, :songs %>
+		 </div>

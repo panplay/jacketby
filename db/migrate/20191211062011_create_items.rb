@@ -5,12 +5,13 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :name, :null => false
       t.integer :artist_id, :null => false
       t.integer :price, :null => false
-      t.string :release_date, :null => false
+      t.datetime :release_date, :null => false
       t.integer :label_id, :null => false
       t.integer :category_id, :null => false
       t.text :comment
       t.integer :status, :null => false, :default =>0
       t.boolean :is_deleted, :null => false, :default =>false
+      t.integer :stock
 
       t.timestamps
     end
