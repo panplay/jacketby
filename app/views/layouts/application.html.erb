@@ -10,6 +10,70 @@
   </head>
 
   <body>
+    <header class="navbar navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <h2 class="title"><%= link_to'Jacketby', root_path %>
+          </h2>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if customer_signed_in? %>
+              <li>
+                <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
+              </li>
+              <li>
+                <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id) %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+              </li>
+              <br>
+              <li>
+                <%= link_to 'ショッピングカート', customers_cart_path(current_customer.id) %>
+              </li>
+
+            <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to 'ランキング', root_path %>
+              </li>
+              <li>
+                <%= link_to '商品一覧', admin_items_path %>
+              </li>
+              <li>
+                <%= link_to '顧客一覧', admin_customers_path %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+              </li>
+              <br>
+              <li>
+                <%= link_to '商品新規追加', new_admin_item_path %>
+              </li>
+
+
+            <% else %>
+              <li>
+                <%= link_to 'アバウト', customers_homes_about_path %>
+              </li>
+              <li>
+                <%=link_to "サインアップ", new_customer_registration_path %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_customer_session_path %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <%= yield %>
+    <footer class="footer">
+      <div class="container">
+        <p class="nav navbar-nav navbar-center">Jacketby</p>
+        <p class="nav navbar-nav navbar-right">© All rights reserved by Infratop.Inc.</p>
+      </div>
+    </footer>
   </body>
+
 </html>
