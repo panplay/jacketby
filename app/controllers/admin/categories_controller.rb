@@ -25,7 +25,7 @@ class Admin::CategoriesController < ApplicationController
 
   private
 	def category_params
-		params.require(:category).permit(:name, item_attributes:[:id, :name, disk_attributes: [:id, :disk_order, song_attributes: [:id, :name]])
+		params.require(:category).permit(:name, item_attributes:[:id, :name, disk_attributes: [:id, :disk_order, song_attributes: [:id, :name]]])
 	end
 
 end
