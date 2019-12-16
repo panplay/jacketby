@@ -1,2 +1,37 @@
-<h1>Customer::Orders#new</h1>
-<p>Find me in app/views/customer/orders/new.html.erb</p>
+<h2>購入確認</h2>
+
+
+
+<h2>お届け先</h2>
+<h3>登録住所</h3>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
+    <input type="radio" name="btn" id="a" checked="checked">
+    <div class="text01">
+    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
+        〒 <%= @customer.postal_code %>
+    </div>
+    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+        住所　<%= @customer.address %>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<h3>新規お届け先</h3>
+
+<%= form_for([:customers,@order]) do |f| %>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
+  	<input type="radio" name="btn" id="b">
+  	<div class="text02">
+    <div>宛名</div>
+      <%= f.text_field :delivery_name %>
+    <div>郵便番号</div>
+      <%= f.text_field :postal_code %>
+    <div>住所</div>
+      <%= f.text_area :destination %>
+    </div>
+    </div>
+</div>
+  <%= f.submit'注文を確定する', class:"btn btn-warning btn-block" %>
+  <% end %>
