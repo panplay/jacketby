@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <header class="navbar navbar-inverse">
+    <header class="navbar navbar-default">
       <div class="container">
         <nav class="nav navbar-nav navbar-left">
           <h2 class="title"><%= link_to'Jacketby', root_path %>
@@ -23,6 +23,9 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if customer_signed_in? %>
+              <p class="navbar-text navbar-right">
+                ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
+              </p>
               <li>
                 <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
               </li>
@@ -34,8 +37,11 @@
               </li>
               <br>
               <li>
-                <%= link_to 'ショッピングカート', customers_cart_path(current_customer.id) %>
+                <button type="button" class="btn btn-warning navbar-btn navbar-right">
+                  <%= link_to 'ショッピングカート', customers_cart_path(current_customer.id)  %>
+                </button>
               </li>
+              </br>
 
             <% elsif admin_signed_in? %>
               <li>
@@ -57,6 +63,10 @@
 
 
             <% else %>
+              <p class="navbar-text navbar-right">
+                ようこそ　ゲストさん。
+              </p>
+              <br>
               <li>
                 <%= link_to 'アバウト', customers_homes_about_path %>
               </li>
@@ -66,6 +76,7 @@
               <li>
                 <%= link_to "ログイン", new_customer_session_path %>
               </li>
+              </br>
             <% end %>
           </ul>
         </nav>

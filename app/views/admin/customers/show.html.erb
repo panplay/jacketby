@@ -1,2 +1,33 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+
+
+  <h2>顧客情報</h2>
+    <table class="table">
+      <tbody>
+      	<tr>
+      	  <th>お名前</th>
+      	<th><%= @customer.last_name %></th>
+      	<th><%= @customer.first_name %></th>
+      	</tr>
+      	<tr>
+      	  <th>お名前カナ</th>
+      	  <th><%= @customer.last_name_kana %></th>
+      	  <th><%= @customer.first_name_kana %></th>
+      	</tr>
+      	<tr>
+      	  <th>住所1</th>
+      	  <th><%= @customer.postal_code %>
+      	  </th>
+      	  <th><%= @customer.address %></th>
+      	</tr>
+      	<tr>
+      	  <th><%= @customer.phone_number %></th>
+      	</tr>
+      	<tr>
+      	  <th><%= @customer.email %></th>
+      	</tr>
+      	<div class="row">
+        <%= link_to "編集", edit_admin_customer_path, class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+    </div>
+
+
+

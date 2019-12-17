@@ -2,28 +2,28 @@
 
 
 
-<h2>お届け先</h2>
-<h3>登録住所</h3>
+<h4>お届け先</h4>
+<p><input type="radio" name="btn" id="a">  登録住所</p>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
-    <input type="radio" name="btn" id="a" checked="checked">
-    <div class="text01">
+    <div class="text text01">
     <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
         〒 <%= @customer.postal_code %>
+        <!--addressモデルから引っ張ったデータをドロップダウンで表示させ、未選択のときは規定値としてメイン住所を表示させるためのコード（addressモデルが空っぽなので途中)-->
+    <!--%= form_for([:customers,@address]) do |f| %-->
+    <!--%= f.select :postal_code, Addresses.all, :id, :name , include_blank: '選択してね！'%-->
     </div>
     <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
         住所　<%= @customer.address %>
     </div>
-  </div>
-  </div>
+    </div>
 </div>
 
 
-<h3>新規お届け先</h3>
+<p><input type="radio" name="btn" id="b">  新規お届け先</p>
 
 <%= form_for([:customers,@order]) do |f| %>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
-  	<input type="radio" name="btn" id="b">
-  	<div class="text02">
+  	<div class="text text02">
     <div>宛名</div>
       <%= f.text_field :delivery_name %>
     <div>郵便番号</div>
@@ -31,7 +31,22 @@
     <div>住所</div>
       <%= f.text_area :destination %>
     </div>
-    </div>
 </div>
+
+
+<h4>支払い方法</h4>
+<div class="field">
+    <%= f.radio_button :payment, :クレジットカード %>
+    <%= f.label :クレジットカード %>
+    <%= f.radio_button :payment, :銀行振込 %>
+    <%= f.label :銀行振込 %>
+    <%= f.radio_button :payment, :代引き %>
+    <%= f.label :代引き %>
+</div>
+
+<h4>注文内容</h4>
+
+
+
   <%= f.submit'注文を確定する', class:"btn btn-warning btn-block" %>
   <% end %>
