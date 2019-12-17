@@ -1,23 +1,37 @@
+<div class="panel-body" ng-transclude>
+  <div include-with-scope=""class="ng-scope">
 <table>
-	<thead>
-		<tr>
-			<th>顧客名</th>
-			<th>メールアドレス</th>
-			<th>登録日</th>
-			<th>購入した日</th>
-			<th>詳細ページへ</th>
+	<div class="col-md-12">
+	  <div ba-panel ba-panel-title="顧客一覧"ba-panel-class="with-scroll">
+          <div class="panel-heading clearfix">
+          	<h3 class="panel-title">顧客一覧</h3>
+	  </div>
+	</div>
+	  <div class="table table-bordered table-hover table-condensed">
+	  </div>
+	</div>
+      <div class="table-responsive">
+      	<table class="table table-striped jambo_table buik_action">
+      	<thead>
+		<tr class="headings">
+			<th class="column-title">顧客名</th>
+			<th class="column-title">メールアドレス</th>
+			<!--th class="column-title">登録日</th-->
+			<th class="column-title">購入した日</th>
+			<th class="column-title">詳細ページへ</th>
 		</tr>
 	</thead>
 	<tbody>
-		<!-- % @customers.all.each do |customer| % -->
-			<tr>
-				<td>宮下房子<!-- %= customer.name % --></td>
-				<td>husahusa@gmail.com<!-- %= customer.mail_address % --></td>
-				<td>2019/12/11<!-- %= customer.created_at % --></td>
-				<td>購入した日</td>
-				<td>詳細ページへ<!-- %= link_to "詳細ページへ", customer_path(customer.id) % --></td>
+		<% @customers.each do |customer| %>
+			<tr class="even pointer">
+				<td class=><%= customer.last_name %>
+					<%= customer.first_name %></td>
+				</td>
+				<td><%= customer.email %></td>
+				<!--td><%= customer.remember_created_at %></td-->
+				<td></td>
+				<td><%= link_to "顧客詳細へ", admin_customer_path(customer) %></td>
 			</tr>
-		<!-- % end % -->
-		<!-- %= paginate @customers, class: "paginate" % -->
+		<% end %>
 	</tbody>
 </table>

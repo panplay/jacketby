@@ -1,12 +1,17 @@
 class Admin::CustomersController < ApplicationController
   def show
+  	@customer = Customer.find(params[:id])
   end
 
   def hide
   end
 
+  def edit
+  end
+
   def index
-  	@customers = Customer.page(params[:page]).reverse_order
+  	@customer = current_user
+    @customers =Customer.all
   end
 
   def update
