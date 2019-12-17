@@ -1,36 +1,39 @@
+<h2 class="with-line">顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h2>
 
-  <h2>顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h2>
-    <table class="table">
-      <tbody>
-      	<tr>
-      	  <th>お名前</th>
-      	<th><%= @customer.last_name %></th>
-      	<th><%= @customer.first_name %></th>
-      	</tr>
-      	<tr>
-      	  <th>お名前カナ</th>
-      	  <th><%= @customer.last_name_kana %></th>
-      	  <th><%= @customer.first_name_kana %></th>
-      	</tr>
-      	<tr>
-      	  <th>住所1</th>
-      	  <th><%= @customer.postal_code %>
-      	  </th>
-      	  <th><%= @customer.address %></th>
-      	</tr>
-      	<tr>
-      	  <th>電話番号</th>
-      	  <th><%= @customer.phone_number %></th>
-      	</tr>
-      	<tr>
-      	　<th>メールアドレス</th>
-      	  <th><%= @customer.email %></th>
-      	</tr>
+      <%= form_for @customer,url:admin_customers_path(@customer) do |f| %>
+    <div class="row" style="display:block;">
+      <div class="col-md-4">
+      
+    <div class="form group">
+      <label>お名前</label>
+        <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control"%>
+        <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control"%>
+    </div>
+    <div class="field">
+      <label>お名前（カナ）</label>
+      <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control"%>
+      <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control"%>
+    </div>
+    <div class="field">
+      <label>住所1</label>
+      <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control"%>
+      <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control"%>
+    </div>
+    <div class="field">
+    　<label>電話番号</label>
+      <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control"%>
+    </div>
+    <div class="field">
+    　<label>メールアドレス</label>
+      <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
+        <% end %>
+    </div>
       	<div class="actions">
-        <%= link_to "編集", edit_admin_customer_path(@customer), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+        <%= link_to "編集", edit_admin_customer_path(@customer),rows: 7,class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench form-control" %>
+        <%= link_to "destroy", admin_customers_path(@customer),rows: 7,class: "btn-sm btn-danger", method: :delete, "data-confirm" => "Are you sure?" %>
         </div>
-     </tbody>
-    </table>
+    </div>
+</div>
 </div>
 
 
