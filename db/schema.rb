@@ -110,16 +110,13 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.string "name", null: false
     t.integer "artist_id", null: false
     t.integer "price", null: false
-    t.string "release_date", null: false
     t.datetime "release_date", null: false
     t.integer "label_id", null: false
     t.integer "category_id", null: false
     t.text "comment"
     t.integer "status", default: 0, null: false
     t.boolean "is_deleted", default: false, null: false
-
     t.integer "stock"
-
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sale"
