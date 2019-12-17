@@ -1,2 +1,32 @@
-<h1>Admin::ArrivalItems#index</h1>
-<p>Find me in app/views/admin/arrival_items/index.html.erb</p>
+<h2>入荷履歴</h2>
+<table  class="table table-hover table-inverse">
+	<thead>
+		<tr>
+			<th class="">#</th>
+			<th class="">シングル/アルバム名</th>
+			<th class="">アーティスト名</th>
+			<th class="">入荷枚数</th>
+			<th class="">入荷日時</th>
+			<th class=""></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<% @item.each do |item| %>
+				<td>
+				</td>
+				<td>
+					<%= item.name %>
+				</td>
+				<td>
+					<%= item.artist.name %>
+				</td>
+				<td>
+					<%= item.arrival_time %>
+				</td>
+				<td>
+				</td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
