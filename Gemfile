@@ -71,5 +71,7 @@ gem 'kaminari','~> 1.1.1'
 gem 'ransack'
 gem 'nested_form_fields'
 
+gem 'pry-byebug'
+
 
 
