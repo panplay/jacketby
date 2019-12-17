@@ -16,6 +16,7 @@ class Item < ApplicationRecord
 	end
 
 	has_many :carts, dependent: :destroy
+	has_many :carted_customers, through: :favorites, source: :customer
 	def carted_by?(customer)
 		carts.where(customer_id: customer.id).exists?
 	end

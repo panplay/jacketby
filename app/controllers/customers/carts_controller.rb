@@ -2,12 +2,11 @@ class Customers::CartsController < ApplicationController
   #before_action :setup_cart!, only: [:create, :update, :destroy]
   def create
       #@customer = current_customer
-  	  @item = Item.find(params[:item_id])
-      @newcart = Cart.new(cart_params)
-      @newcart.customer_id = current_customer.id
-      @newcart.item_id = @item.id
-      @newcart.save
-      redirect_to customers_item_path(@item)
+  	  item = Item.find(params[:item_id])
+      cart = current_customer.carts.new(cart_params)
+      cart.item_id = item.id
+      cart.save
+      redirect_to customers_item_path(item)
       #if
       #@newcart.blank?
       #@newcart = current_customer.cart.build(item_id: params[:item_id])
@@ -17,17 +16,17 @@ class Customers::CartsController < ApplicationController
   end
 
   def show
-      #@newcarts = current_customer.carts
-      @carts = Cart.all
-      @item = Item.find(params[:id])
-      @cart = Cart.find(params[:id])
-      #@customer = current_customer
+      @item = Item.all
   end
 
   def update
   end
 
   def destroy
+    item = Item.find(params[:item_id])
+    cart = current_customer.carts.find_by(item_id: item.id)
+    cart.destroy
+    reLdirect_to customers_item_path(item)
   end
 
   private
