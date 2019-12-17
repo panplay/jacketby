@@ -27,9 +27,7 @@
 						<%= f.collection_select :label_id, Label.all, :id, :name, {include_blank: "レーベル"} %><br>
 						<p>カテゴリー名</p>
 						<%= f.collection_select :category_id, Category.all, :id, :name, {include_blank: "カテゴリー"} %><br>
-						<%= f.fields_for :arrival_items do |t| %>
-						<%= render 'arrival_item_fields', f: t %>
-						<% end %>
+						在庫数<br><%= @item.stock %>
 						<%= f.attachment_field :image %>
 					</div>
 					<%= f.label :管理者コメント %><br>

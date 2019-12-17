@@ -10,6 +10,7 @@ class Item < ApplicationRecord
 	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	has_many :favorites, dependent: :destroy
+	has_many :favorited_customers, through: :favorites, source: :customer
 	def favorited_by?(customer)
 		favorites.where(customer_id: customer.id).exists?
 	end

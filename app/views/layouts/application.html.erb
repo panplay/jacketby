@@ -6,7 +6,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <script src="https://kit.fontawesome.com/0a9fd1077e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
   <body>
@@ -68,10 +72,10 @@
       </div>
     </header>
     <%= yield %>
-    <footer class="footer">
+    <footer class="footer navbar navbar-inverse">
       <div class="container">
-        <p class="nav navbar-nav navbar-center">Jacketby</p>
-        <p class="nav navbar-nav navbar-right">© All rights reserved by Infratop.Inc.</p>
+        <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
+        <p class="nav navbar-nav navbar-right", style="color:white">© All rights reserved by Jacketbye.Inc.</p>
       </div>
     </footer>
   </body>

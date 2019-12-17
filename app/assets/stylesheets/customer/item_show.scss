@@ -1,0 +1,12 @@
+.item_show {
+  .item_show_image {
+  position:relative;
+  }
+  .item_show_image i {
+      position: absolute;
+      color: white;
+      top: 0;
+      right: 0;
+      background-color: #7FBFFF;
+    }
+}

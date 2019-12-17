@@ -8,6 +8,10 @@ class Customer < ApplicationRecord
   has_many :orders
 
   has_many :favorites, dependent: :destroy
+  has_many :favorited_items, through: :favorites, source: :item
+  def already_favorited?(item)
+    self.favorites.exists?(item_id: item.id)
+  end
 
   has_many :carts, dependent: :destroy
 
