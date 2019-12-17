@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
 
     put "/customers/:id" => "customers#hide"
-    resources :customers, only: [:index, :show, :update]
+    resources :customers, only: [:index, :show, :update, :edit]
     resources :orders, only: [:index, :update]
 
   end
