@@ -1,2 +1,63 @@
-<h1>Customer::Items#show</h1>
-<p>Find me in app/views/customer/items/show.html.erb</p>
+<section class="container-fluid clearfix">
+	<h1 class="text-center">商品詳細・編集</h1>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="item_show">
+							<div class="item_show_image">
+								<%= attachment_image_tag @item, :image, size: "300x300" %>
+									<div id="item_favorite">
+										<%= render 'customers/favorites/favorite', item: @item %>
+									</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<p>シングルアルバム名：<%= @item.name %> </p>
+						<p>アーティスト名：<%= @item.artist.name %></p>
+						<p>価格(税込)：¥ <%= (@item.price * 1.1).to_i %>
+							<span class="btn btn-danger btn-xs"><%= @item.sale %></span>
+						</p><br>
+						<p>発売日：<%= @item.release_date %></p>
+						<p>レーベル名：<%= @item.label.name %></p>
+						<p>カテゴリー名：<%= @item.category.name %></p>
+						<p>在庫数：<%= @item.stock %></p>
+		            </div>
+		        </div>
+
+
+					<div class="row">
+						<p>管理者コメント<br><%= @item.comment %></p>
+						<% @item.disks.each do |disk| %>
+							<p>Disk<%= disk.disk_order %><br>
+								<% disk.songs.each do |song| %>
+									<p><%= song.song_order %>.<%= song.name %></p>
+								<% end %>
+							</p>
+						<% end %>
+
+						<div id="item_favorite">
+				             <% if @item.favorited_by?(current_customer) %>
+								<%= link_to customers_item_favorites_path(@item), method: :delete do %>
+									<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-primary" aria-hidden="true" style="color: red;">
+										<span>いいねを外す</span>
+									</i>
+								<% end %>
+							<% else %>
+								<%= link_to customers_item_favorites_path(@item), method: :post do %>
+									<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-primary" aria-hidden="true">
+									    <span>いいねする</span>
+									</i>
+								<% end %>
+							<% end %>
+						</div>
+
+						<%= link_to "ショッピングカートへ入れる", "#", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
+					</div>
+
+				</div>
+			</div>
+		</div>
+</section>
