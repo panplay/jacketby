@@ -1,5 +1,8 @@
 class Admin::ArrivalItemsController < ApplicationController
   def index
+    @arrival_item = ArrivalItem.new
+    @arrival_items = ArrivalItem.all
+    @item = Item.all
   end
 
   def new

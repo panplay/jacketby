@@ -4,6 +4,10 @@ class Admin::CustomersController < ApplicationController
   end
 
   def hide
+  	book = Customer.find(params[:id])
+    customer.destroy
+  	flash[:notice] = "customer was successfully destroyed."
+  	redirect_to admin_customers_path(@customer)
   end
 
   def edit
@@ -17,7 +21,7 @@ class Admin::CustomersController < ApplicationController
   def update
   	@customer = Customer.find(params[:id])
     @customer.update(customer_params)
-    redirect_to admin_customer_path(@customer.id)
+    redirect_to admin_customer_path(@customer)
   end
 end
 private 
@@ -27,6 +31,6 @@ end
 def correct_user
     user = Customer.find(params[:id])
     if current_user != customer
-      redirect_to admin_customer_path(current_user)
+      redirect_to admin_customers_path(current_user)
     end
   end
