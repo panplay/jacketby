@@ -1,1 +1,131 @@
-admin/items/index
+<section class="container">
+	<div class="row">
+		<div class="sidebar, col-md-3">
+
+			<div class="row">
+				<div class="categories">
+					<h2 class="categories-headline">カテゴリー</h2>
+					 <div class="sidebar-contents">
+					  	<% @categories.each do |category| %>
+					  	 <%= link_to "#" do %>
+				 			<h3><%= category.name %></h3>
+				 		 <% end %>
+				 		 <% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="admin-path">
+					<h2 class="admin-path-headline">各種ページへ</h2>
+						<div class="sidebar-contents">
+							<%= link_to admin_orders_path do %>
+								<p>受注一覧へ</p>
+							<% end %>
+							<%= link_to admin_arrival_items_path do %>
+								<p>入荷履歴へ</p>
+							<% end %>
+							<%= link_to new_admin_arrival_item_path do %>
+								<p>入荷入力へ</p>
+							<% end %>
+						</div>
+				</div>
+			</div>
+		</div>
+
+			<div class="col-md-9">
+				<div class="row clearfix">
+					<h2 class="new-items">新着アイテム</h2>
+						<% @items.each do |item| %>
+							<div class="example">
+								<div class="example_image">
+									<%= attachment_image_tag item, :image, size: "150x150" %>
+										<div id="item_favorite">
+								             <%= render 'customers/favorites/favorite', item: item %>
+										</div>
+			  			        </div>
+			  					<div class="example_text">
+			  						<% if item.stock == 0 %>
+			  							<p class="btn btn-info btn-xs">在庫なし</p>
+			  						<% elsif item.stock <= 5 %>
+			  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
+			  						<% else %>
+			  							<p class="btn btn-success btn-xs">在庫あり</p>
+			  						<% end %>
+					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+						  				<%= link_to customers_item_path(item) do %>
+						  					<p>シングル名：<%= item.name %></p>
+						  				<% end %>
+					  				<p>アーティスト名：<%= item.artist.name %></p>
+					  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
+					  			</div>
+							</div>
+						<% end %>
+				</div>
+
+					<div class="row clearfix">
+						<h2 class="new-items">いいねランキング</h2>
+							<% @all_ranks.each.with_index(1) do |item, i| %>
+								<div class="example">
+									<div class="example_image">
+										<%= attachment_image_tag item, :image, size: "150x150" %>
+											<div id="item_favorite">
+									             <%= render 'customers/favorites/favorite', item: item %>
+											</div>
+				  			        </div>
+				  					<div class="example_text">
+				  						<% if item.stock == 0 %>
+				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  						<% elsif item.stock <= 5 %>
+				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
+				  						<% else %>
+				  							<p class="btn btn-success btn-xs">在庫あり</p>
+				  						<% end %>
+						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+							  				<%= link_to customers_item_path(item) do %>
+							  					<p>シングル名：<%= item.name %></p>
+							  				<% end %>
+						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
+						  			</div>
+								</div>
+							<% end %>
+					</div>
+
+					<div class="row clearfix">
+						<h2 class="new-items">一覧</h2>
+							<% @random.each do |item| %>
+								<div class="example">
+									<div class="example_image">
+										<%= attachment_image_tag item, :image, size: "150x150" %>
+											<div id="item_favorite">
+									             <%= render 'customers/favorites/favorite', item: item %>
+											</div>
+				  			        </div>
+				  					<div class="example_text">
+				  						<% if item.stock == 0 %>
+				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  						<% elsif item.stock <= 5 %>
+				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
+				  						<% else %>
+				  							<p class="btn btn-success btn-xs">在庫あり</p>
+				  						<% end %>
+						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+							  				<%= link_to customers_item_path(item) do %>
+							  					<p>シングル名：<%= item.name %></p>
+							  				<% end %>
+						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
+						  			</div>
+								</div>
+							<% end %>
+					</div>
+
+					<span id="back">
+					      <a href="#">
+					        <%= image_tag "arrow.png", size: "30x30", class: "pull-right" %>
+					      </a>
+    				</span>
+			</div>
+	</div>
+</section>

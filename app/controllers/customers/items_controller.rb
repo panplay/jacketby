@@ -5,7 +5,8 @@ class Customers::ItemsController < ApplicationController
     @artists = Artist.all
     @labels = Label.all
     @categories = Category.all
-    @favorite = Favorite.new
+    @all_ranks = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(4).pluck(:item_id))
+    @random = Item.order("RANDOM()").limit(8)
   end
 
   def show

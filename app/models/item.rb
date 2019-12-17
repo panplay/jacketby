@@ -38,7 +38,8 @@ class Item < ApplicationRecord
 
    enum sale:{
    	sale: 0,
-   	販売停止中: 1
+   	販売停止中: 1,
+   	好評発売中: 2
    }
 
 end
