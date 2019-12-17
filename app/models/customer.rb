@@ -14,6 +14,10 @@ class Customer < ApplicationRecord
   end
 
   has_many :carts, dependent: :destroy
+  has_many :carted_items, through: :cartes, source: :item
+  def already_carted?(item)
+    self.cartes.exists?(item_id: item.id)
+  end
 
 
 

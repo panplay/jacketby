@@ -53,7 +53,12 @@
 								<% end %>
 							<% end %>
 						</div>
-						<%= link_to "ショッピングカートへ入れる", customers_carts_path(item_id: @item.id), method: :post, class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
+
+						<%= form_for(@cart, url: customers_item_carts_path(@item), method: :post) do |f| %>
+							<%= f.number_field :quantity, class:"form-control", placeholder: "数量" %>
+							<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
+						<% end %>
+
 					</div>
 
 				</div>

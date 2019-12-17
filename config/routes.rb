@@ -42,15 +42,16 @@ Rails.application.routes.draw do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
     get 'homes/unsubscribe' => "homes#unsubscribe"
+    get "customers/:id/carts" => "customers#carts"
 
     resource :orders, only: [:new, :create]
-    resources :carts, only: [:show, :create, :update, :destroy]
     resources :customers, only: [:edit]
     put "/customers/:id" => "customers#hide"
     get "/customers/:id" => "customers#favorites", as: 'favorites'
 
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]
+      resources :carts, only: [:show, :create, :update, :destroy]
     end
 
   end

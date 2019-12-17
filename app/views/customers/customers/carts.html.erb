@@ -1,0 +1,12 @@
+<section class="container wear-edit">
+ 	<div class="row edit-row">
+ 		<div class="col-md-8 col-sm-offset-2">
+ 			<h2 class="edit-title">カート一覧</h2>
+				<% @carts.each do |cart| %>
+    				<% item = Item.find_by(id: cart.item_id) %>
+					 		<%= attachment_image_tag item, :image, class: "book-img float-left", size: "300x300" %>
+    					<p class="float-left"><%= item.name %></p>
+  				<% end %>
+		</div>
+	</div>
+</section>
