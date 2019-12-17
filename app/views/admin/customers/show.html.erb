@@ -1,6 +1,5 @@
 
-
-  <h2>顧客情報</h2>
+  <h2>顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h2>
     <table class="table">
       <tbody>
       	<tr>
@@ -20,14 +19,19 @@
       	  <th><%= @customer.address %></th>
       	</tr>
       	<tr>
+      	  <th>電話番号</th>
       	  <th><%= @customer.phone_number %></th>
       	</tr>
       	<tr>
+      	　<th>メールアドレス</th>
       	  <th><%= @customer.email %></th>
       	</tr>
-      	<div class="row">
-        <%= link_to "編集", edit_admin_customer_path, class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
-    </div>
+      	<div class="actions">
+        <%= link_to "編集", edit_admin_customer_path(@customer), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+        </div>
+     </tbody>
+    </table>
+</div>
 
 
 
