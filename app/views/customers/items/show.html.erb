@@ -53,8 +53,7 @@
 								<% end %>
 							<% end %>
 						</div>
-
-						<%= link_to "ショッピングカートへ入れる", customers_carts_path, method: :post, class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
+						<%= link_to "ショッピングカートへ入れる", customers_carts_path(item_id: @item.id), method: :post, class:"btn btn-lg btn-block btn-base-1 mt-20 bg-danger" %>
 					</div>
 
 				</div>
