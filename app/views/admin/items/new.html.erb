@@ -31,7 +31,7 @@
 						<%= f.attachment_field :image %>
 					</div>
 					<%= f.label :管理者コメント %><br>
-					<%= f.text_field :comment, class:"form-control", placeholder: "管理者の熱いコメント" %>
+					<%= f.text_area :comment, class:"form-control", placeholder: "管理者の熱いコメント" %>
 					<%= f.fields_for :disks do |disk| %>
 						<%= render 'disk_fields', f: disk %>
 					<% end %>

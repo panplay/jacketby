@@ -37,9 +37,9 @@
 			  						<% end %>
 					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
 						  				<%= link_to customers_item_path(item) do %>
-						  					<p>シングル名：<%= item.name %></p>
+						  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 						  				<% end %>
-					  				<p>アーティスト名：<%= item.artist.name %></p>
+					  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 					  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 					  			</div>
 							</div>
@@ -52,6 +52,9 @@
 								<div class="example">
 									<div class="example_image">
 										<%= attachment_image_tag item, :image, size: "150x150" %>
+											<div class="ranking">
+												<%= i %>位
+											</div>
 											<div id="item_favorite">
 									             <%= render 'favorite', item: item %>
 											</div>
@@ -66,9 +69,9 @@
 				  						<% end %>
 						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
 							  				<%= link_to customers_item_path(item) do %>
-							  					<p>シングル名：<%= item.name %></p>
+							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>
-						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 						  			</div>
 								</div>
@@ -95,9 +98,9 @@
 				  						<% end %>
 						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
 							  				<%= link_to customers_item_path(item) do %>
-							  					<p>シングル名：<%= item.name %></p>
+							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>
-						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 						  			</div>
 								</div>
@@ -105,7 +108,7 @@
 					</div>
 
 					<span id="back">
-					      <a href="#">
+					      <a href="">
 					        <%= image_tag "arrow.png", size: "30x30", class: "pull-right" %>
 					      </a>
     				</span>

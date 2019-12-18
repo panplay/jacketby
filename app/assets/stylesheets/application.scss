@@ -16,3 +16,42 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+	background-color: #f5f5f5;
+}
+.btn-social-flat {
+  color: #484848;
+  display: inline-block;
+  height: 50px;
+  font-size: 17px;
+  line-height: 50px;
+  background: #eaeef1;
+  text-decoration: none;
+  margin: 1em;
+}
+
+.btn-social-flat-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: white;
+}
+.btn-social-flat-icon i {
+  font-size: 25px;
+  line-height: 48px;
+  transition: .3s;
+}
+.btn-social-flat-text {
+  display: inline-block;
+  width: 87px;
+  text-align: center;
+}
+.btn-social-flat-icon--pocket {
+  background:#fd7171;
+}
+.btn-social-flat:hover .btn-social-flat-icon i {
+  -webkit-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
