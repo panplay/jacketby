@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
     get 'homes/unsubscribe' => "homes#unsubscribe"
-    get "customers/:id/carts" => "customers#carts"
+    get "customers/:id/carts" => "customers#carts" 
 
     resource :orders, only: [:new, :create]
     resources :customers, only: [:edit]
