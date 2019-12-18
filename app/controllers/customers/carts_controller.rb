@@ -26,3 +26,4 @@ class Customers::CartsController < ApplicationController
       params.require(:cart).permit(:item_id, :customer_id, :quantity)
   end
 end
+end
