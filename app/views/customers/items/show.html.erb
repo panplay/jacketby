@@ -1,12 +1,12 @@
 <section class="container-fluid clearfix">
-	<h1 class="text-center">商品詳細・編集</h1>
+	<h1 class="text-center">商品詳細</h1>
 		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
+			<div class="col-md-8 col-sm-offset-2 show-container">
+				<div class="row clearfix">
 					<div class="col-md-6">
 						<div class="item_show">
 							<div class="item_show_image">
-								<%= attachment_image_tag @item, :image, size: "300x300" %>
+								<%= attachment_image_tag @item, :image, size: "300x300", class: "center-block" %>
 									<div id="item_favorite">
 										<%= render 'customers/favorites/favorite', item: @item %>
 									</div>
@@ -15,53 +15,137 @@
 					</div>
 
 					<div class="col-md-6">
-						<p>シングルアルバム名：<%= @item.name %> </p>
-						<p>アーティスト名：<%= @item.artist.name %></p>
-						<p>価格(税込)：¥ <%= (@item.price * 1.1).to_i %>
-							<span class="btn btn-danger btn-xs"><%= @item.sale %></span>
-						</p><br>
-						<p>発売日：<%= @item.release_date %></p>
-						<p>レーベル名：<%= @item.label.name %></p>
-						<p>カテゴリー名：<%= @item.category.name %></p>
-						<p>在庫数：<%= @item.stock %></p>
-		            </div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>シングルアルバム名</th>
+									<th><%= @item.name %></th>
+								</tr>
+								<tr>
+									<th>アーティスト名</th>
+									<th><%= @item.artist.name %></th>
+								</tr>
+								<tr>
+									<th>価格(税込)</th>
+									<th>¥ <%= (@item.price * 1.1).to_i %>
+										<span class="btn btn-danger btn-xs"><%= @item.sale %></span>
+									</th>
+								</tr>
+								<tr>
+									<th>発売日</th>
+									<th><%= @item.release_date %></th>
+								</tr>
+								<tr>
+									<th>レーベル名</th>
+									<th><%= @item.label.name %></th>
+								</tr>
+								<tr>
+									<th>カテゴリー名</th>
+									<th><%= @item.category.name %></th>
+								</tr>
+								<tr>
+									<th>在庫</th>
+									<th><% if @item.stock == 0 %>
+				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  						<% elsif @item.stock <= 5 %>
+				  							<p class="btn btn-warning btn-xs">残り在庫<%= @item.stock %>ケ</p>
+				  						<% else %>
+				  							<p class="btn btn-success btn-xs">在庫あり</p>
+				  						<% end %>
+				  					</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
 		        </div>
+		        <hr>
 
 
 					<div class="row">
-						<p>管理者コメント<br><%= @item.comment %></p>
-						<% @item.disks.each do |disk| %>
-							<p>Disk<%= disk.disk_order %><br>
-								<% disk.songs.each do |song| %>
-									<p><%= song.song_order %>.<%= song.name %></p>
-								<% end %>
-							</p>
-						<% end %>
-
-						<div id="item_favorite">
-				             <% if @item.favorited_by?(current_customer) %>
-								<%= link_to customers_item_favorites_path(@item), method: :delete do %>
-									<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-primary" aria-hidden="true" style="color: red;">
-										<span>いいねを外す</span>
-									</i>
-								<% end %>
-							<% else %>
-								<%= link_to customers_item_favorites_path(@item), method: :post do %>
-									<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-primary" aria-hidden="true">
-									    <span>いいねする</span>
-									</i>
-								<% end %>
+						<h3 class="text-left">
+  							<span class="show-title">店長の一言</span>
+  						</h3>
+						<div class="comment">
+							<%= @item.comment %></p>
+						</div>
+						<hr>
+						<h3 class="text-left">
+  							<span class="show-title">製品内容</span>
+  						</h3>
+						<div class ="disk">
+							<% @item.disks.each do |disk| %>
+								<p>ディスク<%= disk.disk_order %><br>
+									<% disk.songs.each do |song| %>
+										<p><%= song.song_order %>.<%= song.name %></p>
+									<% end %>
+								</p>
 							<% end %>
 						</div>
+					</div>
+						<hr>
+
+
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<div id="item_favorite">
+						             <% if @item.favorited_by?(current_customer) %>
+										<%= link_to customers_item_favorites_path(@item), method: :delete do %>
+											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true" style="color: red;">
+												<span>いいねを外す</span>
+											</i>
+										<% end %>
+									<% else %>
+										<%= link_to customers_item_favorites_path(@item), method: :post do %>
+											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true">
+											    <span>いいねする</span>
+											</i>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+							<hr>
 
 						<%= form_for(@cart, url: customers_item_carts_path(@item), method: :post) do |f| %>
-							<%= f.number_field :quantity, class:"form-control", placeholder: "数量" %>
-							<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
+							<div class="row clearfix">
+								<div class="col-md-7 col-md-offset-2">
+									<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
+								</div>
+								<div class="col-md-1">
+									<%= f.number_field :quantity, class:"form-control", placeholder: "数量" %>
+								</div>
 						<% end %>
+							</div>
+							<hr>
 
+
+					<div class="row">
+							<div class="col-md-10 col-md-offset-1">
+								<div class="slide-block">
+								<h2 class="slide-block_text">店長のおすすめ</h2>
+								<div class="slider">
+									<%= image_tag "jacketby(1)", size: "100x100" %>
+									<%= image_tag "jacketby(2)", size: "100x100" %>
+									<%= image_tag "jacketby(3)", size: "100x100" %>
+									<%= image_tag "jacketby(4)", size: "100x100" %>
+									<%= image_tag "jacketby(5)", size: "100x100" %>
+									<%= image_tag "jacketby (6)", size: "100x100" %>
+									<%= image_tag "jacketby(7)", size: "100x100" %>
+									<%= image_tag "jacketby (8)", size: "100x100" %>
+									<%= image_tag "jacketby (9)", size: "100x100" %>
+									<%= image_tag "jacketby(10)", size: "100x100" %>
+								</div>
+							</div>
+							</div>
 					</div>
 
 				</div>
 			</div>
 		</div>
+
+		<span id="back">
+		      <a href="">
+		        <%= image_tag "arrow.png", size: "30x30", class: "pull-right" %>
+		      </a>
+		</span>
 </section>

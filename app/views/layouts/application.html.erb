@@ -6,11 +6,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/0a9fd1077e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
   </head>
 
   <body>
@@ -23,9 +23,6 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if customer_signed_in? %>
-              <p class="navbar-text navbar-right">
-                ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
-              </p>
               <li>
                 <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
               </li>
@@ -35,13 +32,18 @@
               <li>
                 <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
               </li>
-              <br>
               <li>
-                <button type="button" class="btn btn-warning navbar-btn navbar-right">
-                  <!--%= link_to 'ショッピングカート', "/customers/items/#{@item.id}/carts/#{@cart.id}"  %-->
+                <button type="button" class="btn-social-flat">
+                  <span class="btn-social-flat-icon btn-social-flat-icon--pocket">
+                    <i class="fab fa-get-pocket"></i>
+                    </span>
+                  <%= link_to 'カート', customers_path(current_customer), class: "btn-social-flat-text"  %>
                 </button>
               </li>
-              </br>
+              <br>
+              <p class="navbar-text">
+                ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
+              </p>
 
             <% elsif admin_signed_in? %>
               <li>
@@ -83,12 +85,15 @@
       </div>
     </header>
     <%= yield %>
+
     <footer class="footer navbar navbar-inverse">
       <div class="container">
         <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
         <p class="nav navbar-nav navbar-right", style="color:white">© All rights reserved by Jacketbye.Inc.</p>
       </div>
     </footer>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </body>
 
 </html>
