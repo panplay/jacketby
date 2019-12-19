@@ -19,7 +19,7 @@
 			  							<p class="btn btn-success btn-xs">在庫あり</p>
 			  						<% end %>
 					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
-						  				<%= link_to customers_item_path(item) do %>
+						  				<%= link_to customers_item_path(current_customer.id) do %>
 						  					<p>シングル名：<%= item.name %></p>
 						  				<% end %>
 					  				<p>アーティスト名：<%= item.artist.name %></p>

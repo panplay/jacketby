@@ -1,10 +1,11 @@
+<div class="container">
+  <div class="col-xs-3">
 <h2>顧客情報
  <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
 </h2>
-
+<table class="table">
+  <tbody>
       <%= form_for @customer,:url => {:action => :update} do |f| %>
-    <div class="row" style="display:block;">
-      <div class="col-md-4">
       <div class="form group">
       <div class="form-inline">
       <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
@@ -26,8 +27,11 @@
     </div>
       <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
     </div>
+    <fieldset>
     <%= f.fields_for :addresses do |address| %>
 		<%= render "address_fields", f: address %>
+    <%= link_to_add_fields "住所追加", f, :addresses %>
+  </fieldset>
 	<% end %>
     <div class="form group">
     <div class="form-inline">
@@ -45,7 +49,13 @@
     <%= f.submit "アップデート", class:"btn-info btn-sm",:size => "10*10" %>
         <% end %>
     </div>
+    </tbody>
+</table>
+</div>
+ <div class="col-xs-9">
+  <h2>顧客</h2>
+  <h1>ｓっかｍｆｋｓまｆｋｓｍｆｋｄｍｓｆｋｓｍｆｓ</h1>
 </div>
 </div>
-</div>
+
 

@@ -103,13 +103,14 @@
 						</div>
 							<hr>
 
-						<%= form_for(@cart, url: customers_item_carts_path(@item), method: :post) do |f| %>
+						<%= form_for(@cart, url: customers_customer_carts_path(current_customer.id), method: :post) do |f| %>
 							<div class="row clearfix">
 								<div class="col-md-7 col-md-offset-2">
 									<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
 								</div>
 								<div class="col-md-1">
 									<%= f.number_field :quantity, class:"form-control", placeholder: "数量" %>
+									<%= f.hidden_field :item_id, :value => @item.id, class:"form-control" %>
 								</div>
 						<% end %>
 							</div>

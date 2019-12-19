@@ -1,7 +1,6 @@
 class Customers::CustomersController < ApplicationController
   def edit
   	@customer = Customer.find(params[:id])
-    @customer.addresses.build
   end
 
   def favorites
@@ -14,6 +13,7 @@ class Customers::CustomersController < ApplicationController
   def carts
     @customer = Customer.find_by(id: params[:id])
     @carts = Cart.where(customer_id: @customer.id)
+
   end
 
   def update

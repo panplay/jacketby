@@ -1,4 +1,4 @@
-$(function() {
+$(document).on(‘turbolinks:load’, function() {
   $('[name="btn"]:radio').change( function() {
     if($('[id=a]').prop('checked')){
       $('.text').fadeOut();
@@ -8,9 +8,6 @@ $(function() {
       $('.text02').fadeIn();
     }
   });
-});
-
-$(function(){
     var nowchecked = $('input[name=btn]:checked').val();
     $('input[name=btn]').click(function(){
         if($(this).val() == nowchecked) {
