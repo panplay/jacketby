@@ -11,7 +11,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.text :comment
       t.integer :status, :null => false, :default =>0
       t.boolean :is_deleted, :null => false, :default =>false
-      t.integer :stock
+      t.integer :stock, :default =>0
 
       t.timestamps
     end

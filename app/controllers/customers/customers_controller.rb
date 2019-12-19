@@ -5,6 +5,10 @@ class Customers::CustomersController < ApplicationController
   end
 
   def favorites
+    @favorites = Favorite.where(customer_id: current_customer.id)
+    @artists = Artist.all
+    @labels = Label.all
+    @categories = Category.all
   end
 
   def carts
