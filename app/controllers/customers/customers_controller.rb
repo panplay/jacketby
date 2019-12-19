@@ -13,6 +13,7 @@ class Customers::CustomersController < ApplicationController
   def carts
     @customer = Customer.find_by(id: params[:id])
     @carts = Cart.where(customer_id: @customer.id)
+
   end
 
   def update
