@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions',
+    passwords: 'admin/passwords',
+    registrations: 'admin/registrations'
+  }
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     passwords: 'customers/passwords',
@@ -45,7 +49,7 @@ Rails.application.routes.draw do
     get "customers/:id/carts" => "customers#carts" 
 
     resource :orders, only: [:new, :create]
-    resources :customers, only: [:edit]
+    resources :customers, only: [:edit,:update]
     put "/customers/:id" => "customers#hide"
     get "/customers/:id" => "customers#favorites", as: 'favorites'
 

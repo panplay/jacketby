@@ -6,42 +6,49 @@
 
     <div class="form group">
     <div class="form-inline">
-      <label>お名前</label>
-        <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control" %>
-        <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control"%>
+      <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
+        <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control", :size => "10*10" %>
+        <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
     </div>
     </div>
     <div class="form group">
     <div class="form-inline">
-      <label>お名前（カナ）</label>
-      <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control"%>
-      <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control"%>
+      <button type="button" class="btn btn-success" disabled="disabled">お名前（カナ）</button>
+      <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
+      <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
     </div>
     </div>
     <div class="form group">
     <div class="form-inline">
-      <label>住所1</label>
-      <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control"%>
-      <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control"%>
+      <button type="button" class="btn btn-success" disabled="disabled">住所1</button>
+      <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control",:size => "10*10"%>
+    </div>
+      <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
+    </div>
+    <div class="form group">
+    <button type="button" class="btn btn-success" disabled="disabled">住所2</button>
+    <%= f.fields_for :addresses do |address| %>
+		<%= render "address_fields", f: address %>
+	<% end %>
+</div>
+    <div class="form group">
+    <div class="form-inline">
+    　<button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
+      <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
     </div>
     </div>
     <div class="form group">
     <div class="form-inline">
-    　<label>電話番号</label>
-      <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control"%>
-    </div>
-    </div>
-    <div class="form group">
-    <div class="form-inline">
-    　<label>メールアドレス</label>
+    　<button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
       <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
     </div>
     </div>
         <% end %>
       	<div class="actions">
-        <%= link_to "編集", edit_admin_customer_path(@customer),rows: 7,class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench form-control" %>
-        <%= link_to "destroy", admin_customers_path(@customer),rows: 7,class: "btn-sm btn-danger", method: :delete, "data-confirm" => "Are you sure?" %>
+      	<div class="form-inline">
+      	<%= link_to "削除", admin_customers_path(@customer),rows: 7,class: "btn-sm btn-danger form-control", method: :delete, "data-confirm" => "Are you sure?" %>
         </div>
+    </div>
     </div>
 </div>
 </div>
