@@ -17,7 +17,7 @@ class Admin::ArrivalItemsController < ApplicationController
    #  @arrival_item.item.stock = @arrival_item.arrival_count + @arrival_item.item.stock
     @arrival_item.item.stock += @arrival_item.arrival_count
     @arrival_item.item.update(stock: @arrival_item.item.stock)
-    # redirect_to admin_arrival_items_path
+    redirect_to admin_arrival_items_path
   end
 
   def update

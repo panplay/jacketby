@@ -14,7 +14,12 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save!
+    @arrival_item = ArrivalItem.new
+    if @item.save
+       @arrival_item.arrival_count = @item.stock
+       @arrival_item.item_id = @item.id
+       @arrival_item.arrival_time = @item.release_date
+       @arrival_item.save!
       redirect_to admin_items_path
     else
       @artists = Artist.all
