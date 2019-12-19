@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
 
   $('#back a').on('click',function(){
     $('body, html').animate({
