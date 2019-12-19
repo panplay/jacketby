@@ -45,13 +45,14 @@ Rails.application.routes.draw do
     get "customers/:id/carts" => "customers#carts" 
 
     resource :orders, only: [:new, :create]
-    resources :customers, only: [:edit]
+    resources :customers, only: [:edit] do
+      resources :carts, only: [:show, :create, :update, :destroy]
+    end
+
     put "/customers/:id" => "customers#hide"
     get "/customers/:id" => "customers#favorites", as: 'favorites'
-
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]
-      resources :carts, only: [:show, :create, :update, :destroy]
     end
 
   end

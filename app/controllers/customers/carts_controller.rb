@@ -1,10 +1,10 @@
 class Customers::CartsController < ApplicationController
   def create
-  	  item = Item.find(params[:item_id])
       cart = current_customer.carts.new(cart_params)
-      cart.item_id = item.id
-      cart.save
-      redirect_to customers_item_path(item)
+      cart.customer_id = current_customer.id
+
+      cart.save!
+      redirect_to customers_path(current_customer.id)
   end
 
   def show
@@ -12,23 +12,21 @@ class Customers::CartsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:item_id])
-    cart = current_customer.carts.find_by(item_id: item.id)
-    cart.update
-    redirect_to customers_path(item)
+    cart = Cart.find(params[:id])
+    cart.update(cart_params)
+    redirect_to customers_path(current_customer.id)
 
   end
 
   def destroy
-    item = Item.find(params[:item_id])
-    cart = current_customer.carts.find_by(item_id: item.id)
+    cart = Cart.find(params[:id])
     cart.destroy
-    redirect_to customers_path(item)
+    redirect_to customers_path(current_customer.id)
   end
 
   private
   def cart_params
-      params.require(:cart).permit(:item_id, :customer_id, :quantity)
+      params.require(:cart).permit(:customer_id,:item_id,:quantity)
   end
 
 end
