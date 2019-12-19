@@ -15,7 +15,7 @@
 						<%= f.label :価格 %><br>
 						<div class="row">
 							<div class="col-md-6">
-								<%= f.number_field :price, class:"form-control", placeholder: "￥1,000円" %>
+								<%= f.number_field :price, class:"form-control", placeholder: "1000" %>
 							</div>
 							<div class="col-md-6">
 								<%= f.select :sale, Item.sales.keys.to_a, {}, {include_blank: "ステータス"} %>
@@ -27,9 +27,8 @@
 						<%= f.collection_select :label_id, Label.all, :id, :name, {include_blank: "レーベル"} %><br>
 						<p>カテゴリー名</p>
 						<%= f.collection_select :category_id, Category.all, :id, :name, {include_blank: "カテゴリー"} %><br>
-						<%= f.fields_for :arrival_items do |arrival_item| %>
-						<%= render 'arrival_item_fields', f: arrival_item %>
-					<% end %>
+						<%= f.label :入荷数 %>
+						<%= f.number_field :stock, class:"form-control", placeholder: "数" %>
 						<%= f.attachment_field :image %>
 					</div>
 					<%= f.label :管理者コメント %><br>
