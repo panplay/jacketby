@@ -1,2 +1,56 @@
-<h1>Customer::Customers#favorites</h1>
-<p>Find me in app/views/customer/customers/favorites.html.erb</p>
+<section class="container">
+	<div class="row">
+		<div class="sidebar, col-md-3">
+			<div class="row">
+				<div class="categories">
+					<h2 class="categories-headline">カテゴリー</h2>
+					 <div class="sidebar-contents">
+					  	<% @categories.each do |category| %>
+					  	 <%= link_to "/customers/category/#{category.id}" do %>
+				 			<h3><%= category.name %></h3>
+				 		 <% end %>
+				 		 <% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			<div class="col-md-9">
+				<div class="row clearfix">
+					<h2 class="new-items"><%= current_customer.last_name %><%= current_customer.first_name %>さんがいいねしたアイテム</h2>
+						<% @favorites.each do |favorite| %>
+    						<% item = Item.find_by(id: favorite.item_id) %>
+								<div class="example">
+									<div class="example_image">
+										<%= attachment_image_tag item, :image, size: "150x150" %>
+											<div id="item_favorite">
+									             <%= render 'favorite', item: item %>
+											</div>
+				  			        </div>
+				  					<div class="example_text">
+				  						<% if item.stock == 0 %>
+				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  						<% elsif item.stock <= 5 %>
+				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
+				  						<% else %>
+				  							<p class="btn btn-success btn-xs">在庫あり</p>
+				  						<% end %>
+						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+							  				<%= link_to customers_item_path(item) do %>
+							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
+							  				<% end %>
+						  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
+						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
+						  			</div>
+								</div>
+						<% end %>
+				</div>
+
+					<span id="back">
+					      <a href="">
+					        <%= image_tag "arrow.png", size: "30x30", class: "pull-right" %>
+					      </a>
+    				</span>
+			</div>
+	</div>
+</section>

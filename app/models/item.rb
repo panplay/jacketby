@@ -31,6 +31,14 @@ class Item < ApplicationRecord
 	validates :name, presence: true
 	validates :price, numericality: { only_interger: true }
 
+	def Item.search(search, item_or_artist)
+	    if item_or_artist == "1"
+	       Item.where(['name LIKE ?', "%#{search}%"])
+	    else
+	       Item.all
+	    end
+    end
+
 	enum status:{
     受付: 0,
     商品準備中: 1,
