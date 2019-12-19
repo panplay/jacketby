@@ -1,32 +1,39 @@
-<h2>入荷履歴</h2>
-<table  class="table table-hover table-inverse">
-	<thead>
-		<tr>
-			<th class="">#</th>
-			<th class="">シングル/アルバム名</th>
-			<th class="">アーティスト名</th>
-			<th class="">入荷枚数</th>
-			<th class="">入荷日時</th>
-			<th class=""></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<% @item.each do |item| %>
+<section class="container">
+	<h2>入荷履歴</h2>
+	<table  class="table table-hover table-inverse">
+		<thead>
+			<tr>
+				<th class="col-md-1">#</th>
+				<th class="col-md-3">シングル/アルバム名</th>
+				<th class="col-md-4">アーティスト名</th>
+				<th class="col-md-2">入荷日</th>
+				<th class="col-md-2">入荷枚数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @arrival_items.each do |arrival_item| %>
+			<tr>
 				<td>
+					<%= link_to edit_admin_item_path(arrival_item.item) do %>
+						<%= attachment_image_tag arrival_item.item, :image, size: "50x50" %>
+					<% end %>
+				</td>
+				<td class="">
+					<%= link_to edit_admin_item_path(arrival_item.item) do %>
+						<%= arrival_item.item.name %>
+					<% end %>
+				</td>
+				<td  class="">
+					<%= arrival_item.item.artist.name %>
 				</td>
 				<td>
-					<%= item.name %>
+					<%= arrival_item.arrival_time.strftime("%y年%m月%d日") %>
 				</td>
 				<td>
-					<%= item.artist.name %>
+					<%= arrival_item.arrival_count %>
 				</td>
-				<td>
-					<%= item.arrival_items.arrival_time %>
-				</td>
-				<td>
-				</td>
+			</tr>
 			<% end %>
-		</tr>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</section>
