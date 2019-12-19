@@ -1,12 +1,13 @@
+<div class="container">
+  <div class="col-xs-5">
 <h2 class="with-line">顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h2>
 
+<table class="table">
+  <tbody>
       <%= form_for @customer,url:admin_customers_path(@customer) do |f| %>
-    <div class="row" style="display:block;">
-      <div class="col-md-4">
-
     <div class="form group">
     <div class="form-inline">
-      <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
+      <button type="button" class="btn btn-success" disabled="disabled" >お名前</button>
         <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control", :size => "10*10" %>
         <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
     </div>
@@ -49,7 +50,12 @@
       	<%= link_to "削除", admin_customers_path(@customer),rows: 7,class: "btn-sm btn-danger form-control", method: :delete, "data-confirm" => "Are you sure?" %>
         </div>
     </div>
-    </div>
+</tbody>
+</table>
+</div>
+<div class="col-xs-7">
+  <h2>顧客</h2>
+  <h1>ｓっかｍｆｋｓまｆｋｓｍｆｋｄｍｓｆｋｓｍｆｓ</h1>
 </div>
 </div>
 

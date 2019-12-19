@@ -1,7 +1,6 @@
 class Customers::CustomersController < ApplicationController
   def edit
   	@customer = Customer.find(params[:id])
-    @customer.addresses.build
   end
 
   def favorites
