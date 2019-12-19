@@ -7,9 +7,6 @@
 						<div class="item_show">
 							<div class="item_show_image">
 								<%= attachment_image_tag @item, :image, size: "300x300", class: "center-block" %>
-									<div id="item_favorite">
-										<%= render 'customers/favorites/favorite', item: @item %>
-									</div>
 							</div>
 						</div>
 					</div>
@@ -33,7 +30,7 @@
 								</tr>
 								<tr>
 									<th>発売日</th>
-									<th><%= @item.release_date %></th>
+									<th><%= @item.release_date.strftime("%Y年%m月%d日 ") %></th>
 								</tr>
 								<tr>
 									<th>レーベル名</th>

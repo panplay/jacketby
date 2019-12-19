@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2019_12_15_062206) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "name", null: false
     t.string "postal_code", null: false
     t.string "address", null: false
     t.integer "customer_id", null: false
@@ -116,7 +115,7 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.text "comment"
     t.integer "status", default: 0, null: false
     t.boolean "is_deleted", default: false, null: false
-    t.integer "stock"
+    t.integer "stock", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sale"

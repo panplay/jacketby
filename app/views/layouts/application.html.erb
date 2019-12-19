@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Jacketby</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Jacketby</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/0a9fd1077e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://kit.fontawesome.com/0a9fd1077e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  </head>
+</head>
 
-  <body>
-    <header class="navbar navbar-default">
-      <div class="container">
-        <nav class="nav navbar-nav navbar-left">
-          <h2 class="title"><%= link_to'Jacketby', root_path %>
-          </h2>
-        </nav>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <% if customer_signed_in? %>
-              <li>
-                <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
-              </li>
-              <li>
-                <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id) %>
-              </li>
-              <li>
-                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-              </li>
-              <li>
-                <button type="button" class="btn-social-flat">
-                  <span class="btn-social-flat-icon btn-social-flat-icon--pocket">
-                    <i class="fab fa-get-pocket"></i>
-                    </span>
-                  <%= link_to 'カート', customers_path(current_customer), class: "btn-social-flat-text"  %>
-                </button>
-              </li>
-              <br>
-              <p class="navbar-text">
-                ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
-              </p>
-
-            <% elsif admin_signed_in? %>
-              <li>
-                <%= link_to 'ランキング', root_path %>
-              </li>
-              <li>
-                <%= link_to '商品一覧', admin_items_path %>
-              </li>
-              <li>
-                <%= link_to '顧客一覧', admin_customers_path %>
-              </li>
-              <li>
-                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-              </li>
-              <br>
-              <li>
-                <%= link_to '商品新規追加', new_admin_item_path %>
-              </li>
-
-
-            <% else %>
-              <p class="navbar-text navbar-right">
-                ようこそ　ゲストさん。
-              </p>
-              <br>
-              <li>
-                <%= link_to 'アバウト', customers_homes_about_path %>
-              </li>
-              <li>
-                <%=link_to "サインアップ", new_customer_registration_path %>
-              </li>
-              <li>
-                <%= link_to "ログイン", new_customer_session_path %>
-              </li>
-              </br>
-            <% end %>
-          </ul>
-        </nav>
+<body>
+  <header class="navbar navbar-default", style="padding: 0 50px;" >
+    <nav class="nav navbar-nav navbar-left">
+      <h2 class="title"><%= link_to'Jacketby', root_path %>
+      </h2>
+      <div class="search", style="margin-left: 300px;">
+        <%= render 'customers/items/search' %>
       </div>
-    </header>
-    <%= yield %>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if customer_signed_in? %>
+        <li>
+          <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
+        </li>
+        <li>
+          <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id) %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+        </li>
+        <li>
+          <%= link_to customers_path(current_customer) do %>
+          <button type="button" class="btn-social-flat">
+            <span class="btn-social-flat-icon btn-social-flat-icon--pocket">
+             <i class="fas fa-cart-arrow-down"></i>
+           </span>
+           <p class="btn-social-flat-text">カート</p>
+         </button>
+         <% end %>
+       </li>
+       <br>
+       <p class="navbar-text">
+        ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
+      </p>
 
-    <footer class="footer navbar navbar-inverse">
-      <div class="container">
-        <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
-        <p class="nav navbar-nav navbar-right", style="color:white">© All rights reserved by Jacketbye.Inc.</p>
-      </div>
-    </footer>
+      <% elsif admin_signed_in? %>
+      <li>
+        <%= link_to 'ランキング', root_path %>
+      </li>
+      <li>
+        <%= link_to '商品一覧', admin_items_path %>
+      </li>
+      <li>
+        <%= link_to '顧客一覧', admin_customers_path %>
+      </li>
+      <li>
+        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+      </li>
+      <br>
+      <li>
+        <%= link_to '商品新規追加', new_admin_item_path %>
+      </li>
 
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  </body>
+
+      <% else %>
+      <p class="navbar-text navbar-right">
+        ようこそ　ゲストさん。
+      </p>
+      <br>
+      <li>
+        <%= link_to 'アバウト', customers_homes_about_path %>
+      </li>
+      <li>
+        <%=link_to "サインアップ", new_customer_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_customer_session_path %>
+      </li>
+    </br>
+    <% end %>
+  </ul>
+</nav>
+</header>
+<%= yield %>
+
+<footer class="footer navbar-inverse", style="height: 80px; line-height: 80px; font-size: 20px;">
+  <div class="container">
+    <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
+    <p class="nav navbar-nav navbar-right", style="color:white">© All rights reserved by Jacketbye.Inc.</p>
+  </div>
+</footer>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</body>
 
 </html>

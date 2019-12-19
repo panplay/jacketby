@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions',
+    passwords: 'admin/passwords',
+    registrations: 'admin/registrations'
+  }
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     passwords: 'customers/passwords',
@@ -42,7 +46,9 @@ Rails.application.routes.draw do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
     get 'homes/unsubscribe' => "homes#unsubscribe"
-    get "customers/:id/carts" => "customers#carts" 
+    get "customers/:id/carts" => "customers#carts"
+    get "search" => "items#search"
+    get "category/:id" => "items#category"
 
     resource :orders, only: [:new, :create]
     resources :customers, only: [:edit] do
@@ -51,6 +57,11 @@ Rails.application.routes.draw do
 
     put "/customers/:id" => "customers#hide"
     get "/customers/:id" => "customers#favorites", as: 'favorites'
+    resources :customers, only: [:edit,:update]
+    put "/customers/:id" => "customers#hide"
+    get "/customers/:id" => "customers#favorites", as: 'favorites'
+    get "/items/index2" => "items#index2"
+
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]
     end
