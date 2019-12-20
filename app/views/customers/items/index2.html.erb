@@ -7,7 +7,7 @@
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
 					  	 <%= link_to "/customers/category/#{category.id}" do %>
-				 			<h3><%= category.name %></h3>
+				 			<h3 style="color: black"><%= category.name %>(<%= category.items.count %>)</h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
@@ -27,14 +27,20 @@
 										</div>
 			  			        </div>
 			  					<div class="example_text">
-			  						<% if item.stock == 0 %>
-			  							<p class="btn btn-info btn-xs">在庫なし</p>
-			  						<% elsif item.stock <= 5 %>
-			  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
-			  						<% else %>
-			  							<p class="btn btn-success btn-xs">在庫あり</p>
-			  						<% end %>
-					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+			  							<% if item.stock == 0 %>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
+				  						<% elsif item.stock <= 5 %>
+				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
+				  						<% else %>
+				  							<p class="btn btn-success btn-xs">在庫あり</p>
+				  						<% end %>
+				  						<% if item.sale == "好評発売中" %>
+				  							<p class="btn btn-info btn-xs">好評発売中</p>
+				  						<% elsif item.sale == "販売停止中" %>
+				  							<p class="btn btn-warning btn-xs">販売停止中</p>
+				  						<% else %>
+				  							<p class="btn btn-danger btn-xs">sale</p>
+				  						<% end %>
 						  				<%= link_to customers_item_path(item) do %>
 						  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 						  				<% end %>

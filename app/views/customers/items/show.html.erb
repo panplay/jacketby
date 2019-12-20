@@ -25,7 +25,13 @@
 								<tr>
 									<th>価格(税込)</th>
 									<th>¥ <%= (@item.price * 1.1).to_i %>
-										<span class="btn btn-danger btn-xs"><%= @item.sale %></span>
+										<% if @item.sale == "好評発売中" %>
+				  							<span class="btn btn-info btn-xs">好評発売中</span>
+				  						<% elsif @item.sale == "販売停止中" %>
+				  							<span class="btn btn-warning btn-xs">販売停止中</span>
+				  						<% else %>
+				  							<span class="btn btn-danger btn-xs">sale</span>
+				  						<% end %>
 									</th>
 								</tr>
 								<tr>
@@ -43,7 +49,7 @@
 								<tr>
 									<th>在庫</th>
 									<th><% if @item.stock == 0 %>
-				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
 				  						<% elsif @item.stock <= 5 %>
 				  							<p class="btn btn-warning btn-xs">残り在庫<%= @item.stock %>ケ</p>
 				  						<% else %>
@@ -86,13 +92,13 @@
 							<div class="col-md-8 col-md-offset-2">
 								<div id="item_favorite">
 						             <% if @item.favorited_by?(current_customer) %>
-										<%= link_to customers_item_favorites2_path(@item), method: :delete do %>
+										<%= link_to customers_item_favorites_path(@item), method: :delete do %>
 											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true" style="color: red;">
 												<span>いいねを外す</span>
 											</i>
 										<% end %>
 									<% else %>
-										<%= link_to customers_item_favorites2_path(@item), method: :post do %>
+										<%= link_to customers_item_favorites_path(@item), method: :post do %>
 											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true">
 											    <span>いいねする</span>
 											</i>
@@ -109,7 +115,7 @@
 									<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
 								</div>
 								<div class="col-md-1">
-									<%= f.number_field :quantity, class:"form-control", placeholder: "数量" %>
+									<%= f.number_field :quantity, class:"form-control", placeholder: "数量", value: 1 %>
 									<%= f.hidden_field :item_id, :value => @item.id, class:"form-control" %>
 								</div>
 						<% end %>

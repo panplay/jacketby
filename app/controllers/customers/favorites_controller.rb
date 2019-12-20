@@ -1,34 +1,17 @@
 class Customers::FavoritesController < ApplicationController
-	before_action :create, only: [:create1, :create2]
-	before_action :destroy, only: [:destroy1, :destroy2]
+	 before_action :item_params
+  def create
+    @favorite = Favorite.create(customer_id: current_customer.id, item_id: @item.id)
+  end
 
-    def create1
-		redirect_to customers_items_path
-	end
+  def destroy
+    @favorite = Favorite.find_by(customer_id: current_customer.id, item_id: @item.id).destroy
+  end
 
-	def create2
-		redirect_to customers_item_path(params[:item_id])
-	end
+  private
 
-	def destroy1
-		redirect_to customers_items_path
-	end
-
-	def destroy2
-		redirect_to customers_item_path(params[:item_id])
-	end
-
-	private
-	def create
-		item = Item.find(params[:item_id])
-		favorite = current_customer.favorites.new(item_id: item.id)
-		favorite.save
-    end
-
-    def destroy
-		item = Item.find(params[:item_id])
-		favorite = current_customer.favorites.find_by(item_id: item.id)
-		favorite.destroy
-    end
+  def item_params
+    @item = Item.find(params[:item_id])
+  end
 
 end

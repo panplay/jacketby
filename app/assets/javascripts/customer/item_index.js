@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-
+  //トップへ移動
   $('#back a').on('click',function(){
     $('body, html').animate({
       scrollTop:0
@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function() {
   });
 
 
-
+  //画像スライド
   $('.responsive').slick({
   dots: true,
   infinite: false,
@@ -44,5 +44,15 @@ $(document).on('turbolinks:load', function() {
     // instead of a settings object
   ]
 });
+
+  //モーダル表示
+  $('.js-modal-open').on('click',function(){
+        $('.js-modal').fadeIn();
+        return false;
+    });
+    $('.js-modal-close').on('click',function(){
+        $('.js-modal').fadeOut();
+        return false;
+    });
 
 });

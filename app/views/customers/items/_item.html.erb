@@ -8,7 +8,7 @@
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
 					  	 <%= link_to "#" do %>
-				 			<h3><%= category.name %></h3>
+				 			<h3 style="color: black"><%= category.name %>(<%= category.items.count %>)</h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
