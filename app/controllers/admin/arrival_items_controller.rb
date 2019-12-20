@@ -1,7 +1,10 @@
 class Admin::ArrivalItemsController < ApplicationController
   def index
-    @arrival_items = ArrivalItem.all.order(arrival_time: :desc,created_at: :desc)
-    @items = Item.all.order(arrival_time: :desc,created_at: :desc)
+    if params[:sort] == "2"
+      @arrival_items = ArrivalItem.all
+    else
+      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+    end
   end
 
   def new
@@ -18,6 +21,36 @@ class Admin::ArrivalItemsController < ApplicationController
     @arrival_item.item.stock += @arrival_item.arrival_count
     @arrival_item.item.update(stock: @arrival_item.item.stock)
     redirect_to admin_arrival_items_path
+  end
+
+  def search
+    @item_or_artist = params[:option]
+    if @item_or_artist == "1"
+      @arrival_item = ArrivalItem.new
+      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+      @items = Item.search(params[:search], @item_or_artist).order(created_at: :desc)
+      @artists = Artist.all
+    else
+      @arrival_item = ArrivalItem.new
+      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+      @artist = Artist.search(params[:search], @item_or_artist)
+      @items = Item.all.order(created_at: :desc)
+    end
+  end
+
+   def history_search
+    @item_or_artist = params[:option]
+    if @item_or_artist == "1"
+      @arrival_item = ArrivalItem.new
+      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+      @items = Item.search(params[:search], @item_or_artist).order(created_at: :desc)
+      @artists = Artist.all
+    else
+      @arrival_item = ArrivalItem.new
+      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+      @artist = Artist.search(params[:search], @item_or_artist)
+      @items = Item.all.order(created_at: :desc)
+    end
   end
 
   def update
