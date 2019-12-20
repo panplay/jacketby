@@ -13,5 +13,13 @@ class Order < ApplicationRecord
     銀行振込: 1,
     代引き: 2
   }
+    
+    enum status:{
+    受付: 0,
+    商品準備中: 1,
+    出荷済み: 2
+    }
+
+
 end
 
