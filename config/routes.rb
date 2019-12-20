@@ -56,7 +56,6 @@ Rails.application.routes.draw do
     end
 
     put "/customers/:id" => "customers#hide"
-    get "/customers/:id" => "customers#favorites", as: 'favorites'
     resources :customers, only: [:edit,:update]
     put "/customers/:id" => "customers#hide"
     get "/customers/:id" => "customers#favorites", as: 'favorites'
