@@ -8,12 +8,56 @@
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
 					  	 <%= link_to "/customers/category/#{category.id}" do %>
-				 			<h3><%= category.name %></h3>
+				 			<h3 style="color: black"><%= category.name %>(<%= category.items.count %>)</h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
 				</div>
 			</div>
+
+			 <div class="content">
+				        <a class="js-modal-open" href=""><i class="fas fa-money-bill-alt"></i> <span>Sale Item</span></a>
+				    </div>
+				    <div class="modal js-modal">
+				        <div class="modal__bg js-modal-close"></div>
+					        <div class="modal__content">
+					        	<h2 class="text-center">今週のセールアイテム5選</h2>
+					            <table  class="table table-hover table-inverse">
+									<thead>
+							 			<tr>
+											<th class="col-md-1"></th>
+											<th class="col-md-3">シングル/アルバム名</th>
+											<th class="col-md-3">アーティスト名</th>
+											<th class="col-md-2", style="color: red">セール価格</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @item_sale.each do |item| %>
+										<tr>
+											<td>
+												<%= link_to customers_item_path(item) do %>
+												<%= attachment_image_tag item, :image, size: "50x50" %>
+												<% end %>
+											</td>
+											<td>
+												<%= link_to customers_item_path(item) do %>
+												<p style="color: black"><%= item.name %></p>
+												<% end %>
+											</td>
+											<td>
+												<%= item.artist.name %>
+											</td>
+											<td>
+												<p style="color: red"><%= item.price %></p>
+											</td>
+										</tr>
+										<% end %>
+									</tbody>
+								</table>
+					            <a class="js-modal-close pull-right" href="">❌</a>
+					        </div><!--modal__inner-->
+				    </div><!--modal-->
+
 		</div>
 
 			<div class="col-md-9">
@@ -23,19 +67,25 @@
 							<div class="example">
 								<div class="example_image">
 									<%= attachment_image_tag item, :image, size: "150x150" %>
-										<div id="item_favorite">
+										<div id="item_favorite_<%= item.id %>">
 								             <%= render 'favorite', item: item %>
 										</div>
 			  			        </div>
 			  					<div class="example_text">
 			  						<% if item.stock == 0 %>
-			  							<p class="btn btn-info btn-xs">在庫なし</p>
+			  							<p class="btn btn-danger btn-xs">在庫なし</p>
 			  						<% elsif item.stock <= 5 %>
 			  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 			  						<% else %>
 			  							<p class="btn btn-success btn-xs">在庫あり</p>
 			  						<% end %>
-					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+			  						<% if item.sale == "好評発売中" %>
+			  							<p class="btn btn-info btn-xs">好評発売中</p>
+			  						<% elsif item.sale == "販売停止中" %>
+			  							<p class="btn btn-warning btn-xs">販売停止中</p>
+			  						<% else %>
+			  							<p class="btn btn-danger btn-xs">sale</p>
+			  						<% end %>
 						  				<%= link_to customers_item_path(item) do %>
 						  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 						  				<% end %>
@@ -62,13 +112,19 @@
 				  			        </div>
 				  					<div class="example_text">
 				  						<% if item.stock == 0 %>
-				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
 				  						<% elsif item.stock <= 5 %>
 				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 				  						<% else %>
 				  							<p class="btn btn-success btn-xs">在庫あり</p>
 				  						<% end %>
-						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+				  						<% if item.sale == "好評発売中" %>
+				  							<p class="btn btn-info btn-xs">好評発売中</p>
+				  						<% elsif item.sale == "販売停止中" %>
+				  							<p class="btn btn-warning btn-xs">販売停止中</p>
+				  						<% else %>
+				  							<p class="btn btn-danger btn-xs">sale</p>
+				  						<% end %>
 							  				<%= link_to customers_item_path(item) do %>
 							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>
@@ -94,15 +150,21 @@
 									             <%= render 'favorite', item: item %>
 											</div>
 				  			        </div>
-				  					<div class="example_text">
-				  						<% if item.stock == 0 %>
-				  							<p class="btn btn-info btn-xs">在庫なし</p>
+					  					<div class="example_text">
+					  						<% if item.stock == 0 %>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
 				  						<% elsif item.stock <= 5 %>
 				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 				  						<% else %>
 				  							<p class="btn btn-success btn-xs">在庫あり</p>
 				  						<% end %>
-						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
+				  						<% if item.sale == "好評発売中" %>
+				  							<p class="btn btn-info btn-xs">好評発売中</p>
+				  						<% elsif item.sale == "販売停止中" %>
+				  							<p class="btn btn-warning btn-xs">販売停止中</p>
+				  						<% else %>
+				  							<p class="btn btn-danger btn-xs">sale</p>
+				  						<% end %>
 							  				<%= link_to customers_item_path(item) do %>
 							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>

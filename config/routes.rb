@@ -65,11 +65,6 @@ Rails.application.routes.draw do
 
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]
-      post "/favorites1" => "favorites#create1"
-      post "/favorites2" => "favorites#create2"
-      delete "/favorites1" => "favorites#destroy1"
-      delete "/favorites2" => "favorites#destroy2"
-
       resources :carts, only: [:show, :create, :update, :destroy]
     end
 
