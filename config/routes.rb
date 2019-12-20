@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     put 'artists/hide'
 
     get 'homes/index' => 'homes#index'
+    get "search" => "arrival_items#search"
+    get "history_search" => "arrival_items#history_search"
 
    put "/items/:id" => "items#hide"
    resources :items, only: [:new, :create, :edit, :update, :index]

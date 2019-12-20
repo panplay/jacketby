@@ -15,22 +15,23 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @items.each do |item| %>
-			<tr>
-				<td>
-					<%= attachment_image_tag item, :image, size: "50x50" %>
-				</td>
-				<td>
-					<%= item.name %>
-				</td>
-				<td>
-					<%= item.artist.name %>
-				</td>
-				<td>
-					<%= form_for [item, @arrival_item], url: admin_arrival_items_path, html: {method: "post"} do |f| %>
-					<%= f.date_field :arrival_time, class:"form-control" %>
-					<%= f.hidden_field :item_id, :value => item.id, class:"form-control" %>
-				</td>
+			<% @artist.each do |artist| %>
+				<% artist.items.each do |item| %>
+					<tr>
+						<td>
+							<%= attachment_image_tag item, :image, size: "50x50" %>
+						</td>
+					<td>
+						<%= item.name %>
+					</td>
+					<td>
+						<%= item.artist.name %>
+					</td>
+					<td>
+						<%= form_for [item, @arrival_item], url: admin_arrival_items_path, html: {method: "post"} do |f| %>
+						<%= f.date_field :arrival_time, class:"form-control" %>
+						<%= f.hidden_field :item_id, :value => item.id, class:"form-control" %>
+					</td>
 				<td>
 					<%= f.number_field :arrival_count, class:"form-control" %>
 				</td>
@@ -39,6 +40,7 @@
 					<% end %>
 				</td>
 			</tr>
+			<% end %>
 			<% end %>
 		</tbody>
 	</table>
