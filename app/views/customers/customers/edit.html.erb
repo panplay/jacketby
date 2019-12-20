@@ -37,13 +37,13 @@
   </div>
     <div class="form group">
     <div class="form-inline">
-    　<button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
+     <button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
       <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
     </div>
     </div>
     <div class="form group">
     <div class="form-inline">
-    　<button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
+     <button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
       <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
     </div>
     </div>
@@ -52,4 +52,33 @@
         <% end %>
     <%= link_to "退会はこちら", customers_homes_unsubscribe_path(@customer)%>
     </div>
+</div>
+</tbody>
+</table>
+</div>
+<div class="col-xs-7">
+  <h2>購入履歴</h2>
+  <% @orders.each do |order| %>
+    <% order.order_details.each do |order_detail| %>
+              <div class="example">
+                  <div class="example_image">
+                      <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
+                  </div>
+              </div>
+              <div class="example_text">
+                <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
+              </div>
+              <div>
+                <p>アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
+              </div>
+              <div>
+                <p>購入枚数 :<%= truncate(order_detail.quantity, length: 10) %></p>
+              </div>
+              <div>
+                <p>小計 :</p>
+              </div>
+
+    <% end %>
+  <% end %>
+</div>
 </div>

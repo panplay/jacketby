@@ -5,7 +5,6 @@ class Customers::OrdersController < ApplicationController
   	  @customer = current_customer
   	  #@address = Address.new(address_params)
       @carts = Cart.where(customer_id: @customer.id)
-
   end
 
   def create
@@ -14,7 +13,7 @@ class Customers::OrdersController < ApplicationController
       order.save!
      #注文詳細テーブル保存
       order_detail = OrderDetail.new
-       current_customer.carts.each do |n|
+    current_customer.carts.each do |n|
        	order_detail.quantity = n.quantity
        	order_detail.item_id = n.item_id
       order_detail.tax = (order.total_price * 0.1).to_i
@@ -26,6 +25,8 @@ class Customers::OrdersController < ApplicationController
   	end
       #カート削除
       current_customer.carts.where(customer_id:current_customer.id).destroy_all
+
+      redirect_to customers_homes_thanks_path
   end
 
 

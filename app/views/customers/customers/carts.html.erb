@@ -2,20 +2,30 @@
  	<div class="row edit-row">
  		<div class="col-md-8 col-sm-offset-2">
  			<h2 class="edit-title">カート一覧</h2>
+ 			    <% sum = 0 %>
+ 			    <% quantity_sum = 0 %>
 				<% @carts.each do |cart| %>
-    				<% item = Item.find_by(id: cart.item_id) %>
-					 		<%= attachment_image_tag item, :image, class: "book-img float-left", size: "300x300" %>
+    				        <%= link_to(customers_item_path(cart.item.id)) do %>
+					 		<%= attachment_image_tag cart.item, :image, class: "float-left", size: "150x150" %>
+					 		<br><%= cart.item.name %></br>
+					 		<% end %>
+					 		<%= cart.item.artist.name %>
+					 		¥ <%= cart.item.price %>
+					 		<% sum += (cart.item.price * cart.quantity) %>
     					<p class="float-left">
-    						<%= item.name %>
-
     						<%= form_for(cart,url:customers_customer_cart_path(current_customer.id,cart.id), method: :patch) do |f| %>
-    						<%= f.select :quantity, options_for_select((1..item.stock).to_a, cart.quantity) %>
-                            <%= f.submit '更新' %>
+    						数量：<%= f.select :quantity, options_for_select((1..cart.item.stock).to_a, cart.quantity) %>
+                            <%= f.submit '変更' %><%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
                             <% end %>
-    						<%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %></p>
+    					</p>
+    						<% quantity_sum += cart.quantity %>
   				<% end %>
+
+  				商品の小計（<%= quantity_sum %>点）： ¥ <%= sum %>
 
             <%= link_to "レジに進む", new_customers_orders_path, class:"btn btn-warning btn-block" %>
 		</div>
 	</div>
 </section>
+
+
