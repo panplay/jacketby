@@ -3,9 +3,8 @@ class Customers::CustomersController < ApplicationController
   	@customer = Customer.find(params[:id])
     @customer.addresses.build
     @orders = Order.where(customer_id: current_customer.id)
-    @items = Item.all
-    @order_details = OrderDetail.all
   end
+
 
   def favorites
     @favorites = Favorite.where(customer_id: current_customer.id)
@@ -26,8 +25,9 @@ class Customers::CustomersController < ApplicationController
     @customer.update(customer_params)
     redirect_to edit_customers_customer_path(@customer)
   end
+
 private
 def customer_params
     params.require(:customer).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:postal_code,:address,:phone_number,:email, addresses_attributes:[:id,:postal_code,:address,:is_deleted])
-end
+  end
 end

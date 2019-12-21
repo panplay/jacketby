@@ -57,13 +57,20 @@
 </table>
 </div>
 <div class="col-xs-7">
+  <% sum = 0 %>
   <h2>購入履歴</h2>
   <% @orders.each do |order| %>
     <% order.order_details.each do |order_detail| %>
+    <%= order.status %>
+    受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
               <div class="example">
                   <div class="example_image">
                       <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
                   </div>
+              </div>
+              <div>
+                <p>送付先<%= order.postal_code %></p>
+                <P>住所<%= order.destination %></P>
               </div>
               <div class="example_text">
                 <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
@@ -72,13 +79,15 @@
                 <p>アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
               </div>
               <div>
-                <p>購入枚数 :<%= truncate(order_detail.quantity, length: 10) %></p>
+                <p>購入枚数 :<%= order_detail.quantity %></p>
               </div>
               <div>
-                <p>小計 :</p>
+                <p>単価：¥ <%= order_detail.item.price %></p>
               </div>
+              <% sum += (order_detail.quantity * order_detail.item.price) %>
 
-    <% end %>
-  <% end %>
+          <% end %>
+          合計： ¥ <%= sum %>
+          <% end %>
 </div>
 </div>

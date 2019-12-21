@@ -2,6 +2,13 @@ class Admin::CustomersController < ApplicationController
 
   def show
   	@customer = Customer.find(params[:id])
+  	@orders = Order.where(customer_id: current_customer.id)
+  	@customers =Customer.page(params[:page]).per(5)
+  	  total = 0
+      @orders.each do |x|
+      total += x.total_price
+      end
+      @total = total
   end
 
   def hide
@@ -17,8 +24,14 @@ class Admin::CustomersController < ApplicationController
   end
 
   def index
-    @customers =Customer.page(params[:page]).per(4)
+    @customer =Customer.page(params[:page]).per(1)
+     @orders = Order.all
+     if params[:vort] == "2"
+      @customers = Customer.all
+    else
+      @customers = Customer.all.order(created_at: :desc)
   end
+end
 
   def update
   	@customer = Customer.find(params[:id])
