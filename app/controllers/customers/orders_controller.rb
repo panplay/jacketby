@@ -5,7 +5,7 @@ class Customers::OrdersController < ApplicationController
   	  @customer = current_customer
       @carts = Cart.where(customer_id: @customer.id)
       @addresses = Address.where(customer_id: @customer.id)
-      @address = current_customer.address.find([])
+      #@address = current_customer.address.find([])
   end
 
   def create
