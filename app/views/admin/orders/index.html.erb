@@ -1,32 +1,56 @@
-
-  <h2>受注一覧</h2>
- 
+<section class="container-fluid clearfix">
+  <h2 class="text-center">受注一覧</h2>
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-2 order-container">
+        <h4 class="text-right">総売上¥:<%= @total %></h4>
         <% @orders.each do |order| %>
-       
-            受注者：<%= order.customer.last_name %><%= order.customer.first_name %>
-            受注日：<%= order.order_time %>
-            
-              <%= form_for([:admins,order],url: admin_order_path(order.id) , method: :patch) do |f| %>
-              <%= f.select :status, [["受付", :受付],["商品準備中",:商品準備中],["出荷済み",:出荷済み]] %>
-              <% end %>
+              <div class="row order-container_box">
+                  <div class="col-md-3">
+                    <h7>購入者：<%= order.customer.last_name %><%= order.customer.first_name %></h7>
+                  </div>
+                  <div class="col-md-3">
+                    <h7>受注日：<%= order.order_time.strftime("%Y年%m月%d日 ") %></h7>
+                  </div>
+                  <div class="col-md-3">
+                    <%= form_for([:admins,order],url: admin_order_path(order.id) , method: :patch) do |f| %>
+                      <%= f.select :status, [["受付", :受付],["商品準備中",:商品準備中],["出荷済み",:出荷済み]] %>
+                      <%= f.submit "変更", class:"btn bg-info" %>
+                    <% end %>
+                </div>
+                <div class="col-md-3">
+                  売上金額<%= @sum %>
+                </div>
 
 
-            <u>注文内容</u>
-            <% sum = 0 %>
-            <% quantity_sum = 0 %>
-          <% order.order_details.each do |order_detail| %>
-            <br><%= attachment_image_tag order_detail.item, :image, class: "float-left", size: "100x100" %></br>
-            <br><%= order_detail.item.name %><br>
-            <br>受注枚数：<%= order_detail.quantity %></br>
-            <br>単価：¥ <%= order_detail.item.price %></br>
-            <%= order_detail.quantity * order_detail.item.price %>
-
-            <% sum += ( order_detail.quantity * order_detail.item.price ) %>
-          <% end %>
-            
-            商品の小計（<%= order.order_details.count %>点）： ¥ <%= sum %>
-            送料（全国一律）： ¥ 500
-            売上金額：¥ <%= sum + 500 %>
-
-
-        <% end %>
+                <div class="col-md-12">
+                  <table  class="table table-hover table-inverse">
+                    <thead>
+                      <tr>
+                        <th>画像</th>
+                        <th>製品名</th>
+                        <th>受注枚数</th>
+                        <th>単価</th>
+                        <th>小計</th>
+                      </tr>
+                    </thead>
+                    <hr>
+                    <% sum = 0 %>
+                      <tbody>
+                        <% order.order_details.each do |order_detail| %>
+                        <tr>
+                          <td><%= attachment_image_tag order_detail.item, :image, class: "center-block", size: "50x50" %></td>
+                          <td><%= order_detail.item.name %></td>
+                          <td><%= order_detail.quantity %></td>
+                          <td>¥<%= order_detail.item.price %></td>
+                           <% sum = ( order_detail.quantity * order_detail.item.price ) %>
+                          <td>(<%= order.order_details.count %>点)： ¥ <%= sum %></td>
+                        </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+      <% end %>
+    </div>
+  </div>
+</section>

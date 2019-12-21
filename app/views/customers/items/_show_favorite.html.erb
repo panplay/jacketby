@@ -1,0 +1,13 @@
+<% if item.favorited_by?(current_customer) %>
+	<%= link_to customers_item_favorites_path(item), method: :delete, remote: true do %>
+		<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true">
+			<span>いいねを外す</span>
+		</i>
+	<% end %>
+	<% else %>
+	<%= link_to customers_item_favorites_path(item), method: :post, remote: true do %>
+		<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true">
+		    <span>いいねする</span>
+		</i>
+	<% end %>
+	<% end %>
