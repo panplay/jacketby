@@ -1,16 +1,16 @@
 class Admin::ArrivalItemsController < ApplicationController
   def index
     if params[:sort] == "2"
-      @arrival_items = ArrivalItem.all
+      @arrival_items = ArrivalItem.page(params[:page]).per(20).order(arrival_time: :asc, created_at: :asc)
     else
-      @arrival_items = ArrivalItem.all.order(arrival_time: :desc, created_at: :desc)
+      @arrival_items = ArrivalItem.page(params[:page]).per(20).order(arrival_time: :desc, created_at: :desc)
     end
   end
 
   def new
     @arrival_item = ArrivalItem.new
     @arrival_items = ArrivalItem.all
-    @items = Item.all.order(created_at: :desc)
+    @items = Item.page(params[:page]).per(20).order(created_at: :desc)
   end
 
   def create
@@ -20,7 +20,6 @@ class Admin::ArrivalItemsController < ApplicationController
    #  @arrival_item.item.stock = @arrival_item.arrival_count + @arrival_item.item.stock
     @arrival_item.item.stock += @arrival_item.arrival_count
     @arrival_item.item.update(stock: @arrival_item.item.stock)
-    redirect_to admin_arrival_items_path
   end
 
   def search
