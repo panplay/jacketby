@@ -73,14 +73,13 @@
                 <P>住所<%= order.destination %></P>
               </div>
               <div class="example_text">
-                <p>シングル名：<!--%= truncate(order_detail.item.name, length: 10) %--></p>
+                <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
               </div>
               <div>
-                <p>アーティスト名 : <!--%= truncate(order_detail.item.artist.name, length: 10) %--></p>
+                <p>アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
               </div>
               <div>
                 <p>購入枚数 :<%= order_detail.quantity %></p>
-                <p>購入枚数 :<!--%= truncate(order_detail.quantity, length: 10) %--></p>
               </div>
               <div>
                 <p>単価：¥ <%= order_detail.item.price %></p>
@@ -88,7 +87,7 @@
               <% sum += (order_detail.quantity * order_detail.item.price) %>
 
           <% end %>
-          合計： ¥ <%= sum %>
           <% end %>
+          合計： ¥ <%= sum %>
 </div>
 </div>
