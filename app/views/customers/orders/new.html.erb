@@ -27,7 +27,7 @@
 
 
 
-<label><p><input type="radio" name="btn" id="c">  新規お届け先</p></label>
+<label><!--p><input type="radio" name="btn" id="c">  新規お届け先</p--></label>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
   	<div class="text text02">
     <div>宛名</div>
@@ -70,7 +70,7 @@
 
     <p class="float-left">
       <%= f.fields_for cart do |fb| %>
-        <%= f.hidden_field :total_price, :value => cart.quantity * cart.item.price, class:"form-control" %>
+        <%= f.hidden_field :total_price, :value => sum %>
         数量：<%= fb.select :quantity, options_for_select((1..cart.item.stock).to_a, cart.quantity) %>
         <%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
       <% end %>
