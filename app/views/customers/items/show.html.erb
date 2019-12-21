@@ -90,20 +90,8 @@
 
 						<div class="row">
 							<div class="col-md-8 col-md-offset-2">
-								<div id="item_favorite">
-						             <% if @item.favorited_by?(current_customer) %>
-										<%= link_to customers_item_favorites_path(@item), method: :delete do %>
-											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true" style="color: red;">
-												<span>いいねを外す</span>
-											</i>
-										<% end %>
-									<% else %>
-										<%= link_to customers_item_favorites_path(@item), method: :post do %>
-											<i class="fa fa-heart btn btn-lg btn-block btn-base-1 mt-20 bg-info" aria-hidden="true">
-											    <span>いいねする</span>
-											</i>
-										<% end %>
-									<% end %>
+								<div id="item__show_favorite_<%= @item.id %>">
+						             <%= render 'show_favorite', item: @item %>
 								</div>
 							</div>
 						</div>

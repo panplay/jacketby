@@ -13,8 +13,8 @@ class Customers::OrdersController < ApplicationController
   	  order = Order.new(order_params)
       order.save!
      #注文詳細テーブル保存
-      order_detail = OrderDetail.new
     current_customer.carts.each do |n|
+      order_detail = OrderDetail.new
        	order_detail.quantity = n.quantity
        	order_detail.item_id = n.item_id
       order_detail.tax = (order.total_price * 0.1).to_i

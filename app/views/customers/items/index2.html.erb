@@ -22,9 +22,9 @@
 							<div class="example">
 								<div class="example_image">
 									<%= attachment_image_tag item, :image, size: "150x150" %>
-										<div id="item_favorite">
+										<div id="item_favorite_<%= item.id %>">
 								             <%= render 'favorite', item: item %>
-										</div>
+											</div>
 			  			        </div>
 			  					<div class="example_text">
 			  							<% if item.stock == 0 %>
