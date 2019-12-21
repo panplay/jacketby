@@ -66,13 +66,13 @@
                   </div>
               </div>
               <div class="example_text">
-                <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
+                <p>シングル名：<!--%= truncate(order_detail.item.name, length: 10) %--></p>
               </div>
               <div>
-                <p>アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
+                <p>アーティスト名 : <!--%= truncate(order_detail.item.artist.name, length: 10) %--></p>
               </div>
               <div>
-                <p>購入枚数 :<%= truncate(order_detail.quantity, length: 10) %></p>
+                <p>購入枚数 :<!--%= truncate(order_detail.quantity, length: 10) %--></p>
               </div>
               <div>
                 <p>小計 :</p>
