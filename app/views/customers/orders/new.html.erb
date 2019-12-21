@@ -3,25 +3,31 @@
 
 
 <h4>お届け先</h4>
-<p><input type="radio" name="btn" id="a" checked="checked">  登録住所</p>
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
-    <div class="text text01">
-    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
-        〒 <%= @customer.postal_code %>
-        <!--addressモデルから引っ張ったデータをドロップダウンで表示させ、未選択のときは規定値としてメイン住所を表示させるためのコード（addressモデルが空っぽなので途中)-->
-    <!--%= form_for([:customers,@address]) do |f| %-->
-    <!--%= f.select :postal_code, Addresses.all, :id, :name , include_blank: '選択してね！'%-->
-    </div>
-    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-        住所　<%= @customer.address %>
-    </div>
-    </div>
+<!--p><input type="radio" name="btn" id="a" checked="checked">  メイン住所 </p-->
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
+<%= f.radio_button :desitintion, @customer.address, checked:"checked" %>
+
+<%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+<%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+<%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+<%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
 </div>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
+<% @addresses.each do |address| %>
+<%= f.radio_button :desitintion, address.address, checked:"checked" %>
+
+<%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+<%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+<%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>s
+<%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+</div>
+<% end %>
 
 
-<p><input type="radio" name="btn" id="b">  新規お届け先</p>
 
 
+<label><p><input type="radio" name="btn" id="c">  新規お届け先</p></label>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
   	<div class="text text02">
     <div>宛名</div>
@@ -31,15 +37,13 @@
     <div>住所</div>
       <%= f.text_area :destination %>
     </div>
-      <%= f.hidden_field :status, :value => "受付", class:"form-control" %>
+      <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
 
       <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
 
       <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
 
 　　　 <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
-
-      
 </div>
 
 
