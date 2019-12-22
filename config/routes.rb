@@ -23,11 +23,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories, only: [:create, :update]
-    put 'categories/hide'
+    put 'categories/:id/hide' => 'categories#hide', as: 'categories_hide'
     resources :labels, only: [:create, :update]
-    put 'labels/hide'
+    put 'labels/:id/hide' => 'labels#hide', as: 'labels_hide'
     resources :artists, only: [:create, :update]
-    put 'artists/hide'
+    put 'artists/:id/hide' => 'artists#hide', as: 'artists_hide'
 
     get 'homes/index' => 'homes#index'
     get "search" => "arrival_items#search"

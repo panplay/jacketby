@@ -1,4 +1,4 @@
-$(document).on(‘turbolinks:load’, function() {
+$(document).on('turbolinks:load', function() {
   $('[name="btn"]:radio').change( function() {
     if($('[id=a]').prop('checked')){
       $('.text').fadeOut();

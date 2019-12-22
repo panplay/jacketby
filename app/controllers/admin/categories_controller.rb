@@ -21,6 +21,9 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def hide
+    @category = Category.find(params[:id])
+    @category.update(is_deleted: true)
+    redirect_to admin_homes_index_path
   end
 
   private
