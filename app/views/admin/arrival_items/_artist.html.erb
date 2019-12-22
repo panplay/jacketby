@@ -1,4 +1,7 @@
 <section class="container">
+	<div class="demo-container">
+  		<div class="demo-box"></div>
+	</div>
 	<h2>入荷入力画面</h2>
 	<div class="search">
     	<%= render 'search' %>
@@ -17,30 +20,10 @@
 		<tbody>
 			<% @artist.each do |artist| %>
 				<% artist.items.each do |item| %>
-					<tr>
-						<td>
-							<%= attachment_image_tag item, :image, size: "50x50" %>
-						</td>
-					<td>
-						<%= item.name %>
-					</td>
-					<td>
-						<%= item.artist.name %>
-					</td>
-					<td>
-						<%= form_for [item, @arrival_item], url: admin_arrival_items_path, html: {method: "post"} do |f| %>
-						<%= f.date_field :arrival_time, class:"form-control" %>
-						<%= f.hidden_field :item_id, :value => item.id, class:"form-control" %>
-					</td>
-				<td>
-					<%= f.number_field :arrival_count, class:"form-control" %>
-				</td>
-				<td>
-					<%= f.submit "保存" %>
-					<% end %>
-				</td>
-			</tr>
-			<% end %>
+					<div class="item_<%= item.id %>">
+						<%= render 'save',item:item %>
+					</div>
+				<% end %>
 			<% end %>
 		</tbody>
 	</table>
