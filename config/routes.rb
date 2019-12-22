@@ -58,9 +58,8 @@ Rails.application.routes.draw do
       resources :carts, only: [:show, :create, :update, :destroy]
     end
 
-    put "/customers/:id" => "customers#hide"
     resources :customers, only: [:edit,:update]
-    put "/customers/:id" => "customers#hide"
+    put "/customers/:id/hide" => "customers#hide", as: 'customers_hide'
     get "/customers/:id" => "customers#favorites", as: 'favorites'
     get "/items/index2" => "items#index2"
 

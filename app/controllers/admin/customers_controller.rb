@@ -12,10 +12,11 @@ class Admin::CustomersController < ApplicationController
   end
 
   def hide
-  	book = Customer.find(params[:id])
-    customer.destroy
-  	flash[:notice] = "customer was successfully destroyed."
-  	redirect_to admin_customers_path(@customer)
+  	@customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    @customer.destroy_customer_session_path, method: :delete,
+  	flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+  	redirect_to root_path
   end
 
   def edit

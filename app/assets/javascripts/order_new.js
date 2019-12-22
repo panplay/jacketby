@@ -13,6 +13,18 @@ $(function() {
       $('.text02').fadeIn();
     } 
   });
+<<<<<<< HEAD
+=======
+  var nowchecked = $('input[name=btn]:checked').val();
+  $('input[name=btn]').click(function(){
+    if($(this).val() == nowchecked) {
+      $(this).prop('checked', false);
+      nowchecked = false;
+    } else  {
+      nowchecked = $(this).val();
+    }
+  });
+>>>>>>> e85c33ead3708304629ee4e998dd2011337ff887
 });
 
    

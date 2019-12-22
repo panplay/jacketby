@@ -17,6 +17,13 @@ class Customers::CustomersController < ApplicationController
     @customer = Customer.find_by(id: params[:id])
     @carts = Cart.where(customer_id: @customer.id)
 
+  def hide
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    redirect_to destroy_customer_session_path, method: :delete
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    # redirect_to root_path
+  end
 
   end
 
