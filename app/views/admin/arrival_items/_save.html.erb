@@ -10,14 +10,15 @@
 	</td>
 	<td>
 		<%= form_for [item, @arrival_item], url: admin_arrival_items_path, html: {method: "post"}, remote: true do |f| %>
-		<%= f.date_field :arrival_time, class:"form-control" %>
-		<%= f.hidden_field :item_id, :value => item.id, class:"form-control" %>
+		<%= f.date_field :arrival_time, class: "form-control1 item_#{item.id}[arrival_time]" %>
+		<%= f.hidden_field :item_id, :value => item.id, class: "form-control" %>
+		<span class="item<%= item.id %>"></span>
 	</td>
 	<td>
-		<%= f.number_field :arrival_count, class:"form-control" %>
+		<%= f.number_field :arrival_count, class: "form-control2" %>
 	</td>
 	<td>
-		<%= f.submit "追加" %>
+		<%= f.submit "追加", class:"form_submit" %>
 		<% end %>
 	</td>
 </tr>

@@ -1,4 +1,4 @@
-$(document).on(‘turbolinks:load’, function() {
+$(document).on('turbolinks:load', function() {
   $('[name="btn"]:radio').change( function() {
     if($('[id=a]').prop('checked')){
       $('.text').fadeOut();
@@ -8,13 +8,13 @@ $(document).on(‘turbolinks:load’, function() {
       $('.text02').fadeIn();
     }
   });
-    var nowchecked = $('input[name=btn]:checked').val();
-    $('input[name=btn]').click(function(){
-        if($(this).val() == nowchecked) {
-            $(this).prop('checked', false);
-            nowchecked = false;
-        } else  {
-            nowchecked = $(this).val();
-        }
-    });
+  var nowchecked = $('input[name=btn]:checked').val();
+  $('input[name=btn]').click(function(){
+    if($(this).val() == nowchecked) {
+      $(this).prop('checked', false);
+      nowchecked = false;
+    } else  {
+      nowchecked = $(this).val();
+    }
+  });
 });
