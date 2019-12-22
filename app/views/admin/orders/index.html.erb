@@ -2,6 +2,12 @@
   <h2 class="text-center">受注一覧</h2>
     <div class="row">
       <div class="col-md-8 col-sm-offset-2 order-container">
+        <h5 class="text-left">絞り込む⇨
+          <%= link_to "受付", admin_orders_path(sort: 1) %>/
+          <%= link_to "商品準備中", admin_orders_path(sort: 2) %>/
+          <%= link_to "出荷済", admin_orders_path(sort: 3) %>/
+          <%= link_to "全て", admin_orders_path %>
+        </h5>
         <h4 class="text-right">総売上¥:<%= @total %></h4>
         <% @orders.each do |order| %>
               <div class="row order-container_box">
@@ -18,7 +24,7 @@
                     <% end %>
                 </div>
                 <div class="col-md-3">
-                  売上金額<%= @sum %>
+                  売上金額¥<%= order.total_price %>
                 </div>
 
 
@@ -51,6 +57,7 @@
                 </div>
               </div>
       <% end %>
+      <%= paginate @orders, class: "pagenate" %>
     </div>
   </div>
 </section>

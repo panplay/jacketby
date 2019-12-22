@@ -13,7 +13,7 @@
 	 <tr>
 	 	<td><%= artist.name %></td>
 	 	<td><%= link_to "編集", "#" %></td>
-	 	<td><%= link_to "削除", "#" %></td>
+	 	<td><%= link_to "削除", admin_artists_hide_path(artist), method: :put %></td>
 	 </tr>
 	 <% end %>
    </tbody>

@@ -103,7 +103,7 @@
 									<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
 								</div>
 								<div class="col-md-1">
-									<%= f.number_field :quantity, class:"form-control", placeholder: "数量", value: 1 %>
+									<%= f.select :quantity, options_for_select((1..@item.stock).to_a, @cart.quantity) %>
 									<%= f.hidden_field :item_id, :value => @item.id, class:"form-control" %>
 								</div>
 						<% end %>

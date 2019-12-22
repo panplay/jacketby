@@ -7,9 +7,9 @@ class Admin::ItemsController < ApplicationController
       disks.songs.build
      end
     @arrival_item = ArrivalItem.new
-    @artists = Artist.all
-    @labels = Label.all
-    @categories = Category.all
+    @artists = Artist.where(is_deleted: false)
+    @labels = Label.where(is_deleted: false)
+    @categories = Category.where(is_deleted: false)
   end
 
   def create

@@ -21,6 +21,9 @@ class Admin::LabelsController < ApplicationController
   end
 
   def hide
+    @label = Label.find(params[:id])
+    @label.update(is_deleted: true)
+    redirect_to admin_homes_index_path
   end
 
   private

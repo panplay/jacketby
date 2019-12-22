@@ -1,11 +1,11 @@
 class Admin::HomesController < ApplicationController
   def index
   	@artist = Artist.new
-  	@artists = Artist.all
+  	@artists = Artist.where(is_deleted: false)
   	@label = Label.new
-  	@labels = Label.all
+  	@labels = Label.where(is_deleted: false)
   	@category = Category.new
-  	@categories = Category.all
+  	@categories = Category.where(is_deleted: false)
   end
 
 

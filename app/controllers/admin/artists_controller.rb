@@ -21,6 +21,9 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def hide
+    @artist = Artist.find(params[:id])
+    @artist.update(is_deleted: true)
+    redirect_to admin_homes_index_path
   end
 
   private

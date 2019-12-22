@@ -1,5 +1,4 @@
 $(document).on('turbolinks:load', function() {
-$(function() {
   $('[name="btn"]:radio').change( function() {
     if($('[id=a]').prop('checked')){
       $('[id=a]').prop('disabled',false);
@@ -11,7 +10,7 @@ $(function() {
       $('[id=a]').prop('disabled',true);
       $('.text').fadeOut();
       $('.text02').fadeIn();
-    } 
+    }
   });
   var nowchecked = $('input[name=btn]:checked').val();
   $('input[name=btn]').click(function(){
@@ -23,5 +22,3 @@ $(function() {
     }
   });
 });
-
-   
