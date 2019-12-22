@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     get "customers/:id/carts" => "customers#carts"
     get "search" => "items#search"
     get "category/:id" => "items#category"
+    get "orders/new2" => "orders#new_address"
 
     resource :orders, only: [:new, :create]
     resources :customers, only: [:edit] do
