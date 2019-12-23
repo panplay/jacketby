@@ -10,14 +10,17 @@
     </thead>
     <tbody>
 	<% @categories.each do |category| %>
+  <%= form_for(category, url: admin_category_path(category)) do |f| %>
 	 <tr>
-	 	<td><%= category.name %></td>
-	 	<td><%= link_to "編集", "#" %></td>
-	 	<td><%= link_to "削除", "#" %></td>
+	 	<td><%= f.text_field :name, class:"form-control" %></td>
+    <td><%= f.submit "保存" %></td>
+     <% end %>
+	 	<td><%= link_to "削除", admin_categories_hide_path(category), method: :put %></td>
 	 </tr>
 	 <% end %>
    </tbody>
    </table>
+   <hr>
 
    <h2>カテゴリー新規作成</h2>
    <%= form_for(@category, url: admin_categories_path) do |f| %>
