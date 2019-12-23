@@ -2,6 +2,7 @@
 // $('.form-control[name="item[arrival_count]", locals: { item: @arrival_item.item}]').val('');
 // $(function() {
 	// console.log("koko")
+
 	var form_control1 = $(".form-control1");
 	$(".form-control1").val('');
 	var form_control2 = $(".form-control2");
@@ -9,5 +10,5 @@
 
 $('div.demo-container')
 	.html("<%= @arrival_item.item.name %>に<%= @arrival_item.arrival_count %>枚、入荷しました。");
-// })
+
 // $(".form_submit").removeAttr("disabled");

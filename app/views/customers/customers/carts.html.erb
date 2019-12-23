@@ -6,6 +6,7 @@
                 <div class="col-md-12">
      			    <% sum = 0 %>
      			    <% quantity_sum = 0 %>
+                     <% if current_customer.carts.exists? %>
                         <table  class="table table-hover table-inverse">
                             <thead>
                                 <tr>
@@ -41,8 +42,11 @@
                         </table>
 
               			<h4 class="text-right">商品の小計（<%= quantity_sum %>点）： ¥ <%= (sum*1.1).to_i %></h4>
-
-                        <%= link_to "レジに進む", new_customers_orders_path, class:"btn btn-warning btn-block" %>
+                            <%= link_to "レジに進む", new_customers_orders_path, class:"btn btn-warning btn-block" %>
+                    <% else %>
+                        <h4 class="text-center">カートに商品がありません</h4>
+                        <a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
+                    <% end %>
                 </div>
             </div>
 		</div>
