@@ -26,7 +26,7 @@
    <hr>
 
    <h2>アーティスト新規作成</h2>
-   <%= form_for(@artist, url: admin_artists_path, remote: true) do |f| %>
+   <%= form_for(@artist, url: admin_artists_path) do |f| %>
    <%= f.text_field :name, class:"form-control form-control1" %>
 	<%= f.submit "新規作成", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
 	<% end %>

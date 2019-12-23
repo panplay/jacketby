@@ -15,7 +15,7 @@
 						<%= f.label :価格 %><br>
 						<div class="row">
 							<div class="col-md-6">
-								<%= f.number_field :price, class:"form-control", placeholder: "1000" %>
+								<%= f.number_field :price,min: 1, class:"form-control", placeholder: "1000" %>
 							</div>
 							<div class="col-md-6">
 								<%= f.select :sale, Item.sales.keys.to_a, {}, {include_blank: "ステータス"} %>
