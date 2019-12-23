@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     passwords: 'customers/passwords',
-    registrations: 'customers/registrations'
+    registrations: 'customers/registrations',
   }
 
   namespace :admin do
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   namespace :customers do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
-    get 'homes/unsubscribe' => "homes#unsubscribe"
+    get ':id/unsubscribe' => "homes#unsubscribe", as: "unsubscribe"
     get "customers/:id/carts" => "customers#carts"
     get "search" => "items#search"
     get "category/:id" => "items#category"

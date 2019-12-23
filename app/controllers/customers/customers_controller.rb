@@ -16,15 +16,14 @@ class Customers::CustomersController < ApplicationController
   def carts
     @customer = Customer.find_by(id: params[:id])
     @carts = Cart.where(customer_id: @customer.id)
+  end
 
   def hide
     @customer = Customer.find(params[:id])
     @customer.update(is_deleted: true)
-    redirect_to destroy_customer_session_path, method: :delete
+    reset_session
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-    # redirect_to root_path
-  end
-
+    redirect_to root_path
   end
 
   def update
@@ -34,7 +33,7 @@ class Customers::CustomersController < ApplicationController
   end
 
 private
-def customer_params
+  def customer_params
     params.require(:customer).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:postal_code,:address,:phone_number,:email, addresses_attributes:[:id,:postal_code,:address,:is_deleted])
   end
 end
