@@ -15,6 +15,24 @@
             <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
             <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
         </div>
+        <% if current_customer.addresses.where(customer_id: current_customer.id).exists? %>
+          <%= f.label :その他登録住所 %>
+          <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
+            <% @addresses.each.with_index(1) do |address,i| %>
+              <p>住所<%= i %></p>
+              <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%;">
+                  <%= f.radio_button :destination, address.address %>
+                  <p>〒<%= address.postal_code %></p>
+                  <p><%= address.address %></p>
+                  <%= f.hidden_field :postal_code, :value => address.postal_code, class:"form-control" %>
+                  <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+                  <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+                  <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+                  <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
         <%= f.label :その他登録住所 %>
         <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
           <% @addresses.each.with_index(1) do |address,i| %>
@@ -53,11 +71,11 @@
             <% sum += ((cart.item.price * 1.1).to_i * cart.quantity) %>
             <% quantity_sum += cart.quantity %>
             <%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
-             <%= f.hidden_field :total_price, :value => cart.quantity * (cart.item.price * 1.1).to_i, class:"form-control" %>
            <% end %>
           商品の小計（<%= quantity_sum %>点）： ¥ <%= sum %> (税込)
           <br>送料（全国一律）： ¥ 500</br>
           ご請求額：¥ <%= sum + 500 %> (税込)
+        <%= f.hidden_field :total_price, :value => sum, class:"form-control" %>
         <%= f.submit '注文を確定する' , class:"btn btn-warning btn-block" %>
     <% end %>
 </section>
