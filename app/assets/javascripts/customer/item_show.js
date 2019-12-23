@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
   $('.slider').slick({
   slidesToShow: 6,
   slidesToScroll: 1,
