@@ -1,3 +1,4 @@
+$(document).ready(function() {
   $('[name="btn"]:radio').change( function() {
     if($('[id=a]').prop('checked')){
       $('[id=a]').prop('disabled',false);

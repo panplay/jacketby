@@ -33,6 +33,23 @@
             <% end %>
           </div>
         <% end %>
+        <%= f.label :その他登録住所 %>
+        <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
+          <% @addresses.each.with_index(1) do |address,i| %>
+            <p>住所<%= i %></p>
+            <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%;">
+                <%= f.radio_button :destination, address.address %>
+                <p>〒<%= address.postal_code %></p>
+                <p><%= address.address %></p>
+                <%= f.hidden_field :postal_code, :value => address.postal_code, class:"form-control" %>
+                <% binding.pry %>
+                <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+                <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+                <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+                <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+            </div>
+          <% end %>
+        </div>
   <%= link_to "新しい送り先に送る場合は、こちら",customers_orders_new2_path %>
         <h4>支払い方法</h4>
         <div class="field">
