@@ -14,8 +14,6 @@ class Admin::CustomersController < ApplicationController
   def hide
   	@customer = Customer.find(params[:id])
     @customer.update(is_deleted: true)
-    @customer.destroy_customer_session_path, method: :delete,
-  	flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
   	redirect_to root_path
   end
 

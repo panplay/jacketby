@@ -11,13 +11,8 @@ class Admin::LabelsController < ApplicationController
 
   def update
   	label = Label.new
-     @artist = Label.find(params[:id])
-    	if @label.update(label_params)
-      		redirect_to admin_homes_index_path
-    	else
-      		redirect_to admin_homes_index_path
-    	end
-    	flash[:success] = 'Label was successfully updated.'
+    @label = Label.find(params[:id])
+    @label.update(label_params)
   end
 
   def hide

@@ -40,23 +40,29 @@
 							<div class="example">
 								<div class="example_image">
 									<%= attachment_image_tag item, :image, size: "150x150" %>
-										<div id="item_favorite">
-								             <%= render 'customers/favorites/favorite', item: item %>
+										<div id="item_favorite_<%= item.id %>">
+								             <%= render 'customers/items/favorite', item: item %>
 										</div>
 			  			        </div>
 			  					<div class="example_text">
 			  						<% if item.stock == 0 %>
-			  							<p class="btn btn-info btn-xs">在庫なし</p>
+			  							<p class="btn btn-danger btn-xs">在庫なし</p>
 			  						<% elsif item.stock <= 5 %>
 			  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 			  						<% else %>
 			  							<p class="btn btn-success btn-xs">在庫あり</p>
 			  						<% end %>
-					  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
-						  				<%= link_to customers_item_path(item) do %>
-						  					<p>シングル名：<%= item.name %></p>
+			  						<% if item.sale == "好評発売中" %>
+			  							<p class="btn btn-info btn-xs">好評発売中</p>
+			  						<% elsif item.sale == "販売停止中" %>
+			  							<p class="btn btn-warning btn-xs">販売停止中</p>
+			  						<% else %>
+			  							<p class="btn btn-danger btn-xs">sale</p>
+			  						<% end %>
+						  				<%= link_to admin_item_path(item) do %>
+						  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 						  				<% end %>
-					  				<p>アーティスト名：<%= item.artist.name %></p>
+					  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 					  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 					  			</div>
 							</div>
@@ -65,56 +71,77 @@
 
 					<div class="row clearfix">
 						<h2 class="new-items">いいねランキング</h2>
+						<div class="responsive">
 							<% @all_ranks.each.with_index(1) do |item, i| %>
 								<div class="example">
 									<div class="example_image">
 										<%= attachment_image_tag item, :image, size: "150x150" %>
-											<div id="item_favorite">
-									             <%= render 'customers/favorites/favorite', item: item %>
+											<div class="ranking">
+												<%= i %>位
+											</div>
+											<div id="item_favorite_<%= item.id %>">
+								             <%= render 'customers/items/favorite', item: item %>
 											</div>
 				  			        </div>
 				  					<div class="example_text">
 				  						<% if item.stock == 0 %>
-				  							<p class="btn btn-info btn-xs">在庫なし</p>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
 				  						<% elsif item.stock <= 5 %>
 				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 				  						<% else %>
 				  							<p class="btn btn-success btn-xs">在庫あり</p>
 				  						<% end %>
-						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
-							  				<%= link_to customers_item_path(item) do %>
-							  					<p>シングル名：<%= item.name %></p>
+				  						<% if item.sale == "好評発売中" %>
+				  							<p class="btn btn-info btn-xs">好評発売中</p>
+				  						<% elsif item.sale == "販売停止中" %>
+				  							<p class="btn btn-warning btn-xs">販売停止中</p>
+				  						<% else %>
+				  							<p class="btn btn-danger btn-xs">sale</p>
+				  						<% end %>
+							  				<%= link_to admin_item_path(item) do %>
+							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>
-						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 						  			</div>
 								</div>
 							<% end %>
+						</div>
 					</div>
 
 					<div class="row clearfix">
-						<h2 class="new-items">一覧</h2>
+						<h2 class="new-items">一覧
+							<%= link_to customers_items_index2_path do %>
+							<span><i class="fas fa-arrow-alt-circle-right"></i></span>
+							<% end %>
+						</h2>
 							<% @random.each do |item| %>
 								<div class="example">
 									<div class="example_image">
 										<%= attachment_image_tag item, :image, size: "150x150" %>
-											<div id="item_favorite">
-									             <%= render 'customers/favorites/favorite', item: item %>
+											<div id="item_favorite_<%= item.id %>">
+								             <%= render 'customers/items/favorite', item: item %>
 											</div>
 				  			        </div>
-				  					<div class="example_text">
-				  						<% if item.stock == 0 %>
-				  							<p class="btn btn-info btn-xs">在庫なし</p>
+					  					<div class="example_text">
+					  						<% if item.stock == 0 %>
+				  							<p class="btn btn-danger btn-xs">在庫なし</p>
 				  						<% elsif item.stock <= 5 %>
 				  							<p class="btn btn-warning btn-xs">残り在庫<%= item.stock %>ケ</p>
 				  						<% else %>
 				  							<p class="btn btn-success btn-xs">在庫あり</p>
 				  						<% end %>
-						  				<p class="btn btn-danger btn-xs"><%= item.sale %></p>
-							  				<%= link_to customers_item_path(item) do %>
-							  					<p>シングル名：<%= item.name %></p>
+				  						<% if item.sale == "好評発売中" %>
+				  							<p class="btn btn-info btn-xs">好評発売中</p>
+				  						<% elsif item.sale == "販売停止中" %>
+				  							<p class="btn btn-warning btn-xs">販売停止中</p>
+				  						<% else %>
+				  							<p class="btn btn-danger btn-xs">sale</p>
+				  						<% end %>
+							  				<%= link_to admin_item_path(item) do %>
+							  					<p>シングル名：<%= truncate(item.name, length: 10) %></p>
 							  				<% end %>
-						  				<p>アーティスト名：<%= item.artist.name %></p>
+						  				<p>アーティスト名：<%= truncate(item.artist.name, length: 10) %></p>
 						  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 						  			</div>
 								</div>
@@ -122,7 +149,7 @@
 					</div>
 
 					<span id="back">
-					      <a href="#">
+					      <a href="">
 					        <%= image_tag "arrow.png", size: "30x30", class: "pull-right" %>
 					      </a>
     				</span>

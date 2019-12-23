@@ -56,6 +56,20 @@ class Admin::ItemsController < ApplicationController
     @random = Item.order("RANDOM()").limit(8)
   end
 
+  def fav
+    @arrival_items = ArrivalItem.all
+    @artists = Artist.all
+    @labels = Label.all
+    @categories = Category.all
+    @all_ranks = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(16).pluck(:item_id))
+    @random = Item.order("RANDOM()").limit(8)
+  end
+
+  def show
+    @item = Item.find(params[:id])
+    @cart = Cart.new
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :price, :release_date, :comment, :status, :sale, :image, :artist_id, :label_id, :category_id, :stock, arrival_items_attributes: [:id, :arrival_count, :arrival_time, :is_deleted], disks_attributes: [:id, :disk_order, :_destroy, songs_attributes: [:id, :name, :song_order, :_destroy]])

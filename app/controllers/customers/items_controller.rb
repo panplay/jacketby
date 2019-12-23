@@ -11,7 +11,7 @@ class Customers::ItemsController < ApplicationController
   end
 
   def index2
-    @items = Item.page(params[:page]).per(2)
+    @items = Item.page(params[:page]).per(16)
     @categories = Category.all
   end
 

@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
 
   devise_for :admins, controllers: {
-    sessions: 'admin/sessions',
-    passwords: 'admin/passwords',
-    registrations: 'admin/registrations'
-  }
+    sessions: '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new',
+    passwords: '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
+    registrations: '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy',
+
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     passwords: 'customers/passwords',
@@ -32,9 +32,10 @@ Rails.application.routes.draw do
     get 'homes/index' => 'homes#index'
     get "search" => "arrival_items#search"
     get "history_search" => "arrival_items#history_search"
+    get "fav" => "items#fav"
 
    put "/items/:id" => "items#hide"
-   resources :items, only: [:new, :create, :edit, :update, :index]
+   resources :items, only: [:new, :create, :edit, :update, :index, :show]
    resources :arrival_items, only: [:index, :new, :create, :update]
 
 

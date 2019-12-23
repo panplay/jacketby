@@ -1,3 +1,5 @@
+$(document).on('turbolinks:load', function() {
 $(".form-control1").val('');
 $('div.demo-container')
 	.html("<%= @artist.name %>を追加しました。");
+ });

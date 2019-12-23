@@ -1,4 +1,7 @@
 <div class="col-md-12">
+  <div class="demo-container">
+      <div class="demo-box"></div>
+    </div>
 	<h2>レーベル一覧</h2>
 	<table class="table table-striped">
     <thead>
@@ -10,7 +13,7 @@
     </thead>
     <tbody>
 	<% @labels.each do |label| %>
-  <%= form_for(label, url: admin_label_path(label)) do |f| %>
+  <%= form_for(label, url: admin_label_path(label), method: :patch, remote: true) do |f| %>
 	 <tr>
 	  <td><%= f.text_field :name, class:"form-control" %></td>
     <td><%= f.submit "保存" %></td>

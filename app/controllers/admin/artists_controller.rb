@@ -1,7 +1,11 @@
 class Admin::ArtistsController < ApplicationController
   def create
   	@artist = Artist.new(artist_params)
-  	@artist.save
+  	if @artist.save
+      redirect_to admin_homes_index_path
+    else
+      redirect_to admin_homes_index_path
+    end
   end
 
   def update

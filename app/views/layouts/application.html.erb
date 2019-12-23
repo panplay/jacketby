@@ -17,7 +17,6 @@
 
 <body>
   <header class="navbar navbar-default", style="padding: 0 50px;" >
-
   <% if admin_signed_in? %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/admin/items" class="btn-circle-fishy">Jacketby</a>
@@ -30,7 +29,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to 'ランキング', admin_items_path %>
+          <%= link_to 'いいねランキング', admin_fav_path %>
         </li>
         <li>
           <%= link_to '商品一覧', admin_items_path %>
@@ -51,9 +50,6 @@
         </p>
       </ul>
     </nav>
-
-
-
   <% elsif customer_signed_in? %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/" class="btn-circle-fishy">Jacketby</a>
@@ -90,10 +86,7 @@
         </p>
       </ul>
     </nav>
-
-
-
-  <% else %>
+ <% else %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/" class="btn-circle-fishy">Jacketby</a>
     </nav>
@@ -123,7 +116,6 @@
   </header>
 </body>
 <%= yield %>
-
 <footer class="footer navbar-inverse", style="height: 80px; line-height: 80px; font-size: 20px;">
   <div class="container">
     <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
