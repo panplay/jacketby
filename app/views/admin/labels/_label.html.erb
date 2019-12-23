@@ -10,14 +10,17 @@
     </thead>
     <tbody>
 	<% @labels.each do |label| %>
+  <%= form_for(label, url: admin_label_path(label)) do |f| %>
 	 <tr>
-	 	<td><%= label.name %></td>
-	 	<td><%= link_to "編集", "#" %></td>
-	 	<td><%= link_to "削除", "#" %></td>
+	  <td><%= f.text_field :name, class:"form-control" %></td>
+    <td><%= f.submit "保存" %></td>
+     <% end %>
+	 	<td><%= link_to "削除", admin_labels_hide_path(label), method: :put %></td>
 	 </tr>
 	 <% end %>
    </tbody>
    </table>
+   <hr>
 
    <h2>レーベル新規作成</h2>
    <%= form_for(@label, url: admin_labels_path) do |f| %>
