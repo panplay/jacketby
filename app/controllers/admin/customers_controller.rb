@@ -2,11 +2,16 @@ class Admin::CustomersController < ApplicationController
 
   def show
   	@customer = Customer.find(params[:id])
+  	@customers =Customer.page(params[:page]).per(2)
   	@orders = Order.where(customer_id: current_customer.id)
-  	@customers =Customer.page(params[:page]).per(5)
   	  total = 0
+      sum = 0
       @orders.each do |x|
-      total += x.total_price
+        total += x.total_price
+        x.order_details.each do |y|
+          sum += ( y.quantity * y.item.price )
+        end
+        @sum = sum
       end
       @total = total
   end

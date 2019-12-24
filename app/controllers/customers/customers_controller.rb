@@ -2,7 +2,18 @@ class Customers::CustomersController < ApplicationController
   def edit
   	@customer = Customer.find(params[:id])
     @customer.addresses.build
+    @customers =Customer.page(params[:page]).per(2)
     @orders = Order.where(customer_id: current_customer.id)
+      total = 0
+      sum = 0
+      @orders.each do |x|
+        total += x.total_price
+        x.order_details.each do |y|
+          sum += ( y.quantity * y.item.price )
+        end
+        @sum = sum
+      end
+      @total = total
   end
 
 

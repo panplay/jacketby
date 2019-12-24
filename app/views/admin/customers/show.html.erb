@@ -54,42 +54,63 @@
 </table>
 </div>
 <div class="col-xs-7">
+	<div class="table">
+<section class="container-fluid clearfix">
 	<% sum = 0 %>
   <% quantity_sum = 0 %>
-  <h2>受注履歴
-  	購入価格総計<%= @total %>
-  </h2>
+  <div class="row order-container_box">
+  <div class="col-md-5">
+  <h4>受注履歴</h4>
+  </div>
+  <div class="col-md-5">
+  	<h4>購入価格総計:<%= @total %></h4>
+  </div>
+</div>
+
   <% @orders.each do |order| %>
     <% order.order_details.each do |order_detail| %>
+    <div class="col-xs-7">
+    <div class="row order-container_box">
+    <div class="col-md-10">
     受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
+    </div>
+    <div class="col-md-2">
+    <%= order.status %>
+    </div>
+    <div class="col-md-4">
+     売上金額<%= @sum %><br/>
+    </div>
+</div>
+</div>
               <div class="example">
                   <div class="example_image">
                       <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
                   </div>
               </div>
               <div class="example_text">
-                <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
+                <p class="btn btn-default btn-xs"><%= truncate(order_detail.item.name, length: 10) %></p>
               </div>
               <div>
-                <p>受注枚数 :<%= order_detail.quantity %></p>
+                <p class="btn btn-default btn-xs">受注枚数 :<%= order_detail.quantity %></p>
               </div>
               <div>
-              	<p>受注者：<%= order.customer.last_name %><%= order.customer.first_name %></p>
+              	<p class="btn btn-default btn-xs">受注者名：<%= order.customer.last_name %><%= order.customer.first_name %></p>
               </div>
               <div>
-                <p>単価：¥ <%= order_detail.item.price %></p>
+                <p class="btn btn-default btn-xs">単価：¥ <%= order_detail.item.price %></p>
               </div>
               <div>
-                <p>送付先<%= order.postal_code %></p>
-                <P>住所<%= order.destination %></P>
+                <p class="btn btn-default btn-xs">送付先<%= order.postal_code %><br/>
+                <%= order.destination %></P>
               </div>
-              <% sum += (order_detail.quantity * order_detail.item.price) %>
 
-    <% sum += ( order_detail.quantity * order_detail.item.price ) %>
           <% end %>
-            合計（<%= order.order_details.count %>点）： ¥<%= sum %>
-            購入価格総計：¥ <%= sum * order.order_details.count  %>
             <% end %>
+</p>
+</div>
+</section>
+</div>
+</div>
 </div>
 <%= paginate @customers, class: "paginate"%>
 </div>
