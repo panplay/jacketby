@@ -1,14 +1,15 @@
 <div class="thanks-content">
 	<div class="container thanks-content">
 		<div class="row">
-			<h1>Thanks</h1>
-				<p>商品の配送状況は、</p>
-				<p>マイページの購入履歴</p>
-				<p>よりご確認下さい。</p>
+			<h1 style="font-size: 200px; color: white;">Thanks</h1>
+			<h2 style="color: white; margin-left: 150px;">お買い上げありがとうございます。</h2>
+				<p style="color: white; margin-left: 150px;">商品の配送状況は、
+				マイページの購入履歴
+				よりご確認下さい。</p>
 
-				<p><%= link_to "マイページへ", edit_customers_customer_path(current_customer) %>
-					<%= link_to "Topページへ", root_path %>
-				</p>
+				<b><%= link_to "マイページへ", edit_customers_customer_path(current_customer),style: "color: #286090; margin-left: 150px;" %>
+					<%= link_to "Topページへ", root_path, style: "color: #286090; margin-left: 20px;" %>
+				</b>
 		</div>
 	</div>
 </div>
