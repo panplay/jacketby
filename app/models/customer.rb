@@ -20,6 +20,7 @@ class Customer < ApplicationRecord
     self.cartes.exists?(item_id: item.id)
   end
 
+   has_many :post_comments, dependent: :destroy
 
 
   validates :last_name, presence: true

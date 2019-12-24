@@ -1,3 +1,4 @@
+<div class="show-content">
 <section class="container-fluid clearfix">
 	<h1 class="text-center">商品詳細</h1>
 		<div class="row">
@@ -87,15 +88,40 @@
 					</div>
 						<hr>
 
+					<div class="row">
+					  <ul>
+						<li class="comment-create">
+		  					<h3 class="text-left comment-title">レビュー<i class="fas fa-folder-open"></i></h3>
+			  				<div class="comment">
+				  				<h4 class="comment-count">
+		  							<%= @item.post_comments.count %>件レビュー
+		  						</h4>
+	  							<% @item.post_comments.each do |post_comment| %>
+	  									<div class="comment-entry">
+	  										<b><%= post_comment.customer.last_name %>さん</b><br>
+	  				    					<%= post_comment.comment %>
+	  				    				</div>
+	  				    		<% end %>
+	  				    	</div>
+	  				    </li>
+	  				</ul>
+			  						<%= form_for([@item, @post_comment], url: customers_item_post_comments_path(@item), method: :post) do |f| %>
+				  						<div class="col-md-12 comment-submit">
+				  							<%= f.text_field :comment, class: "form-control",placeholder: "レビューをここに" %>
+				  						</div>
+				  						<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			  						<% end %>
+  					</div>
+  					<hr>
 
-						<div class="row">
-							<div class="col-md-8 col-md-offset-2">
-								<div id="item__show_favorite_<%= @item.id %>">
-						             <%= render 'show_favorite', item: @item %>
-								</div>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<div id="item__show_favorite_<%= @item.id %>">
+					             <%= render 'show_favorite', item: @item %>
 							</div>
 						</div>
-							<hr>
+					</div>
+						<hr>
 
 					<% if customer_signed_in? %>
 						<%= form_for(@cart, url: customers_customer_carts_path(current_customer.id), method: :post) do |f| %>
@@ -147,3 +173,4 @@
 		      </a>
 		</span>
 </section>
+</div>

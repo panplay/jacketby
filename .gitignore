@@ -31,4 +31,6 @@
 /config/master.key
 
 .DS_Store
+PAYJP_PUBLIC_KEY='pk_test_6f6c6927b0286421699ee2b5'
+PAYJP_SECRET_KEY='sk_test_c3fabecb879eaa80c4f3bb15'
 

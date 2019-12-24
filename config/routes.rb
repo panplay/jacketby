@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
 
+  get  'index' =>'contact_mailers#index'
+  post 'confirm' => 'contact_mailers#confirm'
+  post 'done' => 'contact_mailers#done'
+
   namespace :customer do
     get 'customers/edit'
     get 'customers/favorites'
   end
 
   root 'customers/items#index'
-  get '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new'
-  post '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
-  get '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy'
-
-  devise_for :admins, controllers: {
-    sessions: '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#new',
-    passwords: '/panda_and_coffee_with_ryoko_play/sign_in' => 'admins/sessions#create'
-    registrations: '/panda_and_coffee_with_ryoko_play/sign_out' => 'admins/sessions#destroy',
+  devise_for :admins, path: 'auth', path_names: { sign_in: 'panda_and_coffee_with_ryoko_play_login', sign_out: 'panda_and_coffee_with_ryoko_play_logout', password: 'panda_and_coffee_with_ryoko_play_secret', confirmation: 'panda_and_coffee_with_ryoko_play_verification', unlock: 'panda_and_coffee_with_ryoko_play_unblock', registration: 'panda_and_coffee_with_ryoko_play_register', sign_up: 'panda_and_coffee_with_ryoko_play_cmon_let_me_in' }, controllers: {
+    sessions: 'admin/sessions',
+    passwords: 'admin/passwords',
+    registrations: 'admin/registrations',
+  }
 
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
@@ -54,7 +55,10 @@ Rails.application.routes.draw do
     get "category/:id" => "items#category"
     get "orders/new2" => "orders#new_address"
 
-    resource :orders, only: [:new, :create]
+    resource :orders, only: [:new, :create] do
+      post :pay, on: :member
+    end
+
     resources :customers, only: [:edit] do
       resources :carts, only: [:show, :create, :update, :destroy]
     end
@@ -67,6 +71,7 @@ Rails.application.routes.draw do
     resources :items, only: [:show, :index] do
       resource :favorites, only: [:create, :destroy]
       resources :carts, only: [:show, :create, :update, :destroy]
+      resources :post_comments, only: [:create, :destroy, :edit, :update]
     end
 
   end

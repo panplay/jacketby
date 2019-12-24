@@ -18,6 +18,7 @@ class Customers::OrdersController < ApplicationController
   def create
   	 #注文テーブル保存
   	  order = Order.new(order_params)
+      order.total_price = params[:total_price]
       order.save!
      #注文詳細テーブル保存
     current_customer.carts.each do |n|
@@ -37,6 +38,14 @@ class Customers::OrdersController < ApplicationController
       redirect_to customers_homes_thanks_path
   end
 
+  def pay
+      Payjp.api_key = "sk_test_c3fabecb879eaa80c4f3bb15"
+      charge = Payjp::Charge.create(
+      :amount => params[:total_price],
+      :card => params['payjp-token'],
+      :currency => 'jpy',
+      )
+  end
 
   private
   def order_params

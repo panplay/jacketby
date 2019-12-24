@@ -26,6 +26,8 @@ class Item < ApplicationRecord
 		order_details.where(customer_id: customer.id).exists?
 	end
 
+	has_many :post_comments, dependent: :destroy
+
 	attachment :image
 
 	validates :name, presence: true
