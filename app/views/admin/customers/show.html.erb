@@ -54,6 +54,70 @@
           </tbody>
         </table>
     </div>
+</tbody>
+</table>
+</div>
+<div class="col-xs-7">
+	<div class="table">
+<section class="container-fluid clearfix">
+	<% sum = 0 %>
+  <% quantity_sum = 0 %>
+  <div class="row order-container_box">
+  <div class="col-md-5">
+  <h4>受注履歴</h4>
+  </div>
+  <div class="col-md-5">
+  	<h4>購入価格総計:<%= @total %></h4>
+  </div>
+</div>
+
+  <% @orders.each do |order| %>
+    <% order.order_details.each do |order_detail| %>
+    <div class="col-xs-7">
+    <div class="row order-container_box">
+    <div class="col-md-10">
+    受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
+    </div>
+    <div class="col-md-2">
+    <%= order.status %>
+    </div>
+    <div class="col-md-4">
+     売上金額<%= @sum %><br/>
+    </div>
+</div>
+</div>
+              <div class="example">
+                  <div class="example_image">
+                      <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
+                  </div>
+              </div>
+              <div class="example_text">
+                <p class="btn btn-default btn-xs"><%= truncate(order_detail.item.name, length: 10) %></p>
+              </div>
+              <div>
+                <p class="btn btn-default btn-xs">受注枚数 :<%= order_detail.quantity %></p>
+              </div>
+              <div>
+              	<p class="btn btn-default btn-xs">受注者名：<%= order.customer.last_name %><%= order.customer.first_name %></p>
+              </div>
+              <div>
+                <p class="btn btn-default btn-xs">単価：¥ <%= order_detail.item.price %></p>
+              </div>
+              <div>
+                <p class="btn btn-default btn-xs">送付先<%= order.postal_code %><br/>
+                <%= order.destination %></P>
+              </div>
+
+          <% end %>
+            <% end %>
+</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+<%= paginate @customers, class: "paginate"%>
+</div>
 
     <div class="col-xs-6 col-xs-offset-1 cus-show">
     	<% sum = 0 %>
