@@ -1,9 +1,7 @@
 class Customers::CustomersController < ApplicationController
   def edit
   	@customer = Customer.find(params[:id])
-    @customer.addresses.build
     @customers =Customer.page(params[:page]).per(2)
-    #@customer.addresses.build
     @orders = Order.where(customer_id: current_customer.id)
       total = 0
       sum = 0
