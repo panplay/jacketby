@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <header class="navbar navbar-default", style="padding: 0 50px;">
+  <header class="navbar nav-head", style="padding: 0 50px; margin-bottom: 0px;">
   <% if admin_signed_in? %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/admin/items" class="btn-circle-fishy">Jacketby</a>
@@ -29,20 +29,20 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to 'いいねランキング', admin_fav_path %>
+          <%= link_to 'いいねランキング', admin_fav_path, style: "color: white;" %>
         </li>
         <li>
-          <%= link_to '商品一覧', admin_items_path %>
+          <%= link_to '商品一覧', admin_items_path, style: "color: white;" %>
         </li>
         <li>
-          <%= link_to '顧客一覧', admin_customers_path %>
+          <%= link_to '顧客一覧', admin_customers_path, style: "color: white;" %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, style: "color: white;" %>
         </li>
         <br>
         <li>
-          <%= link_to '商品新規追加', new_admin_item_path %>
+          <%= link_to '商品新規追加', new_admin_item_path, style: "color: white;" %>
         </li>
         <br>
         <p class="navbar-text navbar-right">
@@ -62,13 +62,13 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
+          <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id), class: "btn-default", style: "margin-left: 5px" %>
         </li>
         <li>
-          <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id) %>
+          <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id), class: "btn-default", style: "margin-left: 5px" %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+          <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn-default", style: "margin-left: 5px" %>
         </li>
         <li>
           <%= link_to customers_path(current_customer) do %>
@@ -118,7 +118,6 @@
 <%= yield %>
 <footer class="footer navbar-inverse", style="height: 80px; line-height: 80px; font-size: 20px;">
   <div class="container">
-    <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>
     <p class="nav navbar-nav navbar-right", style="color:white">© All rights reserved by Jacketbye.Inc.</p>
   </div>
 </footer>

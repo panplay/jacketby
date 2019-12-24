@@ -4,202 +4,104 @@
         <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
       </h2>
     <table class="table">
-  <tbody>
-      <%= form_for(@customer,url: customers_customer_path) do |f| %>
-      <div class="form group">
-      <div class="form-inline">
-      <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
-        <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
-        <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
-    </div>
-    </div>
-    <div class="form group">
-    <div class="form-inline">
-      <button type="button" class="btn btn-success" disabled="disabled">お名前（カナ）</button>
-      <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
-      <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
-    </div>
-    </div>
-    <div class="form group">
-    <div class="form-inline">
-      <button type="button" class="btn btn-success" disabled="disabled">住所</button>
-      <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control",:size => "10*10"%>
-    </div>
-      <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
-    </div>
-    <div class="form group">
-    <%= f.fields_for :addresses do |address| %>
-		<%= render "address_fields", f: address %>
-	<% end %>
-  </div>
-  <div id="links">
-    <%= link_to_add_association '住所追加はこちら', f, :addresses, class: 'btn btn-default' %></td>
-  </div>
-    <div class="form group">
-    <div class="form-inline">
-     <button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
-      <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
-    </div>
-    </div>
-    <div class="form group">
-    <div class="form-inline">
-     <button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
-      <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
-    </div>
-    </div>
-    <div class="actions">
-    <%= f.submit "保存", class:"btn-info btn-sm",:size => "10*10" %>
-        <% end %>
-    <%= link_to "退会はこちら", customers_homes_unsubscribe_path(@customer)%>
-    </div>
-</div>
-</tbody>
-</table>
-</div>
-<div class="col-xs-7">
-  <section class="container-fluid clearfix">
-  <% sum = 0 %>
-  <div class="row order-container_box">
-  <div class="col-md-5">
-  <h4>購入履歴</h4>
-  </div>
-  <% @orders.each do |order| %>
-    <% order.order_details.each do |order_detail| %>
-    <div class="row order-container_box">
-    <div class= "table">
-    <div class="col-md-2">
-    <%= order.status %>
-    </div>
-    <div class="col-md-3">
-    合計： ¥ <%= sum %>
-    </div>
-    <div class="col-md-5">
-    購入日：<%= order.order_time.strftime("%y年%m月%d日") %>
-    </div>
-  </div>
-              <div class="example">
-                  <div class="example_image">
-                      <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
-                  </div>
-              </div>
-              <div class="example_text">
-                <p class="btn btn-default btn-xs">送付先<%= order.postal_code %>
-                <%= order.destination %></P>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">購入枚数 :<%= order_detail.quantity %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">単価：¥ <%= order_detail.item.price %></p>
-              </div>
-
-          <% end %>
-          <% end %>
-</div>
-</div>
-</div>
-</div>
-</div>
-</p>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-<%= paginate @customers, class: "paginate"%>
       <tbody>
-        <%= form_for(@customer,url: customers_customer_path) do |f| %>
-              <div class="form group">
-                <div class="form-inline">
-                  <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
-                    <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
-                    <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
-                </div>
-              </div>
-              <div class="form group">
-                <div class="form-inline">
-                  <button type="button" class="btn btn-success" disabled="disabled">お名前（カナ）</button>
-                  <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
-                  <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
-                </div>
-              </div>
-              <div class="form group">
-                <div class="form-inline">
-                  <button type="button" class="btn btn-success" disabled="disabled">住所</button>
-                  <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control",:size => "10*10"%>
-                </div>
-                  <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
-              </div>
-            <div class="form group">
-              <%= f.fields_for :addresses do |address| %>
-          		  <%= render "address_fields", f: address %>
-          	  <% end %>
-            </div>
-            <div id="links">
-              <%= link_to_add_association '住所追加はこちら', f, :addresses, class: 'btn btn-default' %>
-            </div>
+          <%= form_for(@customer,url: customers_customer_path) do |f| %>
             <div class="form group">
               <div class="form-inline">
-                 <button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
-                  <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
+                <button type="button" class="btn btn-success" disabled="disabled">お名前</button>
+                  <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
+                  <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
               </div>
             </div>
-            <div class="form group">
-              <div class="form-inline">
-                 <button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
-                  <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
+          <div class="form group">
+            <div class="form-inline">
+                <button type="button" class="btn btn-success" disabled="disabled">お名前（カナ）</button>
+                <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
+                <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
+            </div>
+          </div>
+          <div class="form group">
+            <div class="form-inline">
+                <button type="button" class="btn btn-success" disabled="disabled">住所</button>
+                <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control",:size => "10*10"%>
+            </div>
+            <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
+          </div>
+          <div class="form group">
+            <%= f.fields_for :addresses do |address| %>
+        		  <%= render "address_fields", f: address %>
+        	  <% end %>
+          </div>
+          <div id="links">
+            <%= link_to_add_association '住所追加はこちら', f, :addresses, class: 'btn btn-default' %>
+          </div>
+          <div class="form group">
+            <div class="form-inline">
+               <button type="button" class="btn btn-success" disabled="disabled">電話番号</button>
+                <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
+            </div>
+          </div>
+          <div class="form group">
+            <div class="form-inline">
+               <button type="button" class="btn btn-success" disabled="disabled">メールアドレス</button>
+                <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
+            </div>
+          </div>
+          <div class="actions">
+            <%= f.submit "保存", class:"btn-info btn-sm",:size => "10*10" %>
+            <%= link_to "退会はこちら", customers_unsubscribe_path(@customer)%>
+         </div>
+       <% end %>
+    </tbody>
+  </table>
+</div>
+    <div class="col-xs-7">
+      <section class="container-fluid clearfix">
+          <% sum = 0 %>
+          <div class="row order-container_box">
+            <div class="col-md-5">
+              <h4>購入履歴</h4>
+            </div>
+            <div class="row order-container_box">
+            <% @orders.each do |order| %>
+              <div class="col-md-3">
+                    合計： ¥ <%= order.total_price %>
               </div>
+              <% order.order_details.each do |order_detail| %>
+                  <div class= "table">
+                    <div class="col-md-2">
+                      <%= order.status %>
+                    </div>
+                    <div class="col-md-5">
+                      購入日：<%= order.order_time.strftime("%y年%m月%d日") %>
+                    </div>
+                  </div>
+                      <div class="example">
+                          <div class="example_image">
+                              <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
+                          </div>
+                      </div>
+                      <div class="example_text">
+                        <p class="btn btn-default btn-xs">送付先<%= order.postal_code %>
+                        <%= order.destination %></p>
+                      </div>
+                      <div>
+                        <p class="btn btn-default btn-xs">シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
+                      </div>
+                      <div>
+                        <p class="btn btn-default btn-xs">アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
+                      </div>
+                      <div>
+                        <p class="btn btn-default btn-xs">購入枚数 :<%= order_detail.quantity %></p>
+                      </div>
+                      <div>
+                        <p class="btn btn-default btn-xs">単価：¥ <%= order_detail.item.price %></p>
+                      </div>
+                  </div>
+                <% end %>
+              <% end %>
+                <%= paginate @customers, class: "paginate"%>
             </div>
-            <div class="actions">
-              <%= f.submit "保存", class:"btn-info btn-sm",:size => "10*10" %>
-        <% end %>
-              <%= link_to "退会はこちら", customers_unsubscribe_path(@customer)%>
-            </div>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-xs-6 col-xs-offset-1 show-container">
-      <% sum = 0 %>
-      <h2>購入履歴</h2>
-      <% if current_customer.orders.exists? %>
-        <% @orders.each do |order| %>
-          <% order.order_details.each do |order_detail| %>
-          <%= order.status %>
-          受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
-            <div class="example">
-              <div class="example_image">
-                <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
-              </div>
-            </div>
-            <div>
-              <p>送付先<%= order.postal_code %></p>
-              <P>住所<%= order.destination %></P>
-            </div>
-            <div class="example_text">
-              <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
-            </div>
-            <div>
-              <p>アーティスト名 : <%= truncate(order_detail.item.artist.name, length: 10) %></p>
-            </div>
-            <div>
-              <p>購入枚数 :<%= order_detail.quantity %></p>
-            </div>
-            <div>
-              <p>単価：¥ <%= order_detail.item.price %></p>
-            </div>
-            <% sum += (order_detail.quantity * order_detail.item.price) %>
-          <% end %>
-        <% end %>
-          合計： ¥ <%= sum %>
-      <% else %>
-        <h4 style="color: #C0C0C0;"> 現在、購入履歴はございません。</h4>
-      <% end %>
-    </div>
+          </section>
+        </div>
   </div>
