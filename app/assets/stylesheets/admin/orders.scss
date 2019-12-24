@@ -13,3 +13,15 @@
   padding-bottom: 20px;
   margin: 30px;
 }
+.order-content {
+	background-image: url(image-path("audio.jpg"));
+	background-size: cover;
+    background-position: center;
+    height: 1000px;
+}
+.order-container {
+  background-color: white;
+  padding: 50px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}

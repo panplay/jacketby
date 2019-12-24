@@ -38,6 +38,7 @@ a {
 .show-container {
   background-color: white;
   padding: 50px;
+  margin-bottom: 30px;
 }
 .comment {
   padding-left: 65px;
@@ -57,7 +58,27 @@ a {
   margin-left: 30px;
   border-bottom: solid 1px #9d9d9d;
 }
-
+.comment {
+  display: none;
+  padding-left: 65px;
+  border: solid 1px #C0C0C0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 30px;
+}
+.comment-title {
+  margin-left: 30px;
+  border-bottom: solid 1px #9d9d9d;
+  width: 170px;
+}
+ul {
+  list-style: none;
+}
+.show-content {
+  background-image: url(image-path("black.jpg"));
+  background-size: cover;
+    background-position: center;
+}
 
 
 

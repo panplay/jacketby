@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_062206) do
+ActiveRecord::Schema.define(version: 2019_12_23_165610) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "postal_code", null: false
@@ -153,6 +153,14 @@ ActiveRecord::Schema.define(version: 2019_12_15_062206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["is_deleted"], name: "index_orders_on_is_deleted"
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "customer_id"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "songs", force: :cascade do |t|
