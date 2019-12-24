@@ -7,9 +7,9 @@ class Admin::ItemsController < ApplicationController
       disks.songs.build
      end
     @arrival_item = ArrivalItem.new
-    @artists = Artist.all
-    @labels = Label.all
-    @categories = Category.all
+    @artists = Artist.where(is_deleted: false)
+    @labels = Label.where(is_deleted: false)
+    @categories = Category.where(is_deleted: false)
   end
 
   def create
@@ -54,6 +54,20 @@ class Admin::ItemsController < ApplicationController
     @categories = Category.all
     @all_ranks = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(4).pluck(:item_id))
     @random = Item.order("RANDOM()").limit(8)
+  end
+
+  def fav
+    @arrival_items = ArrivalItem.all
+    @artists = Artist.all
+    @labels = Label.all
+    @categories = Category.all
+    @all_ranks = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(16).pluck(:item_id))
+    @random = Item.order("RANDOM()").limit(8)
+  end
+
+  def show
+    @item = Item.find(params[:id])
+    @cart = Cart.new
   end
 
   private

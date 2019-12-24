@@ -11,16 +11,14 @@ class Admin::CategoriesController < ApplicationController
 
   def update
   	category = Category.new
-     @category = Category.find(params[:id])
-    	if @category.update(category_params)
-      		redirect_to admin_homes_index_path
-    	else
-      		redirect_to admin_homes_index_path
-    	end
-    	flash[:success] = 'Category was successfully updated.'
+    @category = Category.find(params[:id])
+    @category.update(category_params)
   end
 
   def hide
+    @category = Category.find(params[:id])
+    @category.update(is_deleted: true)
+    redirect_to admin_homes_index_path
   end
 
   private

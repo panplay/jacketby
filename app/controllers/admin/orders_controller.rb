@@ -1,14 +1,20 @@
 class Admin::OrdersController < ApplicationController
   def index
-  	  @orders = Order.all.order(created_at: :desc)
+    if params[:sort] == "1"
+      @orders = Order.where(status: "受付").page(params[:page]).per(5).order(created_at: :desc)
+    elsif params[:sort] == "2"
+      @orders = Order.where(status: "商品準備中").page(params[:page]).per(5).order(created_at: :desc)
+    elsif params[:sort] == "3"
+      @orders = Order.where(status: "出荷済").page(params[:page]).per(5).order(created_at: :desc)
+    else
+      @orders = Order.page(params[:page]).per(5).order(created_at: :desc)
+    end
+      #総売上
   	  total = 0
-      sum = 0
+      customer_total = 0
       @orders.each do |x|
         total += x.total_price
-        x.order_details.each do |y|
-          sum += ( y.quantity * y.item.price )
-        end
-        @sum = sum
+        @customer_total = x.total_price
       end
       @total = total
   end

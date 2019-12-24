@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
   //トップへ移動
   $('#back a').on('click',function(){
     $('body, html').animate({

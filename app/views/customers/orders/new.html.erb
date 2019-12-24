@@ -1,85 +1,81 @@
-<h2>購入確認</h2>
-<%= form_for([:customers,@order],url: customers_orders_path , method: :post) do |f| %>
-
-
-<h4>お届け先</h4>
-<!--p><input type="radio" name="btn" id="a" checked="checked">  メイン住所 </p-->
-
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
-<%= f.radio_button :desitintion, @customer.address, checked:"checked" %>
-
-<%= f.hidden_field :status, :value => :受付, class:"form-control" %>
-<%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
-<%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
-<%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
-</div>
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 30%;">
-<% @addresses.each do |address| %>
-<%= f.radio_button :desitintion, address.address, checked:"checked" %>
-
-<%= f.hidden_field :status, :value => :受付, class:"form-control" %>
-<%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
-<%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>s
-<%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
-</div>
-<% end %>
-
-
-
-
-<label><p><input type="radio" name="btn" id="c">  新規お届け先</p></label>
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%; border-radius: 5px;">
-  	<div class="text text02">
-    <div>宛名</div>
-      <%= f.text_field :delivery_name %>
-    <div>郵便番号</div>
-      <%= f.text_field :postal_code %>
-    <div>住所</div>
-      <%= f.text_area :destination %>
-    </div>
-      <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
-
-      <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
-
-      <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
-
-　　　 <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
-</div>
-
-
-<h4>支払い方法</h4>
-<div class="field">
-    <%= f.radio_button :payment, :クレジットカード %>
-    <%= f.label :クレジットカード %>
-    <%= f.radio_button :payment, :銀行振込 %>
-    <%= f.label :銀行振込 %>
-    <%= f.radio_button :payment, :代引き %>
-    <%= f.label :代引き %>
-</div>
-
-<h4>注文内容</h4>
-<% sum = 0 %>
-<% quantity_sum = 0 %>
-  <% @carts.each do |cart| %>
-    <%= attachment_image_tag cart.item, :image, class: "book-img float-left", size: "150x150" %>
-    <%= cart.item.name %>
-    ¥ <%= cart.item.price %>
-
-    <% sum += (cart.item.price * cart.quantity) %>
-    <% quantity_sum += cart.quantity %>
-
-    <p class="float-left">
-      <%= f.fields_for cart do |fb| %>
-        <%= f.hidden_field :total_price, :value => cart.quantity * cart.item.price, class:"form-control" %>
-        数量：<%= fb.select :quantity, options_for_select((1..cart.item.stock).to_a, cart.quantity) %>
-        <%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
-      <% end %>
-    </p>
-  <% end %>
-
-  商品の小計（<%= quantity_sum %>点）： ¥ <%= sum %>
-  <br>送料（全国一律）： ¥ 500</br>
-  ご請求額：¥ <%= sum + 500 %>
-<%= f.submit '注文を確定する' , class:"btn btn-warning btn-block" %>
-
-<% end %>
+<section class="container">
+  <h2>購入確認</h2>
+    <%= form_for(@order,url: customers_orders_path , method: :post) do |f| %>
+        <h4>お届け先</h4>
+        <%= f.label :宛名 %>
+          <%= f.text_field :delivery_name, class:"form-control" %>
+        <%= f.label :メイン住所 %>
+        <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
+            <%= f.radio_button :destination, @customer.address, checked:"checked" %>
+             <p>〒<%= @customer.postal_code %></p>
+             <p><%= @customer.address %></p>
+            <%= f.hidden_field :postal_code, :value => @customer.postal_code, class:"form-control" %>
+            <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+            <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+            <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+        </div>
+        <% if current_customer.addresses.where(customer_id: current_customer.id).exists? %>
+          <%= f.label :その他登録住所 %>
+          <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
+            <% @addresses.each.with_index(1) do |address,i| %>
+              <p>住所<%= i %></p>
+              <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%;">
+                  <%= f.radio_button :destination, address.address %>
+                  <p>〒<%= address.postal_code %></p>
+                  <p><%= address.address %></p>
+                  <%= f.hidden_field :postal_code, :value => address.postal_code, class:"form-control" %>
+                  <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+                  <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+                  <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+                  <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <%= f.label :その他登録住所 %>
+        <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 60%;">
+          <% @addresses.each.with_index(1) do |address,i| %>
+            <p>住所<%= i %></p>
+            <div style= "padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 100%;">
+                <%= f.radio_button :destination, address.address %>
+                <p>〒<%= address.postal_code %></p>
+                <p><%= address.address %></p>
+                <%= f.hidden_field :postal_code, :value => address.postal_code, class:"form-control" %>
+                <% binding.pry %>
+                <%= f.hidden_field :status, :value => :受付, class:"form-control" %>
+                <%= f.hidden_field :order_time, :value => Time.now, class:"form-control" %>
+                <%= f.hidden_field :delivery_charge, :value => 500, class:"form-control" %>
+                <%= f.hidden_field :customer_id, :value => current_customer.id, class:"form-control" %>
+            </div>
+          <% end %>
+        </div>
+  <%= link_to "新しい送り先に送る場合は、こちら",customers_orders_new2_path %>
+        <h4>支払い方法</h4>
+        <div class="field">
+            <%= f.radio_button :payment, :クレジットカード %>
+            <%= f.label :クレジットカード %>
+            <%= f.radio_button :payment, :銀行振込 %>
+            <%= f.label :銀行振込 %>
+            <%= f.radio_button :payment, :代引き %>
+            <%= f.label :代引き %>
+        </div>
+        <h4>注文内容</h4>
+        <% sum = 0 %>
+        <% quantity_sum = 0 %>
+          <% @carts.each do |cart| %>
+            <%= attachment_image_tag cart.item, :image, class: "book-img float-left", size: "150x150" %>
+            <%= cart.item.name %>
+            <p>数量：<%= cart.quantity %></p>
+            <p>¥<%= (cart.item.price * 1.1).to_i %>  (税込)</p>
+            <% sum += ((cart.item.price * 1.1).to_i * cart.quantity) %>
+            <% quantity_sum += cart.quantity %>
+            <%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
+           <% end %>
+          商品の小計（<%= quantity_sum %>点）： ¥ <%= sum %> (税込)
+          <br>送料（全国一律）： ¥ 500</br>
+          ご請求額：¥ <%= sum + 500 %> (税込)
+        <%= f.hidden_field :total_price, :value => sum, class:"form-control" %>
+        <%= f.submit '注文を確定する' , class:"btn btn-warning btn-block" %>
+    <% end %>
+</section>

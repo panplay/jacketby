@@ -17,6 +17,40 @@
 
 <body>
   <header class="navbar navbar-default", style="padding: 0 50px;" >
+  <% if admin_signed_in? %>
+    <nav class="nav navbar-nav navbar-left">
+      <a href="/admin/items" class="btn-circle-fishy">Jacketby</a>
+    </nav>
+    <nav class="nav navbar-nav navbar-center">
+    <div class="search", style="margin-left: 300px;">
+        <%= render 'customers/items/search' %>
+      </div>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to 'いいねランキング', admin_fav_path %>
+        </li>
+        <li>
+          <%= link_to '商品一覧', admin_items_path %>
+        </li>
+        <li>
+          <%= link_to '顧客一覧', admin_customers_path %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+        </li>
+        <br>
+        <li>
+          <%= link_to '商品新規追加', new_admin_item_path %>
+        </li>
+        <br>
+        <p class="navbar-text navbar-right">
+          管理者としてログインしています
+        </p>
+      </ul>
+    </nav>
+  <% elsif customer_signed_in? %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/" class="btn-circle-fishy">Jacketby</a>
     </nav>
@@ -27,7 +61,6 @@
     </nav>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <% if customer_signed_in? %>
         <li>
           <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id) %>
         </li>
@@ -39,60 +72,50 @@
         </li>
         <li>
           <%= link_to customers_path(current_customer) do %>
-          <button type="button" class="btn-social-flat">
-            <span class="btn-social-flat-icon btn-social-flat-icon--pocket">
-             <i class="fas fa-cart-arrow-down"></i>
-           </span>
-           <p class="btn-social-flat-text">カート</p>
-         </button>
-         <% end %>
+            <button type="button" class="btn-social-flat">
+              <span class="btn-social-flat-icon btn-social-flat-icon--pocket">
+              <i class="fas fa-cart-arrow-down"></i>
+              </span>
+              <p class="btn-social-flat-text">カート</p>
+            </button>
+          <% end %>
         </li>
-      <br>
-      <p class="navbar-text">
-        ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん。
-      </p>
-
-      <% elsif admin_signed_in? %>
-      <li>
-        <%= link_to 'ランキング', root_path %>
-      </li>
-      <li>
-        <%= link_to '商品一覧', admin_items_path %>
-      </li>
-      <li>
-        <%= link_to '顧客一覧', admin_customers_path %>
-      </li>
-      <li>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-      </li>
-      <br>
-      <li>
-        <%= link_to '商品新規追加', new_admin_item_path %>
-      </li>
-      <p class="navbar-text">
-        管理者としてログインしています
-
-      <% else %>
-      <p class="navbar-text navbar-right">
-        ようこそ　ゲストさん。
-      </p>
-    <br>
-      <li>
-        <%= link_to "アバウト", customers_homes_about_path %>
-      </li>
-      <li>
-        <%=link_to "サインアップ", new_customer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    </br>
-      <% end %>
-  </ul>
-</nav>
-</header>
+        <br>
+        <p class="navbar-text navbar-right">
+        ようこそ　<%= current_customer.last_name %><%= current_customer.first_name %>さん。
+        </p>
+      </ul>
+    </nav>
+ <% else %>
+    <nav class="nav navbar-nav navbar-left">
+      <a href="/" class="btn-circle-fishy">Jacketby</a>
+    </nav>
+    <nav class="nav navbar-nav navbar-center">
+    <div class="search", style="margin-left: 300px;">
+        <%= render 'customers/items/search' %>
+      </div>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to "アバウト", customers_homes_about_path %>
+        </li>
+        <li>
+          <%=link_to "サインアップ", new_customer_registration_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_customer_session_path %>
+        </li>
+        </br>
+        <p class="navbar-text navbar-right">
+          ようこそ　ゲストさん。
+        </p>
+      </ul>
+    </nav>
+  <% end %>
+  </header>
+</body>
 <%= yield %>
-
 <footer class="footer navbar-inverse", style="height: 80px; line-height: 80px; font-size: 20px;">
   <div class="container">
     <p class="nav navbar-nav navbar-center", style="color:white">Jacketby</p>

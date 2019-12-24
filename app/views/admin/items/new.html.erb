@@ -11,11 +11,11 @@
 						<%= f.label :シングルアルバム名 %><br>
 						<%= f.text_field :name, class:"form-control", placeholder: "シングル/アルバム名" %>
 						<p>アーティスト名</p>
-						<%= f.collection_select :artist_id, Artist.all, :id, :name, {include_blank: "アーティスト"} %><br>
+						<%= f.collection_select :artist_id, Artist.where(is_deleted: false), :id, :name, {include_blank: "アーティスト"} %><br>
 						<%= f.label :価格 %><br>
 						<div class="row">
 							<div class="col-md-6">
-								<%= f.number_field :price, class:"form-control", placeholder: "1000" %>
+								<%= f.number_field :price,min: 1, class:"form-control", placeholder: "1000" %>
 							</div>
 							<div class="col-md-6">
 								<%= f.select :sale, Item.sales.keys.to_a, {}, {include_blank: "ステータス"} %>
@@ -24,9 +24,9 @@
 						<%= f.label :発売日 %>
 						<%= f.date_field :release_date, class:"form-control", placeholder: "2020/12/27" %>
 						<p>レーベル名</p>
-						<%= f.collection_select :label_id, Label.all, :id, :name, {include_blank: "レーベル"} %><br>
+						<%= f.collection_select :label_id, Label.where(is_deleted: false), :id, :name, {include_blank: "レーベル"} %><br>
 						<p>カテゴリー名</p>
-						<%= f.collection_select :category_id, Category.all, :id, :name, {include_blank: "カテゴリー"} %><br>
+						<%= f.collection_select :category_id, Category.where(is_deleted: false), :id, :name, {include_blank: "カテゴリー"} %><br>
 						<%= f.label :入荷数 %>
 						<%= f.number_field :stock, class:"form-control", placeholder: "数" %>
 						<%= f.attachment_field :image %>

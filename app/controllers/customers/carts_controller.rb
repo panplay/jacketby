@@ -1,10 +1,17 @@
 class Customers::CartsController < ApplicationController
+
   def create
       cart = current_customer.carts.new(cart_params)
-      cart.customer_id = current_customer.id
-
-      cart.save!
-      redirect_to customers_path(current_customer.id)
+      if Cart.where(item_id: cart.item_id).exists?
+        cart_up = Cart.find_by(item_id: cart.item_id)
+        cart_up.quantity += cart.quantity
+        cart_up.update(quantity: cart_up.quantity)
+        redirect_to customers_path(current_customer.id)
+      else
+        cart.customer_id = current_customer.id
+        cart.save!
+        redirect_to customers_path(current_customer.id)
+      end
   end
 
   def show
@@ -15,7 +22,6 @@ class Customers::CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.update(cart_params)
     redirect_to customers_path(current_customer.id)
-
   end
 
   def destroy

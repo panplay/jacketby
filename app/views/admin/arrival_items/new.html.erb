@@ -1,9 +1,14 @@
 <section class="container">
+	<div class="demo-container">
+  		<div class="demo-box"></div>
+	</div>
 	<h2>入荷入力画面</h2>
+	<%= link_to admin_arrival_items_path do %>
+		<p>入荷履歴へ</p>
+	<% end %>
 	<div class="search">
     	<%= render 'search' %>
     </div>
-
 	<table  class="table table-hover table-inverse">
 		<thead>
  			<tr>
@@ -18,7 +23,7 @@
 		<tbody>
 			<% @items.each do |item| %>
 				<div class="item_<%= item.id %>">
-					<%= render 'save',item:item %>
+					<%= render 'save',item: item, arrival_item: @arrival_item %>
 				</div>
 			<% end %>
 		</tbody>

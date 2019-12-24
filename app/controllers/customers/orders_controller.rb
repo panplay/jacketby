@@ -1,11 +1,19 @@
 class Customers::OrdersController < ApplicationController
+
+	
   def new
   	  @order = Order.new
-  	  #@order.order_details.build
   	  @customer = current_customer
       @carts = Cart.where(customer_id: @customer.id)
       @addresses = Address.where(customer_id: @customer.id)
       #@address = current_customer.address.find([])
+  end
+
+  def new_address
+      @order = Order.new
+  	  @customer = current_customer
+      @carts = Cart.where(customer_id: @customer.id)
+      @addresses = Address.where(customer_id: @customer.id)
   end
 
   def create
@@ -37,7 +45,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   def address_params
-  	  params.require(:addresses).permit(:postal_code,:address)
+  	  params.require(:addresses).permit(:id,:postal_code,:address)
   end
 
 end

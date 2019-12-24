@@ -3,6 +3,7 @@ class Customers::CustomersController < ApplicationController
   	@customer = Customer.find(params[:id])
     @customer.addresses.build
     @customers =Customer.page(params[:page]).per(2)
+    #@customer.addresses.build
     @orders = Order.where(customer_id: current_customer.id)
       total = 0
       sum = 0
@@ -27,8 +28,14 @@ class Customers::CustomersController < ApplicationController
   def carts
     @customer = Customer.find_by(id: params[:id])
     @carts = Cart.where(customer_id: @customer.id)
+  end
 
-
+  def hide
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
   end
 
   def update
@@ -38,7 +45,7 @@ class Customers::CustomersController < ApplicationController
   end
 
 private
-def customer_params
-    params.require(:customer).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:postal_code,:address,:phone_number,:email, addresses_attributes:[:id,:postal_code,:address,:is_deleted])
+  def customer_params
+    params.require(:customer).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:postal_code,:address,:phone_number,:email, addresses_attributes:[:id,:postal_code,:address,:_destroy])
   end
 end
