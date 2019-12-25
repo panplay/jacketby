@@ -41,7 +41,6 @@
                   				    <% end %>
                                 </tbody>
                             </table>
-
                   			<h4 class="text-right">商品の小計（<%= quantity_sum %>点）： ¥ <%= (sum*1.1).to_i %></h4>
                                 <%= link_to "レジに進む", new_customers_orders_path, class:"btn btn-warning btn-block" %>
                         <% else %>

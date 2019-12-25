@@ -92,6 +92,12 @@
 					  <ul>
 						<li class="comment-create">
 		  					<h3 class="text-left comment-title">レビュー<i class="fas fa-folder-open"></i></h3>
+		  					<% if @post_comment.errors.any? %>
+					          <%= @post_comment.errors.count %>件のエラー。
+					          <% @post_comment.errors.full_messages.each do |message| %>
+					            <%= message %>。
+					          <% end %>
+					        <% end %>
 			  				<div class="comment">
 				  				<h4 class="comment-count">
 		  							<%= @item.post_comments.count %>件レビュー
@@ -126,17 +132,25 @@
 						<hr>
 
 					<% if customer_signed_in? %>
-						<%= form_for(@cart, url: customers_customer_carts_path(current_customer.id), method: :post) do |f| %>
-							<div class="row clearfix">
-								<div class="col-md-7 col-md-offset-2">
-									<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
-								</div>
-								<div class="col-md-1">
-									<%= f.select :quantity, options_for_select((1..@item.stock).to_a, @cart.quantity) %>
-									<%= f.hidden_field :item_id, :value => @item.id, class:"form-control" %>
+						<%if @item.sale == "販売停止中" %>
+							<div class="col-md-8 col-md-offset-2">
+								<h2 class="btn btn-lg btn-block btn-base-1 mt-20 bg-danger">
+									販売停止中です
+								</h2>
+							</div>
+						<% else %>
+							<%= form_for(@cart, url: customers_customer_carts_path(current_customer.id), method: :post) do |f| %>
+								<div class="row clearfix">
+									<div class="col-md-7 col-md-offset-2">
+										<%= f.submit "カートへ入れる", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-success" %>
+									</div>
+									<div class="col-md-1">
+										<%= f.select :quantity, options_for_select((1..@item.stock).to_a, @cart.quantity) %>
+										<%= f.hidden_field :item_id, :value => @item.id, class:"form-control" %>
+									</div>
+							<% end %>
 								</div>
 						<% end %>
-							</div>
 							<hr>
 					<% else %>
 						<%= link_to new_customer_session_path do %>

@@ -2,6 +2,12 @@
   <div class="container clearfix">
   	<div class="row">
   		<div class="col-md-8 col-md-offset-2 contact-form">
+        <% if @contact.errors.any? %>
+          <%= @contact.errors.count %>件のエラー。
+          <% @contact.errors.full_messages.each do |message| %>
+            <%= message %>。
+          <% end %>
+        <% end %>
   			<h2 class="contact-title">お問い合わせフォーム</h2>
                   <%= form_for (@contact) do |f| %>
                     <%= f.label :タイトル, class:"contact-title-title" %>

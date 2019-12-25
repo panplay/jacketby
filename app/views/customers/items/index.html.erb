@@ -60,9 +60,11 @@
 					            <a class="js-modal-close pull-right" href="">❌</a>
 					        </div><!--modal__inner-->
 				    </div><!--modal-->
-				    <div class="contact">
-				    	<%= link_to "お問い合わせはこちら", new_contact_path %>
-				    </div>
+				    <% if customer_signed_in? %>
+					    <div class="contact">
+					    	<%= link_to "お問い合わせはこちら", new_contact_path %>
+					    </div>
+					<% end %>
 		</div>
 
 			<div class="col-md-8 col-md-offset-1 index-container">
@@ -72,7 +74,7 @@
 							<div class="example">
 								<div class="example_image">
 									<%= attachment_image_tag item, :image, size: "150x150" %>
-										<div id="item_favorite_<%= item.id %>">
+										<div class="item_favorite_<%= item.id %>">
 								             <%= render 'favorite', item: item %>
 										</div>
 			  			        </div>
@@ -111,7 +113,7 @@
 											<div class="ranking">
 												<%= i %>位
 											</div>
-											<div id="item_favorite_<%= item.id %>">
+											<div class="item_favorite_<%= item.id %>">
 								             <%= render 'favorite', item: item %>
 											</div>
 				  			        </div>
@@ -151,7 +153,7 @@
 								<div class="example">
 									<div class="example_image">
 										<%= attachment_image_tag item, :image, size: "150x150" %>
-											<div id="item_favorite_<%= item.id %>">
+											<div class="item_favorite_<%= item.id %>">
 								             <%= render 'favorite', item: item %>
 											</div>
 				  			        </div>

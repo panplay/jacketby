@@ -89,11 +89,51 @@
   display:inline-block;
   position: relative;
   transition: .5s}
-
 .js-modal-open:hover span {
   /*ホバーで一周回転*/
   -webkit-transform: rotateX(360deg);
   transform: rotateX(360deg);
 }
+//検索フォーム
+.search-form {
+  display: none;
+}
+.fa-search {
+  font-size: 50px;
+  color: white;
+}
+.btn-real-dent {
+  /*周りの凹み*/
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: rgba(3, 169, 244, 0.54);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08);
+}
+.btn-real-dent i {
+  /*ボタン自体*/
+  position: absolute;
+  content: '';
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  left: 10px;
+  top: 9px;
+  border-radius: 50%;
+  font-size: 24px;
+  background-image: linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #b5b5b5;
+  }
 
+.btn-real-dent .fa:active {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #d8d8d8;
+}
 

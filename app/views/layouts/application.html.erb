@@ -21,11 +21,6 @@
     <nav class="nav navbar-nav navbar-left">
       <a href="/admin/items" class="btn-circle-fishy">Jacketby</a>
     </nav>
-    <nav class="nav navbar-nav navbar-center">
-    <div class="search", style="margin-left: 300px;">
-        <%= render 'customers/items/search' %>
-      </div>
-    </nav>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -54,21 +49,21 @@
     <nav class="nav navbar-nav navbar-left">
       <a href="/" class="btn-circle-fishy">Jacketby</a>
     </nav>
-    <nav class="nav navbar-nav navbar-center">
-    <div class="search", style="margin-left: 300px;">
-        <%= render 'customers/items/search' %>
-      </div>
-    </nav>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id), class: "btn-default", style: "margin-left: 5px" %>
+            <div class="search">
+              <%= render 'customers/items/search' %>
+            </div>
         </li>
         <li>
-          <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id), class: "btn-default", style: "margin-left: 5px" %>
+          <%= link_to 'いいね一覧', customers_favorites_path(current_customer.id), class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn-default", style: "margin-left: 5px" %>
+          <%= link_to 'マイページ', edit_customers_customer_path(current_customer.id), class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
         </li>
         <li>
           <%= link_to customers_path(current_customer) do %>
@@ -114,7 +109,6 @@
     </nav>
   <% end %>
   </header>
-</body>
 <%= yield %>
 <footer class="footer navbar-inverse", style="height: 80px; line-height: 80px; font-size: 20px;">
   <div class="container">

@@ -1,6 +1,10 @@
-<%= form_tag(customers_search_path, :method => 'get') do %>
-    <%= select_tag(:option, options_for_select([["アルバム名", "1"],["アーティスト","2"]]))%>
-    <%= text_field_tag :search %>
-    <%= submit_tag '検索' %>
-<% end %>
-
+<div class="search-btn">
+	<i class="fas fa-search", style= "margin-left: 5px; margin-top: 28px;"></i>
+		<div class="search-form">
+			<%= form_tag(customers_search_path, :method => 'get') do %>
+			    <%= select_tag(:option, options_for_select([["アルバム名", "1"],["アーティスト","2"]]))%>
+			    <%= text_field_tag :search, params[:search], class: "form-control" %>
+			    <%= submit_tag '検索', class: "btn btn-info" %>
+			<% end %>
+		</div>
+</div>
