@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  'index' =>'contact_mailers#index'
   post 'confirm' => 'contact_mailers#confirm'
   post 'done' => 'contact_mailers#done'
+  resources :contacts, only: [:index, :new, :create, :edit, :update]
 
   namespace :customer do
     get 'customers/edit'

@@ -28,7 +28,7 @@
 						<p>カテゴリー名</p>
 						<%= f.collection_select :category_id, Category.where(is_deleted: false), :id, :name, {include_blank: "カテゴリー"} %><br>
 						<%= f.label :入荷数 %>
-						<%= f.number_field :stock, class:"form-control", placeholder: "数" %>
+						<%= f.number_field :stock,,min: 1 class:"form-control", placeholder: "数" %>
 						<%= f.attachment_field :image %>
 					</div>
 					<%= f.label :管理者コメント %><br>

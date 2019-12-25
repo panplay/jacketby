@@ -1,3 +1,4 @@
+<% if @artist.exists? %>
 <section class="container">
 	<h2>入荷履歴</h2>
 	<div class="search">
@@ -44,3 +45,9 @@
 		</tbody>
 	</table>
 </section>
+% else %>
+<div style= "height: 800px; margin-top: 300px;">
+	<h4 class="text-center">お探しのアイテムがありません。</h4>
+	<a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
+</div>
+<% end %>

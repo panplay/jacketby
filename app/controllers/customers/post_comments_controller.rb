@@ -9,8 +9,8 @@ class Customers::PostCommentsController < ApplicationController
 	end
 
 	def destroy
-		post_comment = current_user.post_comments.find_by(post_comment)
-		post_comment.destroy
+		post_comment = PostComment.find_by(item_id: params[:item_id])
+    	post_comment.destroy
 		redirect_to admin_item_path(post_comment.item)
 	end
 

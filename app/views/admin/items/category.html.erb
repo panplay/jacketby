@@ -7,19 +7,19 @@
 					<h2 class="categories-headline">カテゴリー</h2>
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
-					  	 <%= link_to "#" do %>
-				 			<h3 style="color: black"><%= category.name %>(<%= category.items.count %>)</h3>
+					  	 <%= link_to "/customers/category/#{category.id}" do %>
+				 			<h3><%= category.name %></h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
 				</div>
 			</div>
 		</div>
-		<% if @items.exists? %>
+
 			<div class="col-md-9">
 				<div class="row clearfix">
-					<h2 class="new-items">アイテム一覧</h2>
-						<% @items.each do |item| %>
+					<h2 class="new-items"><%= @category.name %></h2>
+							<% @items.each do |item| %>
 							<div class="example">
 								<div class="example_image">
 									<%= attachment_image_tag item, :image, size: "150x150" %>
@@ -43,14 +43,8 @@
 					  				<p>価格（税込)：¥ <%= (item.price * 1.1).to_i %></p>
 					  			</div>
 							</div>
-						<% end %>
+							<% end %>
 				</div>
-				<% else %>
-					<div style= "height: 800px; margin-top: 300px;">
-		 				<h4 class="text-center">お探しのアイテムがありません。</h4>
-                     		<a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
-                    </div>
-                <% end %>
 
 
 					<span id="back">

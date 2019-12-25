@@ -1,4 +1,2 @@
-$(document).on('turbolinks:load', function() {
-$('div.demo-container')
-	.html("<%= @label.name %>を編集しました。");
-	 });
+$('div.demo-container-label')
+	.html("レーベル：<%= @label.name %>を編集しました。");

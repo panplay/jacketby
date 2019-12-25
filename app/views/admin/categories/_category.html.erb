@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="demo-container">
+  <div class="demo-container-cate">
       <div class="demo-box"></div>
     </div>
 	<h2>カテゴリー一覧</h2>
@@ -27,7 +27,7 @@
 
    <h2>カテゴリー新規作成</h2>
    <%= form_for(@category, url: admin_categories_path) do |f| %>
-   <%= f.text_field :name %>
+   <%= f.text_field :name, class:"form-control form-control1" %>
 	<%= f.submit "新規作成", class:"btn btn-lg btn-block btn-base-1 mt-20 bg-primary" %>
 	<% end %>
 </div>

@@ -1,4 +1,8 @@
 <section class="container">
+	<div class="flash">
+	  <% flash.each do |key, value| %>
+	  	<%= content_tag(:div, value, class: "#{key}") %>
+	  <% end %>
 	<div class="row">
 		<div class="sidebar, col-md-3 index-container">
 			<div class="row">
@@ -56,7 +60,9 @@
 					            <a class="js-modal-close pull-right" href="">❌</a>
 					        </div><!--modal__inner-->
 				    </div><!--modal-->
-
+				    <div class="contact">
+				    	<%= link_to "お問い合わせはこちら", new_contact_path %>
+				    </div>
 		</div>
 
 			<div class="col-md-8 col-md-offset-1 index-container">

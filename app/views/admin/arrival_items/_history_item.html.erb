@@ -1,44 +1,51 @@
-<section class="container">
-	<h2>入荷履歴</h2>
-	<div class="search">
-    	<%= render 'history_search' %>
-    </div>
-	<table  class="table table-hover table-inverse">
-		<thead>
-			<tr>
-				<th class="col-md-1">#</th>
-				<th class="col-md-3">シングル/アルバム名</th>
-				<th class="col-md-4">アーティスト名</th>
-				<th class="col-md-2">入荷日</th>
-				<th class="col-md-2">入荷枚数</th>
-			</tr>
-		</thead>
-		<tbody>
-				<% @items.each do |item| %>
-					<% item.arrival_items.each do |arrival_item| %>
-					<tr>
-						<td>
-							<%= link_to edit_admin_item_path(arrival_item.item) do %>
-								<%= attachment_image_tag arrival_item.item, :image, size: "50x50" %>
-							<% end %>
-						</td>
-						<td class="">
-							<%= link_to edit_admin_item_path(arrival_item.item) do %>
-								<%= arrival_item.item.name %>
-							<% end %>
-						</td>
-						<td  class="">
-							<%= arrival_item.item.artist.name %>
-						</td>
-						<td>
-							<%= arrival_item.arrival_time.strftime("%y年%m月%d日") %>
-						</td>
-						<td>
-							<%= arrival_item.arrival_count %>
-						</td>
-					</tr>
+<% if @items.exists? %>
+	<section class="container">
+		<h2>入荷履歴</h2>
+		<div class="search">
+	    	<%= render 'history_search' %>
+	    </div>
+		<table  class="table table-hover table-inverse">
+			<thead>
+				<tr>
+					<th class="col-md-1">#</th>
+					<th class="col-md-3">シングル/アルバム名</th>
+					<th class="col-md-4">アーティスト名</th>
+					<th class="col-md-2">入荷日</th>
+					<th class="col-md-2">入荷枚数</th>
+				</tr>
+			</thead>
+			<tbody>
+					<% @items.each do |item| %>
+						<% item.arrival_items.each do |arrival_item| %>
+						<tr>
+							<td>
+								<%= link_to edit_admin_item_path(arrival_item.item) do %>
+									<%= attachment_image_tag arrival_item.item, :image, size: "50x50" %>
+								<% end %>
+							</td>
+							<td class="">
+								<%= link_to edit_admin_item_path(arrival_item.item) do %>
+									<%= arrival_item.item.name %>
+								<% end %>
+							</td>
+							<td  class="">
+								<%= arrival_item.item.artist.name %>
+							</td>
+							<td>
+								<%= arrival_item.arrival_time.strftime("%y年%m月%d日") %>
+							</td>
+							<td>
+								<%= arrival_item.arrival_count %>
+							</td>
+						</tr>
+					<% end %>
 				<% end %>
-			<% end %>
-		</tbody>
-	</table>
-</section>
+			</tbody>
+		</table>
+	</section>
+<% else %>
+	<div style= "height: 800px; margin-top: 300px;">
+		<h4 class="text-center">お探しのアイテムがありません。</h4>
+		<a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
+	</div>
+<% end %>

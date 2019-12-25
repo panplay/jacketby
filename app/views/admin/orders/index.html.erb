@@ -8,7 +8,7 @@
           <%= link_to "出荷済", admin_orders_path(sort: 3) %>/
           <%= link_to "全て", admin_orders_path %>
         </h5>
-        <h4 class="text-right">総売上¥:<%= @total %></h4>
+        <h4 class="text-right">総売上¥<%= @total %></h4>
         <% @orders.each do |order| %>
               <div class="row order-container_box">
                   <div class="col-md-3">
@@ -32,7 +32,7 @@
                   <table  class="table table-hover table-inverse">
                     <thead>
                       <tr>
-                        <th>画像</th>
+                        <th>ジャケット</th>
                         <th>製品名</th>
                         <th>受注枚数</th>
                         <th>単価</th>
@@ -49,7 +49,7 @@
                           <td><%= order_detail.quantity %></td>
                           <td>¥<%= order_detail.item.price %></td>
                            <% sum = ( order_detail.quantity * order_detail.item.price ) %>
-                          <td>(<%= order.order_details.count %>点)： ¥ <%= sum %></td>
+                          <td>¥<%= sum %></td>
                         </tr>
                         <% end %>
                       </tbody>

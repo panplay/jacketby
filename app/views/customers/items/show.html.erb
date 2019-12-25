@@ -105,12 +105,14 @@
 	  				    	</div>
 	  				    </li>
 	  				</ul>
-			  						<%= form_for([@item, @post_comment], url: customers_item_post_comments_path(@item), method: :post) do |f| %>
-				  						<div class="col-md-12 comment-submit">
-				  							<%= f.text_field :comment, class: "form-control",placeholder: "レビューをここに" %>
-				  						</div>
-				  						<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-			  						<% end %>
+	  				<% if customer_signed_in? %>
+  						<%= form_for([@item, @post_comment], url: customers_item_post_comments_path(@item), method: :post) do |f| %>
+	  						<div class="col-md-12 comment-submit">
+	  							<%= f.text_field :comment, class: "form-control",placeholder: "レビューをここに" %>
+	  						</div>
+	  						<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+  						<% end %>
+			  		<% end %>
   					</div>
   					<hr>
 
