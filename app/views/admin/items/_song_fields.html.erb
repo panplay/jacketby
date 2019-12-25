@@ -1,4 +1,9 @@
-<div class="col-md-2">
-	<%= f.number_field :song_order, class:"form-control", placeholder: "曲順" %>
+<div class="nested-fields form-inline">
+	<div class="col-md-2">
+		<%= f.number_field :song_order,min: 1, class:"form-control", placeholder: "曲順", style: "width: 80px; margin-left: 30px;" %>
 	</div>
-	<%= f.text_area :name, class:"form-control", placeholder: "曲名" %>
+	<%= f.text_area :name, class:"form-control", placeholder: "曲名", style: "width: 200px; margin-left: 30px;" %>
+	<%= link_to_remove_association f do %>
+	     <i class="fas fa-minus-circle"></i>
+	 <% end %>
+</div>

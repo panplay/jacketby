@@ -72,6 +72,7 @@ gem 'ransack'
 gem 'nested_form_fields'
 gem 'payjp'
 gem 'dotenv-rails'
+gem 'rails-i18n'
 
 gem 'pry-byebug'
 

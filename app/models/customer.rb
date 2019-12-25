@@ -21,6 +21,7 @@ class Customer < ApplicationRecord
   end
 
    has_many :post_comments, dependent: :destroy
+   has_many :contact, dependent: :destroy
 
 
   validates :last_name, presence: true

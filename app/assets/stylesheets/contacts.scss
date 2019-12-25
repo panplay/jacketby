@@ -1,0 +1,51 @@
+// Place all the styles related to the contacts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.contact {
+	color: black;
+	margin-top: 20px;
+}
+.contact-content{
+	height: 800px;
+	background-image: url(image-path("audio.jpg"));
+    background-size: cover;
+    background-position: center;
+}
+.contact-index-content {
+    background-image: url(image-path("audio.jpg"));
+    background-size: cover;
+    background-position: center;
+}
+.contact-form {
+	background-color: white;
+    margin: 130px;
+    padding: 30px 50px;
+}
+.contact-title {
+	border-bottom: solid 1px #9d9d9d;
+	width: 311px;
+	margin-bottom: 30px;
+}
+.contact-title-title {
+	margin-bottom: 10px;
+}
+.contact-form-form {
+	margin-bottom: 20px;
+}
+.contact-edit-content {
+	background-image: url(image-path("audio.jpg"));
+    background-size: cover;
+    background-position: center;
+}
+.contact-edit-title {
+	border-bottom: solid 1px #9d9d9d;
+	width: 85px;
+}
+.contact-edit-title_body {
+	border-bottom: solid 1px #9d9d9d;
+	width: 174px;
+}
+.contact-reply {
+	margin-bottom: 20px;
+	height: 100px;
+}

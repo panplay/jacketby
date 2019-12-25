@@ -1,9 +1,14 @@
-<%= f.label :ディスク %><br>
-<%= f.number_field :disk_order, class:"form-control", placeholder: "ディスク" %>
-		<p>シングルアルバム内の曲名</p>
+<div class="nested-fields form-inline">
+	<%= f.label :ディスク, style: "width: 80px; margin-left: 30px;" %><br>
+	<%= f.number_field :disk_order,min: 1, class:"form-control", placeholder: "ディスク", style: "width: 80px; margin-left: 30px;" %>
+		 <%= link_to_remove_association f do %>
+	    	<i class="fas fa-minus-circle"></i>
+	 	 <% end %><br>
+		<%= f.label :曲名, style: "margin-left: 30px;" %><br>
 		<%= f.fields_for :songs do |song| %>
 		<%= render 'song_fields', f: song  %>
 		<% end %>
 		<div id="links">
 		  <%= link_to_add_association '曲追加',f, :songs %>
 		 </div>
+</div>

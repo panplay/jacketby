@@ -100,6 +100,7 @@
 	  									<div class="comment-entry">
 	  										<b><%= post_comment.customer.last_name %>さん</b><br>
 	  				    					<%= post_comment.comment %>
+	  				    					<%= link_to "削除", customers_item_post_comment_path(@item.id,post_comment.id), method: :delete %>
 	  				    				</div>
 	  				    		<% end %>
 	  				    	</div>

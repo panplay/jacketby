@@ -44,6 +44,9 @@ class Admin::ItemsController < ApplicationController
   end
 
   def hide
+    @item = Item.find(params[:id])
+    @item.update(is_deleted: true)
+    redirect_to root_path
   end
 
   def index

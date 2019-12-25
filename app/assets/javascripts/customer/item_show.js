@@ -20,4 +20,16 @@ $(document).ready(function() {
 	}
 	});
 
+	$('.search-btn').click(function() {
+	var $answer = $(this).find('.search-form');
+	if($answer.hasClass('open')) {
+	  $answer.removeClass('open');
+
+	  $(this).find('i').text('');
+	} else {
+	  $answer.addClass('open');
+	   $answer.slideDown();
+	}
+	});
+
  });

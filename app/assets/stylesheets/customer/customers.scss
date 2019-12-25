@@ -16,5 +16,17 @@
     border-radius: 1.1rem;
     outline: 0;
     max-width: 500px;
+    margin: 50px 0px;
 }
-
+.log-content {
+    background-image: url(image-path("audio.jpg"));
+    background-size: cover;
+    background-position: center;
+    height: 800px;
+}
+.sign-content {
+    background-image: url(image-path("audio.jpg"));
+    background-size: cover;
+    background-position: center;
+    height: 1000px;
+}

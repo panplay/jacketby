@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_165610) do
+ActiveRecord::Schema.define(version: 2019_12_24_152929) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "postal_code", null: false
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2019_12_23_165610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["is_deleted"], name: "index_categories_on_is_deleted"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.text "reply"
+    t.integer "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|

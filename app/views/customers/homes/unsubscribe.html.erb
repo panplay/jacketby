@@ -1,8 +1,12 @@
-<p>※この内容で「退会する」ボタンを押しますと必ず退会が完了します。ご注意下さい。</p>
-<p>※一度承った退会はキャンセルできませんので慎重にお手続きをお願いします。</p>
-<p>
-	<%= link_to "退会する", customers_customers_hide_path(current_customer), method: :put, "data-confirm" => "今、退会しますとおじさんの一人娘の難病を治すための治療費が払えなくなります。本当に退会しますか？" %>
-</p>
-<h1>
-	<%= link_to "退会しない", root_path %>
-</h1>
+<div class="unsub-content">
+	<div class="container">
+		<div class="row unsub-box">
+			<h3 style="font-size: 20px; color: white;">※この内容で「退会する」ボタンを押しますと必ず退会が完了します。ご注意下さい。</h3>
+			<h3 style="font-size: 20px; color: white;">※一度承った退会はキャンセルできませんので慎重にお手続きをお願いします。</h3>
+			<h3 style="font-size: 20px; margin-right: 30px;">
+				<%= link_to "退会する", customers_customers_hide_path(current_customer), method: :put, "data-confirm" => "今、退会しますとおじさんの一人娘の難病を治すための治療費が払えなくなります。本当に退会しますか？" %>
+				<%= link_to "退会しない", root_path %>
+			</h3>
+		</div>
+	</div>
+</div>
