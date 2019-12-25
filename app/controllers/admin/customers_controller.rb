@@ -4,17 +4,16 @@ class Admin::CustomersController < ApplicationController
   	@customer = Customer.find(params[:id])
   	@customers =Customer.page(params[:page]).per(2)
   	@orders = Order.where(customer_id: current_customer.id)
+  	 #総売上
   	  total = 0
-      sum = 0
+      customer_total = 0
       @orders.each do |x|
         total += x.total_price
-        x.order_details.each do |y|
-          sum += ( y.quantity * y.item.price )
-        end
-        @sum = sum
+        @customer_total = x.total_price
       end
       @total = total
   end
+
 
   def hide
   	@customer = Customer.find(params[:id])
