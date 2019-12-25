@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
 	   	contact.update(contact_params)
 	   	customer = contact.customer
 	   	ContactMailer.send_when_admin_reply(customer, contact).deliver
-	   	redirect_to root_path
+	   	redirect_to admin_items_path
 	end
 
 	def destroy
