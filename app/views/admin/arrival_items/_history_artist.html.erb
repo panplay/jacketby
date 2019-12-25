@@ -1,6 +1,9 @@
 <% if @artist.exists? %>
 <section class="container">
 	<h2>入荷履歴</h2>
+	<%= link_to new_admin_arrival_item_path do %>
+		<p>入荷入力へ</p>
+	<% end %>
 	<div class="search">
     	<%= render 'history_search' %>
     </div>

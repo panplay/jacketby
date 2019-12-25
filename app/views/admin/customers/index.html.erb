@@ -16,9 +16,6 @@
 		<tr class="headings">
 			<th class="column-title">顧客名</th>
 			<th class="column-title">メールアドレス</th>
-			<th class="column-title">購入した日
-				<%= link_to "新しい順", admin_customers_path(vort: 1) %>
-				<%= link_to "古い順", admin_customers_path(vort: 2) %></th>
 			<th class="column-title">詳細ページへ</th>
 		</tr>
 	</thead>
@@ -28,11 +25,7 @@
 				<td class=><%= customer.last_name %>
 				<%= customer.first_name %></td>
 				<td><%= customer.email %></td>
-				<% customer.orders.each do |order| %>
-					<td><%= order.order_time.strftime('%Y/%m/%d') %>
-					</td>
-					<td><%= link_to "顧客詳細へ", admin_customer_path(customer) %></td>
-		<% end %>
+				<td><%= link_to "顧客詳細へ", admin_customer_path(customer) %></td>
 		<% end %>
 	</tbody>
 </table>

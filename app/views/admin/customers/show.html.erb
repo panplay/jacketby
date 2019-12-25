@@ -1,33 +1,44 @@
+<div class="tbody" style= "height: 100%;">
 <section class="container">
   <div class="row">
-    <div class="col-xs-5 cus-show">
-      <h2 class="with-line">顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h2>
+  	<div class="col-lg-5">
+    <div class="col-xs-5 cus-show"style= "width: 500px;">
+      <h4 class="with-line">顧客情報<span class="fa fa-user form-control-icon" aria-hidden="true"></span></h4>
         <table class="table">
           <tbody>
               <%= form_for @customer,url:admin_customers_path(@customer) do |f| %>
                   <div class="form group">
                     <div class="form-inline">
-                      <button type="button" class="btn btn-success show-btn" disabled="disabled" >お名前</button>
+                      <button type="button" class=" col-sm-2 btn-xs btn-success show-btn" disabled="disabled">お名前</button>
+                      <div class="col-sm-10"style= "padding:0px,2px;">
                         <%= f.text_field :last_name,id:"customer_last_name",placeholder:"名前",rows: 7,class: "form-control", :size => "10*10" %>
                         <%= f.text_field :first_name,id:"customer_first_name",placeholder:"名前",rows: 7,class: "form-control",:size => "10*10"%>
                     </div>
+                </div>
+            </div>
                   <div class="form group">
                     <div class="form-inline">
-                      <button type="button" class="btn btn-success show-btn" disabled="disabled">お名前（カナ）</button>
+                      <button type="button" class=" col-sm-2 btn-xs btn-success show-btn" disabled="disabled">お名前（カナ）</button>
+                    <div class="col-sm-10" style= "padding:15px;">
                       <%= f.text_field :last_name_kana,id:"customer_last_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
                       <%= f.text_field :first_name_kana,id:"customer_first_name_kana",placeholder:"名前（カナ）",rows: 7,class: "form-control",:size => "10*10"%>
                     </div>
                   </div>
+                 </div>
                   <div class="form group">
                     <div class="form-inline">
-                      <button type="button" class="btn btn-success show-btn" disabled="disabled">住所1</button>
+                      <button type="button" class="col-lg-2 btn-xs btn-success show-btn" disabled="disabled">住所1</button>
+                      <div class="col-sm-10" style= "padding:0px,4px;">
                       <%= f.text_field :postal_code,id:"customer_postal_code",placeholder:"郵便番号",rows: 7,class: "form-control",:size => "10*10"%>
                     </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-sm-10" style= "padding:15px;">
                     <%= f.text_area :address,id:"customer_adress",placeholder:"住所1",rows: 7,class: "form-control",:size => "40*40"%>
                   </div>
+              </div>
+          </div>
                   <div class="form group">
                     <div class="form-inline">
-                      <button type="button" class="btn btn-success show-btn" disabled="disabled">住所2</button>
                       <%= f.fields_for :addresses do |address| %>
                   		  <%= render "address_fields", f: address %>
                   	  <% end %>
@@ -35,16 +46,20 @@
                   </div>
                   <div class="form group">
                     <div class="form-inline">
-                      　<button type="button" class="btn btn-success show-btn" disabled="disabled">電話番号</button>
+                      <button type="button" class="col-lg-2 btn-xs btn-success show-btn" disabled="disabled">電話番号</button>
+                      <div class="col-sm-10" style= "padding:0px,3px;">
                         <%= f.text_field :phone_number,id:"customer_phone_number",placeholder:"電話番号",rows: 7,class: "form-control",:size => "10*10"%>
                     </div>
                   </div>
+              </div>
                   <div class="form group">
                     <div class="form-inline">
-                  　   <button type="button" class="btn btn-success show-btn" disabled="disabled">メールアドレス</button>
+                     <button type="button" class="col-lg-2 btn-xs btn-success show-btn" disabled="disabled">email</button>
+                     <div class="col-sm-10" style= "padding:10px;">
                       <%= f.text_field :email,id:"customer_email",placeholder:"メールアドレス",rows: 7,class: "form-control"%>
                     </div>
                   </div>
+              </div>
               <% end %>
                 	<div class="actions">
                 	   <div class="form-inline">
@@ -60,105 +75,79 @@
 <div class="col-xs-7">
 	<div class="table">
 <section class="container-fluid clearfix">
-	<% sum = 0 %>
-  <% quantity_sum = 0 %>
-  <div class="row order-container_box">
-  <div class="col-md-5">
-  <h4>受注履歴</h4>
-  </div>
-  <div class="col-md-5">
-  	<h4>購入価格総計:<%= @total %></h4>
-  </div>
-</div>
 
-  <% @orders.each do |order| %>
-    <% order.order_details.each do |order_detail| %>
-    <div class="col-xs-7">
-    <div class="row order-container_box">
-    <div class="col-md-10">
-    受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
-    </div>
-    <div class="col-md-2">
-    <%= order.status %>
-    </div>
-    <div class="col-md-4">
-     売上金額<%= @sum %><br/>
-    </div>
-</div>
-</div>
-              <div class="example">
-                  <div class="example_image">
-                      <%= attachment_image_tag order_detail.item, :image, size: "150x150" %>
-                  </div>
-              </div>
-              <div class="example_text">
-                <p class="btn btn-default btn-xs"><%= truncate(order_detail.item.name, length: 10) %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">受注枚数 :<%= order_detail.quantity %></p>
-              </div>
-              <div>
-              	<p class="btn btn-default btn-xs">受注者名：<%= order.customer.last_name %><%= order.customer.first_name %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">単価：¥ <%= order_detail.item.price %></p>
-              </div>
-              <div>
-                <p class="btn btn-default btn-xs">送付先<%= order.postal_code %><br/>
-                <%= order.destination %></P>
-              </div>
-
-          <% end %>
-            <% end %>
-</p>
-</div>
-</section>
-</div>
-</div>
-</div>
-<%= paginate @customers, class: "paginate"%>
-</div>
-
-    <div class="col-xs-6 col-xs-offset-1 cus-show">
+    <div class="col-xs-7 col-xs-offset-1 cus-show" style="width: 600px;""height: 800px;">
     	<% sum = 0 %>
       <% quantity_sum = 0 %>
-      <h4 class="text-left">受注履歴</h4>
-      	<h4 class="text-right">購入価格総計<%= @total %>
-      </h4>
+      	<div class="row">
+      	<h4 class="col-md-4 col-md-offset-1">
+      		受注履歴
+      	</h4>
+      	<h4 class="col-md-5 col-md-offset-2">
+      		購入価格総計<%= @total %>
+      	</h4>
+      </div>
+
       <% @orders.each do |order| %>
-        <% order.order_details.each do |order_detail| %>
-        受注日：<%= order.order_time.strftime("%y年%m月%d日") %>
+        <div class="row cus-show">
+        <div class="row order-container_box">
+        <div class="col-sm-4">
+        受注日：<%= order.order_time.strftime("%y年%m月%d日") %></div>
+        <div class="col-sm-3"><%= order.status %></div>
+        <div class="col-sm-3">売上金額¥<%= order.total_price %></div>
+    </div>
+    <% end %>
+    
+    <div class="table">
+    <% @orders.each do |order| %>
+    送付先<%= order.postal_code %></p>
+          <P><%= order.destination %>
+    <% order.order_details.each do |order_detail| %>
+    <div class="container">
+    	<div class="row">
+        <div class="col-xs-6">
                   <div class="example">
                       <div class="example_image">
-                          <%= attachment_image_tag order_detail.item, :image, size: "100x100" %>
+                          <%= attachment_image_tag order_detail.item, :image, size: "170x170" %>
                       </div>
                   </div>
-                  <div class="example_text">
+              </div>
+          </div>
+      </div>
+              <div class="row order-container_box">
+                  <div class="container">
+                  <div class="col-xs-6">
+                  <div class="row">
                     <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
                   </div>
-                  <div>
+                  <div class="row">
                     <p>受注枚数 :<%= order_detail.quantity %></p>
                   </div>
-                  <div>
+                  <div class="row">
                   	<p>受注者：<%= order.customer.last_name %><%= order.customer.first_name %></p>
                   </div>
-                  <div>
+                  <div class="row">
                     <p>単価：¥ <%= order_detail.item.price %></p>
                   </div>
-                  <div>
-                    <p>送付先<%= order.postal_code %></p>
-                    <P>住所<%= order.destination %></P>
-                  </div>
-                  <% sum += (order_detail.quantity * order_detail.item.price) %>
-
-        <% sum += ( order_detail.quantity * order_detail.item.price ) %>
+                  <% end %>
               <% end %>
-                合計（<%= order.order_details.count %>点）： ¥<%= sum %>
-                購入価格総計：¥ <%= sum * order.order_details.count  %>
-                <% end %>
+                 <div class="row">
+                 	<p>送料 :500円</p>
+                 </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+      </div>
+      <%= paginate @customers, class: "paginate"%>
+  </div>
     </div>
-    <%= paginate @customers, class: "paginate"%>
   </div>
 </section>
-
+</div>
+</div>
+</div>
+</section>
+</div>
 

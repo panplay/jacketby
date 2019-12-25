@@ -1,2 +1,3 @@
 $(".item_favorite_<%= @item.id %>").html("<%= j(render partial: 'customers/items/favorite', locals: { item: @item}) %>");
 $("#item__show_favorite_<%= @item.id %>").html("<%= j(render partial: 'customers/items/show_favorite', locals: { item: @item}) %>");
+
