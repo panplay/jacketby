@@ -3,7 +3,7 @@ class Admin::CustomersController < ApplicationController
   def show
   	@customer = Customer.find(params[:id])
   	@customers =Customer.page(params[:page]).per(2)
-  	@orders = Order.where(customer_id: current_customer.id)
+  	@orders = Order.where(customer_id: @customer.id)
   	 #総売上
   	  total = 0
       customer_total = 0

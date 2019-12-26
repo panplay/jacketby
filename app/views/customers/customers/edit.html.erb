@@ -87,12 +87,12 @@
           購入履歴
         </h3>
         <h4 class="col-md-5 col-md-offset-2">
-          購入価格総計<%= @total %>
+          購入価格総計¥<%= @total %>
         </h4>
       </div>
   </div>
 </div>
-    <% if current_customer.orders.exists? %>
+    <% if @customer.orders.exists? %>
       <% @orders.each do |order| %>
       <div class="row cus-show">
         <p><hr width="100%"></p>
@@ -100,7 +100,7 @@
         <div class="col-sm-5">
         受注日：<%= order.order_time.strftime("%y年%m月%d日") %></div>
         <div class="col-sm-3"><%= order.status %></div>
-        <div class="col-sm-4">売上金額¥<%= order.total_price %></div>
+        <div class="col-sm-4">お買い上げ金額¥<%= order.total_price %></div>
    </button>
      <div class="row" style= "padding:20px;">
                   </div>
@@ -150,7 +150,7 @@
               <% end %>
               </div>
           <div class="text-center">
-          <%= paginate @customers, class: "paginate"%>
+          <%= paginate @customers, class:"paginate"%>
       </div>
       <% else %>
           <h4 class="text-center">購入履歴がありません</h4>
