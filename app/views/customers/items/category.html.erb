@@ -1,6 +1,6 @@
 <section class="container">
 	<div class="row">
-		<div class="sidebar, col-md-3">
+		<div class="sidebar, col-md-2">
 
 			<div class="row">
 				<div class="categories">
@@ -8,7 +8,7 @@
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
 					  	 <%= link_to "/customers/category/#{category.id}" do %>
-				 			<h3><%= category.name %></h3>
+				 			<h3 style="color: white; font-size: 15px; "><%= category.name %>(<%= category.items.count %>)</h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 
-			<div class="col-md-9">
+			<div class="col-md-9 col-md-offset-1">
 				<div class="row clearfix">
 					<h2 class="new-items"><%= @category.name %></h2>
 							<% @items.each do |item| %>
