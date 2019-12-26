@@ -37,7 +37,7 @@ class Admin::ArrivalItemsController < ApplicationController
     end
   end
 
-   def history_search
+  def history_search
     @item_or_artist = params[:option]
     if @item_or_artist == "1"
       @arrival_item = ArrivalItem.new
