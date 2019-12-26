@@ -88,12 +88,12 @@
       		受注履歴
       	</h3>
       	<h4 class="col-md-5 col-md-offset-2">
-      		購入価格総計<%= @total %>
+      		購入価格総計¥<%= @total %>
       	</h4>
       </div>
   </div>
 </div>
-　　　<% if current_customer.orders.exists? %>
+　　　<% if @customer.orders.exists? %>
       <% @orders.each do |order| %>
        <div class="row cus-show">
         <p><hr width="100%"></p>

@@ -1,8 +1,8 @@
 class Customers::CustomersController < ApplicationController
   def edit
   	@customer = Customer.find(params[:id])
-    @customers =Customer.page(params[:page]).per(2)
-    @orders = Order.where(customer_id: current_customer.id)
+    @customers =Customer.page(params[:page]).per(1)
+    @orders = Order.where(customer_id: @customer.id)
     @address= Address.where(customer_id: @customer.id)
     if @address.count == 0
       2.times { @customer.addresses.build }
