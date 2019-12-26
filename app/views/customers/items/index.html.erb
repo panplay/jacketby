@@ -4,21 +4,21 @@
 	  	<%= content_tag(:div, value, class: "#{key}") %>
 	  <% end %>
 	<div class="row">
-		<div class="sidebar, col-md-3 index-container">
+		<div class="sidebar col-md-2 index-container">
 			<div class="row">
 				<div class="categories">
 					<h2 class="categories-headline">カテゴリー</h2>
 					 <div class="sidebar-contents">
 					  	<% @categories.each do |category| %>
 					  	 <%= link_to "/customers/category/#{category.id}" do %>
-				 			<h3 style="color: black"><%= category.name %>(<%= category.items.count %>)</h3>
+				 			<h3 style="color: white; font-size: 15px; "><%= category.name %>(<%= category.items.count %>)</h3>
 				 		 <% end %>
 				 		 <% end %>
 					</div>
 				</div>
 			</div>
 
-			 <div class="content">
+			 <div class="content col-md-2">
 				        <a class="js-modal-open" href=""><i class="fas fa-money-bill-alt"></i> <span>Sale Item</span></a>
 				    </div>
 				    <div class="modal js-modal">
@@ -67,7 +67,7 @@
 					<% end %>
 		</div>
 
-			<div class="col-md-8 col-md-offset-1 index-container">
+			<div class="col-md-9 col-md-offset-1 index-container">
 				<div class="row clearfix">
 					<h2 class="new-items">新着アイテム</h2>
 						<% @items.each do |item| %>
