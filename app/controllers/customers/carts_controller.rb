@@ -1,5 +1,5 @@
 class Customers::CartsController < ApplicationController
-  before_action :correct_customer, only: [:show]
+
 
   def create
       cart = current_customer.carts.new(cart_params)
@@ -36,11 +36,6 @@ class Customers::CartsController < ApplicationController
       params.require(:cart).permit(:customer_id,:item_id,:quantity)
   end
 
-  def correct_customer
-    @cart = Cart.find(params[:id])
-    if current_customer != @cart.customer
-      redirect_to root_path
-    end
-  end
+
 
 end
