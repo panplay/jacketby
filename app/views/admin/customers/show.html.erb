@@ -1,5 +1,5 @@
-<div class="tbody" style= "height: 100%;">
-<section class="container">
+<div class="tbody" style="width:100%;">
+<section class="container kazu">
   <div class="row">
   	<div class="col-lg-5">
     <div class="col-xs-5 cus-show"style= "width: 500px;">
@@ -72,39 +72,48 @@
 </tbody>
 </table>
 </div>
+<div class="container">
 <div class="col-xs-7">
 	<div class="table">
-<section class="container-fluid clearfix">
+	<div class="panel panel-default">
 
     <div class="col-xs-7 col-xs-offset-1 cus-show" style="width: 600px;""height: 800px;">
     	<% sum = 0 %>
       <% quantity_sum = 0 %>
+      <div class="panel-heading">
       	<div class="row">
-      	<h4 class="col-md-4 col-md-offset-1">
+        <div class="panel panel-default">
+        <div class="panel-body bg-primary">
+      	<h3 class="col-md-4 col-md-offset-1 panel-title">
       		受注履歴
-      	</h4>
+      	</h3>
       	<h4 class="col-md-5 col-md-offset-2">
       		購入価格総計<%= @total %>
       	</h4>
       </div>
+  </div>
+</div>
 
       <% @orders.each do |order| %>
-        <div class="row cus-show">
-        <div class="row order-container_box">
-        <div class="col-sm-4">
+      <div class="row cus-show">
+      	<button type="button" class="btn bg-info"style="padding: 20px">
+        <div class="col-sm-5">
         受注日：<%= order.order_time.strftime("%y年%m月%d日") %></div>
         <div class="col-sm-3"><%= order.status %></div>
-        <div class="col-sm-3">売上金額¥<%= order.total_price %></div>
+        <div class="col-sm-4">売上金額¥<%= order.total_price %></div>
+   </button>
+     <div class="row" style= "padding:20px;">
+                  </div>
+         <div class="col-xs-6">
+            <div class="row">
+            <div class="well">
+       <p>送付先<%= order.postal_code %></p>
+       <P>住所<%= order.destination %></P>
     </div>
-    <% end %>
-    
-    <div class="table">
-    <% @orders.each do |order| %>
-    送付先<%= order.postal_code %></p>
-          <P><%= order.destination %>
-    <% order.order_details.each do |order_detail| %>
-    <div class="container">
-    	<div class="row">
+   </div>
+</div>
+</div>
+        <% order.order_details.each do |order_detail| %>
         <div class="col-xs-6">
                   <div class="example">
                       <div class="example_image">
@@ -112,36 +121,40 @@
                       </div>
                   </div>
               </div>
-          </div>
-      </div>
-              <div class="row order-container_box">
-                  <div class="container">
                   <div class="col-xs-6">
                   <div class="row">
+                  <div class="well well-sm">
                     <p>シングル名：<%= truncate(order_detail.item.name, length: 10) %></p>
                   </div>
+              </div>
                   <div class="row">
+                  <div class="well well-sm">
                     <p>受注枚数 :<%= order_detail.quantity %></p>
                   </div>
+              </div>
                   <div class="row">
+                  	<div class="well well-sm">
                   	<p>受注者：<%= order.customer.last_name %><%= order.customer.first_name %></p>
                   </div>
+              </div>
                   <div class="row">
+                  <div class="well well-sm">
                     <p>単価：¥ <%= order_detail.item.price %></p>
                   </div>
-                  <% end %>
-              <% end %>
-                 <div class="row">
-                 	<p>送料 :500円</p>
-                 </div>
               </div>
-          </div>
-      </div>
+                  <div class="row" style= "padding:40px;">
+                  </div>
+                  </div>
+                    <% end %>
+              <% end %>
+              </div>
+          <div class="text-center">
+          <%= paginate @customers, class: "paginate"%>
       </div>
   </div>
       </div>
-      <%= paginate @customers, class: "paginate"%>
   </div>
+</div>
     </div>
   </div>
 </section>

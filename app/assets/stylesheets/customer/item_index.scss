@@ -28,7 +28,7 @@
 }
 //モーダル
 .content{
-    padding: 40px 60px 0px 1px;
+    padding: 20px 0px 0px 0px;
 }
 .modal{
     display: none;
@@ -58,9 +58,9 @@
   position: relative;
   display: inline-block;
   height: 50px;/*高さ*/
-  width: 190px;/*幅*/
+  width: 140px;/*幅*/
   text-align: center;/*中身を中央寄せ*/
-  font-size: 25px;/*文字のサイズ*/
+  font-size: 15px;/*文字のサイズ*/
   line-height: 50px;/*高さと合わせる*/
   background: linear-gradient(135deg, #ff4265 0%, #f13f79 70%) no-repeat;/*グラデーション①*/
   overflow: hidden;/*はみ出た部分を隠す*/
@@ -137,3 +137,33 @@
   border-bottom: solid 2px #d8d8d8;
 }
 
+.categories {
+  background-color: black;
+  color: white;
+  border-radius: 7px;/*角丸に*/
+}
+
+.categories-headline {
+  padding: 10px 0px 10px 20px;
+  border-bottom: solid 2px white;
+}
+
+.sidebar-contents {
+  padding: 0px 0px 10px 10px;
+}
+
+.admin-path {
+  background-color: black;
+  color: white;
+  border-radius: 7px;/*角丸に*/
+}
+
+.admin-path-headline {
+  padding: 10px 0px 10px 20px;
+  border-bottom: solid 2px white;
+}
+
+.contact {
+  font-size: 15px;
+  padding: 50px 0px 0px 0px;
+}
