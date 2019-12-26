@@ -44,9 +44,6 @@
                       <% end %>
                     </div>
                   </div>
-                  <div id="links">
-            <%= link_to_add_association '住所追加はこちら', f, :addresses, class: 'btn btn-default btn-xs' %>
-          </div>
                   <div class="form group">
                     <div class="form-inline">
                       <button type="button" class="col-lg-2 btn-xs btn-success show-btn" disabled="disabled">電話番号</button>
@@ -87,7 +84,7 @@
         <div class="panel panel-default">
         <div class="panel-body bg-primary">
         <h3 class="col-md-4 col-md-offset-1 panel-title">
-          受注履歴
+          購入履歴
         </h3>
         <h4 class="col-md-5 col-md-offset-2">
           購入価格総計<%= @total %>
@@ -95,9 +92,10 @@
       </div>
   </div>
 </div>
-
+    <% if current_customer.orders.exists? %>
       <% @orders.each do |order| %>
       <div class="row cus-show">
+        <p><hr width="100%"></p>
         <button type="button" class="btn bg-info"style="padding: 20px">
         <div class="col-sm-5">
         受注日：<%= order.order_time.strftime("%y年%m月%d日") %></div>
@@ -136,7 +134,7 @@
               </div>
                   <div class="row">
                   <div class="well well-sm">
-                    <p>受注枚数 :<%= order_detail.quantity %></p>
+                    <p>購入枚数 :<%= order_detail.quantity %></p>
                   </div>
               </div>
                   <div class="row">
@@ -148,11 +146,16 @@
                   </div>
                   </div>
                     <% end %>
+                    <p><hr width="100%"></p>
               <% end %>
               </div>
           <div class="text-center">
           <%= paginate @customers, class: "paginate"%>
       </div>
+      <% else %>
+          <h4 class="text-center">購入履歴がありません</h4>
+          <a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
+       <% end %>
   </div>
       </div>
   </div>
