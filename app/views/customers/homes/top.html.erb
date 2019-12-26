@@ -1,0 +1,31 @@
+<section class="chat-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 chat-container">
+        <% if customer_signed_in? %>
+          <h2 class="text-center">トークルーム作成</h2>
+          <hr>
+          <%= form_for(@room, url: customers_rooms_path) do |f| %>
+            <h4>ルーム名</h4>
+            <%= f.text_field :name %>
+            <%= f.submit "ルームを作る" %>
+          <% end %>
+
+          <h2>参加済トークルーム一覧</h2>
+            <% @rooms.each do |room| %>
+              <%= link_to customers_room_path(room) do %>
+                <h5 style="color: black"><%= room.name %></h5>
+            <% end %>
+          <% end %>
+
+          <h2>未参加トークルーム一覧</h2>
+          <% @nonrooms.each do |room| %>
+            <%= link_to customers_room_path(room) do %>
+              <h5 style="color: black"><%= room.name %></h5>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

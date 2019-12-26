@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_24_152929) do
+ActiveRecord::Schema.define(version: 2019_12_26_031617) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "postal_code", null: false
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2019_12_24_152929) do
     t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "customer_rooms", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_rooms_on_customer_id"
+    t.index ["room_id"], name: "index_customer_rooms_on_room_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -168,6 +177,20 @@ ActiveRecord::Schema.define(version: 2019_12_24_152929) do
     t.text "comment"
     t.integer "customer_id"
     t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "message"
+    t.integer "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

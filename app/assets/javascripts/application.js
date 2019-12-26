@@ -18,3 +18,6 @@
 
 //= require_tree .
 //= require cocoon
+<script>
+new WOW().init();
+</script>
