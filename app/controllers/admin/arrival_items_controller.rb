@@ -1,5 +1,5 @@
 class Admin::ArrivalItemsController < ApplicationController
-  before_action :correct_customer, only: [:index, :new, :search, :history_search]
+
 
   def index
     if params[:sort] == "2"
@@ -62,10 +62,5 @@ class Admin::ArrivalItemsController < ApplicationController
   def arrival_item_params
 		params.require(:arrival_item).permit(:arrival_count, :arrival_time, :item_id)
   end
-  def correct_customer
-    @arrival_item = ArrivalItem.find(params[:id])
-    if current_customer != @arrival_item.customer
-      redirect_to root_path
-    end
-    end
+
 end

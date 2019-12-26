@@ -1,5 +1,5 @@
 class Customers::OrdersController < ApplicationController
-  before_action :correct_customer, only: [:new, :new_address, :pay]
+
 
   def new
   	  @order = Order.new
@@ -63,11 +63,5 @@ class Customers::OrdersController < ApplicationController
   	  params.require(:addresses).permit(:id,:postal_code,:address)
   end
 
-  def correct_customer
-    @order = Order.find(params[:id])
-    if current_customer != @order.customer
-      redirect_to root_path
-    end
-    end
 
 end
