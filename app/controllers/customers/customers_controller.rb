@@ -3,6 +3,13 @@ class Customers::CustomersController < ApplicationController
   	@customer = Customer.find(params[:id])
     @customers =Customer.page(params[:page]).per(2)
     @orders = Order.where(customer_id: current_customer.id)
+    @address= Address.where(customer_id: @customer.id)
+    if @address.count == 0
+      2.times { @customer.addresses.build }
+    elsif @address.count == 1
+      @customer.addresses.build
+    else
+    end
       total = 0
       customer_total = 0
       @orders.each do |x|

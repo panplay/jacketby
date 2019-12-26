@@ -1,4 +1,4 @@
-<div class="tbody" style="width:100%;">
+<div class="tbody" style="width:100%; height: 100%;">
 <section class="container kazu">
   <div class="row">
   	<div class="col-lg-5">
@@ -93,9 +93,10 @@
       </div>
   </div>
 </div>
-
+　　　<% if current_customer.orders.exists? %>
       <% @orders.each do |order| %>
-      <div class="row cus-show">
+       <div class="row cus-show">
+        <p><hr width="100%"></p>
       	<button type="button" class="btn bg-info"style="padding: 20px">
         <div class="col-sm-5">
         受注日：<%= order.order_time.strftime("%y年%m月%d日") %></div>
@@ -146,11 +147,16 @@
                   </div>
                   </div>
                     <% end %>
+                    <p><hr width="100%"></p>
               <% end %>
               </div>
           <div class="text-center">
           <%= paginate @customers, class: "paginate"%>
       </div>
+      <% else %>
+          <h4 class="text-center">購入履歴がありません</h4>
+          <a href="/" class="btn-circle-cart pull-right cart-size">トップへ戻る</a>
+       <% end %>
   </div>
       </div>
   </div>
