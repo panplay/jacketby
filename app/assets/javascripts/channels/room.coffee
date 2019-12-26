@@ -8,7 +8,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
     # サーバーサイドから値を受け取る
-    $('#posts').append("<p>"+data["message"]+"</p>"); # 投稿を追加
+    $('#posts').append("<h4 style='color: white;'>" + data['customer_first_name'] + "さん<br>" + data['message'] + "</h4>"); # 投稿を追加
 
   speak: (message) ->
     @perform 'speak', message: message　#サーバーサイドのspeakアクションにmessageパラメータを渡す

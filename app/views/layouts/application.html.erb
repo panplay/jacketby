@@ -29,27 +29,37 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to 'いいねランキング', admin_fav_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
-        </li>
-        <li>
-          <%= link_to '商品一覧', admin_items_path, class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
-        </li>
-        <li>
           <%= link_to '顧客一覧', admin_customers_path, class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
+          <%= link_to '受注一覧', admin_orders_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;"%>
         </li>
-        <br>
         <li>
-          <%= link_to '商品新規追加', new_admin_item_path, class: "btn-default", style: "margin-left: 5px; margin-top: 33px;" %>
+          <%= link_to '問い合わせ一覧', contacts_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
         </li>
-        <br>
-        <p class="navbar-text navbar-right">
-          管理者としてログインしています
-        </p>
+        <li>
+          <%= link_to '入荷履歴', admin_arrival_items_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;"%>
+        </li>
+        <li>
+          <%= link_to '入荷入力', new_admin_arrival_item_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
+        </li>
+        <li>
+          <%= link_to '各種編集', admin_homes_index_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;"%>
+        </li>
+        <li>
+          <%= link_to '商品新規追加', new_admin_item_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
+        </li>
+        <li>
+          <%= link_to 'いいねランキング', admin_fav_path, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn-default", style: "margin-left: 20px; margin-top: 33px;" %>
+        </li>
       </ul>
     </nav>
+    <p class="navbar-text navbar-right">
+      管理者としてログインしています
+    </p>
   <% elsif customer_signed_in? %>
     <nav class="nav navbar-nav navbar-left">
       <a href="/" class="btn-circle-fishy">Jacketby</a>

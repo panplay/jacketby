@@ -7,12 +7,6 @@
     background-position: center;
     height: 1000px;
 }
-.about-content {
-	background-image: url(image-path("group.jpg"));
-	background-size: cover;
-    background-position: center;
-    height: 1000px;
-}
 .unsub-content {
 	background-image: url(image-path("group.jpg"));
 	background-size: cover;
@@ -29,8 +23,20 @@
  	margin: 60px;
 }
 .chat-content {
+  padding-bottom: 300px;
 	background-image: url(image-path("audio.jpg"));
   	background-size: cover;
   	background-position: center;
-  	height: 1000px;
+  	//height: 1000px;
+}
+.video {
+  position: relative;
+}
+.video-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
 }

@@ -26,7 +26,7 @@
 										<th><%= f.collection_select :artist_id, Artist.all, :id, :name, {include_blank: "アーティスト"} %></th>
 									</tr>
 									<tr>
-										<th>価格(税込)</th>
+										<th>価格</th>
 										<th><%= f.number_field :price,min: 1, class:"form-control", placeholder: "1000" %>
 											<%= f.select :sale, Item.sales.keys.to_a, {}, {include_blank: "ステータス"} %>
 										</th>
