@@ -50,11 +50,13 @@ Rails.application.routes.draw do
   namespace :customers do
     get 'homes/about' => "homes#about"
     get 'homes/thanks' => "homes#thanks"
+    get 'homes/top' => "homes#top"
     get ':id/unsubscribe' => "homes#unsubscribe", as: "unsubscribe"
     get "customers/:id/carts" => "customers#carts"
     get "search" => "items#search"
     get "category/:id" => "items#category"
     get "orders/new2" => "orders#new_address"
+    resources :rooms, only: [:show, :create]
 
     resource :orders, only: [:new, :create] do
       post :pay, on: :member

@@ -23,3 +23,14 @@
 	background-color: #9e9e9ec9;
     margin-top: 71px;
 }
+.chat-container {
+	background-color: rgba(158, 158, 158, 0.57);
+  	padding: 20px;
+ 	margin: 60px;
+}
+.chat-content {
+	background-image: url(image-path("audio.jpg"));
+  	background-size: cover;
+  	background-position: center;
+  	height: 1000px;
+}

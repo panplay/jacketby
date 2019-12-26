@@ -1,0 +1,16 @@
+<div class="chat-content">
+	<div class="container">
+	  <div class="row">
+	  	<div class="col-md-8 col-md-offset-2 chat-container">
+			<h2 class="text-center"><%= "ルーム名：#{@room.name}" %></h2>
+			<hr>
+
+			<input type="text" data-behavior="room_speaker" data-user="<%= current_customer.id %>" data-room="<%= @room.id %>">送信はENTER
+
+			<div id="posts">
+			  <%= render "post", posts: @posts %>
+			</div>
+		</div>
+	  </div>
+	</div>
+</div>

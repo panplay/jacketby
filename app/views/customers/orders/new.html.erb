@@ -2,9 +2,16 @@
   <section class="container">
     <div class="row">
       <div class="col-md-8 col-sm-offset-2 order-container">
-      <h2>購入確認</h2>
+        <% if @order.errors.any? %>
+          <%= @order.errors.count %>件のエラー。
+          <% @order.errors.full_messages.each do |message| %>
+            <%= message %>。
+          <% end %>
+        <% end %>
+      <h2 class="text-center">購入確認</h2>
+      <hr>
         <%= form_for(@order,url: customers_orders_path , method: :post) do |f| %>
-            <h4>お届け先</h4>
+            <h4 class="order-title">お届け先</h4>
             <%= f.label :宛名 %>
               <%= f.text_field :delivery_name, class:"form-control" %>
             <%= f.label :メイン住所 %>
@@ -38,37 +45,58 @@
             <% end %>
       <%= link_to "新しい送り先に送る場合は、こちら",customers_orders_new2_path %>
 
-            <h4>注文内容</h4>
-            <% sum = 0 %>
-            <% quantity_sum = 0 %>
-              <% @carts.each do |cart| %>
-                <%= attachment_image_tag cart.item, :image, class: "book-img float-left", size: "150x150" %>
-                <%= cart.item.name %>
-                <p>数量：<%= cart.quantity %></p>
-                <p>¥<%= (cart.item.price * 1.1).to_i %>  (税込)</p>
-                <% sum += (cart.item.price * cart.quantity) %>
-                <% quantity_sum += cart.quantity %>
-                <%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %>
-               <% end %>
+            <h4 class="order-title">注文内容</h4>
+            <table  class="table table-hover table-inverse">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>製品名</th>
+                  <th>数量</th>
+                  <th>価格</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                 <% sum = 0 %>
+                  <% quantity_sum = 0 %>
+                    <% @carts.each do |cart| %>
+                      <tr>
+                        <td><%= attachment_image_tag cart.item, :image, class: "book-img float-left", size: "50x50" %></td>
+                        <td><%= cart.item.name %></td>
+                        <td><%= cart.quantity %></td>
+                        <td>¥<%= (cart.item.price * 1.1).to_i %>  (税込)</td>
+                        <td><%= link_to "削除", customers_customer_cart_path(current_customer.id,cart.id), method: :delete,class: "btn btn-sm btn-link" %></td>
+                      </tr>
+                      <% sum += (cart.item.price * cart.quantity) %>
+                      <% quantity_sum += cart.quantity %>
+                   <% end %>
+              </tbody>
+            </table>
+            <hr>
+            <h5 class="text-right">
               商品の小計（<%= quantity_sum %>点）： ¥ <%= (sum * 1.1).to_i %> (税込)
               <br>送料（全国一律）： ¥ 500</br>
               ご請求額：¥ <%= (sum * 1.1).to_i + 500 %> (税込)
-
-              <h4>支払い方法</h4>
-            <div class="field">
-                <%= f.radio_button :payment, :クレジットカード %>
-                <%= f.label :クレジットカード %>
-                  <%= form_tag(action: :pay, method: :post) do |x| %>
-                  <%= hidden_field_tag :total_price, sum %>
-                    <script type="text/javascript"
-                      src="https://checkout.pay.jp"
-                      class="payjp-button"
-                      data-key="pk_test_6f6c6927b0286421699ee2b5">
-                    </script>
-                <%= f.radio_button :payment, :銀行振込 %>
-                <%= f.label :銀行振込 %>
-                <%= f.radio_button :payment, :代引き %>
-                <%= f.label :代引き %>
+            </h5>
+            <h4 class="order-title">支払い方法</h4>
+              <div class="field">
+                <table>
+                  <tbody>
+                  <td style="margin-right: 10px;"><%= f.radio_button :payment, :クレジットカード, checked:"checked" %>
+                  <%= f.label :クレジットカード %></td>
+                    <td><%= form_tag(action: :pay, method: :post) do |x| %>
+                    <%= hidden_field_tag :total_price, sum %>
+                      <script type="text/javascript"
+                        src="https://checkout.pay.jp"
+                        class="payjp-button"
+                        data-key="pk_test_6f6c6927b0286421699ee2b5">
+                      </script></td>
+                  <td><%= f.radio_button :payment, :銀行振込 %>
+                  <%= f.label :銀行振込 %></td>
+                  <td><%= f.radio_button :payment, :代引き %>
+                  <%= f.label :代引き %></td>
+                </tbody>
+            </table><br>
             </div>
             <%= f.hidden_field :total_price, :value => sum, class:"form-control" %>
             <%= f.submit '注文を確定する' , class:"btn btn-warning btn-block" %>

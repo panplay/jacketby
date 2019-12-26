@@ -23,6 +23,10 @@ class Customer < ApplicationRecord
    has_many :post_comments, dependent: :destroy
    has_many :contact, dependent: :destroy
 
+   has_many :customer_rooms
+   has_many :rooms, through: :customer_rooms
+   has_many :posts
+
 
   validates :last_name, presence: true
   validates :first_name, presence: true
