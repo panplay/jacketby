@@ -13,6 +13,6 @@ class RoomChannel < ApplicationCable::Channel
   def speak(message)
     post = Post.new(message: message['message'][0], customer_id: message['message'][1].to_i, room_id: message['message'][2].to_i)
     post.save
-    ActionCable.server.broadcast 'room_channel', message: message['message'][0] # フロントへ返します
+    ActionCable.server.broadcast 'room_channel', message: message['message'][0], customer_first_name: Customer.find(message['message'][1].to_i).first_name # フロントへ返します
   end
 end
